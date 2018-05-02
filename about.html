@@ -1,4 +1,4 @@
-<!Doctype html>
+    <!Doctype html>
 <html>
     <head>
         <title>About Jume</title>
@@ -14,9 +14,7 @@
                 <h1 class="cnt fntsty-old ">Welcome to my homepage<sub>&reg;</sub>.</h1>
             </header>
     </div>
-        <h3 class="fntsty-viv flt-rt" id="demo"></h3>
-        <br />
-        <br />
+        <marquee><h3 class="fntsty-viv flt-rt" id="demo"></h3></marquee>
         <hr style="width: 90%;align-self: center" />
         <div class="container row">
             <div class="width-33 flt-lf">
@@ -115,7 +113,8 @@
                 }
             }
             var d = new Date();
-            var days =                          ['Sunday','Monday','Tueday','Wednesday','Thursday','Friday','Saturday'];
-            document.getElementById("demo").innerHTML = days[d.getDay()]+' '+d.getDate()+' '+d.getFullYear();
+            var days =['Sunday','Monday','Tueday','Wednesday','Thursday','Friday','Saturday'];
+            var months = ['January','February','March','April','May','June','July','August','September','October','November','December']
+            document.getElementById("demo").innerHTML = days[d.getDay()]+' '+d.getDate()+' '+months[d.getMonth()]+' '+d.getFullYear();
     </script>
 </html>
