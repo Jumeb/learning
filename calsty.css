@@ -1,0 +1,54 @@
+.brd{
+    border:1px solid black;
+    width:37%;
+    padding: 8px;
+    border-radius: 12px;
+}
+.width-50{
+    width: 35%
+}
+.container{
+    padding: 0.o1em 16px;
+}
+.fntsty-viv{
+    font-family: vivaldi;
+}
+.fntsty-ol{
+    font-family: old english text mt;
+}
+.hover-clr-teal{
+    background-color: white;
+    color: teal;
+}
+.hover-clr-teal:hover{
+    background-color: rgb(0, 128, 128);
+    color:white;
+}
+.hover-clr-white{
+    background-color: teal;
+    color: white;
+}
+.hover-clr-white:hover{
+    background-color: white;
+    color: teal;
+}
+.brd-btn{
+    padding: 8px 4px 8px 4px;
+    border: 1px solid teal;
+    width: 22.3%;
+    border-radius: 8px 4px;
+}
+.pad-8{
+    padding: 18px 14px 18px 14px;
+    border: 2px solid black;
+    width:88%;
+}
+.shadow{
+    box-shadow:2.5px 5px 10px 2.5px rgba(0, 0, 0, 0.2), 3.5px 7px 14px 1px rgba(0, 0, 0, 0.3);
+}
+.clr-gray{
+    background-color: black;
+}
+.round{
+    border-radius: 4px;
+}
