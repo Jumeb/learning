@@ -1,0 +1,64 @@
+.cnt {
+    float: right;
+    margin-top:10px;
+    margin-right:10px;
+}
+.shadow{
+    box-shadow: 0px 4px 8px 2px rgba(0,0,0,0.2),0px 8px 16px 4px rgba(0,0,0,0.6);
+}
+.brd-form{
+    max-width:100%;
+}
+.clr{
+    background-color: teal;
+    color:white;
+}
+.clr-white{
+    background-color: white;
+}
+.clr-black{
+    color: black;
+}
+.brd-div{
+    max-width:30%;
+}
+.fnsty-harr{
+    font-family: Segeo;
+    font-size: 16px;
+}
+.pad-8 {
+    padding: 12px 4px;
+    margin: 5px;
+}
+.pad-10{
+    padding: 2px 4px;
+}
+.hover-white-shadow:hover{
+    box-shadow:0px 4px 8px 2px rgb(200,200,200),0px 8px 16px 4px rgb(255,255,255); 
+}
+.brd{
+    border: none;
+    border-bottom: 2px solid teal;
+}
+.brd-num{
+    border: none;
+    border-bottom: 2px solid teal;
+    margin-left:50px;
+}
+.inc-50{
+    width:40%;
+    transition:width 2s ease-in-out;
+}
+.inc-50:focus{
+    width:95%;
+}
+.inc-30{
+    width:40%;
+    transition-duration: 2s;
+}
+.inc-30:focus{
+    width:70%;
+}
+.inc{
+    width:95%;
+}

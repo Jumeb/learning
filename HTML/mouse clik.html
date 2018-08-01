@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Mouse click></title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="../CSS/mouse.css" />
+   
+</head>
+<body onmouseover="Click(event)">
+    <h2>Current Mouse Position</h2>
+    <div class="up brd"><center><div class="sty brd">
+        <p class="p">X: <i id="x"></i></p>
+        <p class="p">Y <i id="y"></i>:</p>
+        <p class="p">T: <i id="t"></i></p>
+    </div></center></div>
+    <div class="brd down"></div>
+</body>
+<script>
+    function Click(event){
+        var time = new Date();
+        var xp = event.clientX;
+        var yp = event.clientY;
+        document.getElementById('x').innerHTML = xp;
+        document.getElementById('y').innerHTML = yp;
+        document.getElementById('t').innerHTML = time.getHours() + ':' + time.getMinutes() + ':' + time.getSeconds();
+    }
+</script>
+</html>

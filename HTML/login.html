@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Simple login page</title>
+        <meta charset="utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale = 1" />
+        <link href="../CSS/login.css" rel="stylesheet" type="text/css" />
+    </head>
+    <body>
+        <div class="cnt brd-div shadow hover-white-shadow clr">
+            <div class="pad-10 fnsty-harr"><h2>Sign Up</h2></div>
+            <form class="brd-form clr-white">
+                <input type="text" placeholder="First Name" class="fnsty-harr brd pad-8 inc-50" /><br />
+                <input type="text" placeholder="Second Name" class="fnsty-harr brd pad-8 inc-50" /><br />
+                <input type="text" placeholder="Address" class="fnsty-harr brd pad-8 inc-30" /><i class="fnsty-harr clr-black" style="font-size:18px">@jume.hon</i><br />
+                <select class="fnsty-harr brd pad-8">
+                    <option value="jan">January</option>
+                    <option value="feb">February</option>
+                    <option value="mar">March</option>
+                    <option value="ap">April</option>
+                    <option value="ma">May</option>
+                    <option value="jun">June</option>
+                    <option value="jul">July</option>
+                    <option value="aug">August</option>
+                    <option value="sep">September</option>
+                    <option value="oct">October</option>
+                    <option value="nov">November</option>
+                    <option value="dec">December</option>
+                </select>
+                <select class="fntsy-harr brd-num pad-8 ">
+                    <option>1</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                    <option>6</option>
+                    <option>7</option>
+                    <option>8</option>
+                    <option>9</option>
+                    <option>10</option>
+                    <option>11</option>
+                    <option>12</option>
+                    <option>13</option>
+                    <option>14</option>
+                    <option>15</option>
+                    <option>16</option>
+                    <option>17</option>
+                    <option>18</option>
+                    <option>19</option>
+                    <option>20</option>
+                    <option>21</option>
+                    <option>22</option>
+                    <option>23</option>
+                    <option>24</option>
+                    <option>25</option>
+                    <option>26</option>
+                    <option>27</option>
+                    <option>28</option>
+                    <option>29</option>
+                    <option>30</option>
+                    <option>31</option>
+                </select>
+                <select class="fntsy-harr brd-num pad-8">
+                    <option>2001</option>
+                    <option>2002</option>
+                    <option>2003</option>
+                    <option>2004</option>
+                    <option>2005</option>
+                    <option>2006</option>
+                    <option>2007</option>
+                    <option>2008</option>
+                    <option>2009</option>
+                    <option>2010</option>
+                </select><br />
+                <input type="password" placeholder="Password" class="brd pad-8 inc-50" id="pas1"/>  <br />
+                <input type="password" placeholder="Retry Password" class="brd pad-8 inc-50"  id="pas2"/><br /><p id="warn" style="color: red; font-family: agency fb;"></p>
+                <input type="Radio" name="gender" checked/><i class="fnsty-harr clr-black">Male</i>
+                <input type="Radio" name="gender"/><i class="fnsty-harr clr-black">Female</i>
+                <input type="Radio" name="gender"/><i class="fnsty-harr clr-black" >Won't say for now</i><br />
+                <button class="brd pad-8 inc fntsty-harr" style="text-align: center" onclick="sub()">Submit</button>
+            </form>
+        </div>
+    </body>
+    <script>
+        function sub(){
+            var try1 = document.getElementById('pas1');
+            var try2 = document.getElementById('pas2');
+            var text;
+            if (try1 !== try2)
+                {
+                    text = 'Your passwords do not march try again';
+                }
+            else{
+                text = 'OK';
+            }
+                document.getElementById('warn').innerHTML = text;
+        }
+    </script>
+</html>
