@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Try</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="../fontawesome-free-5.0.4/web-fonts-with-css/css/fontawesome-all.min.css">
+    <link rel="stylesheet" href="../fontawesome-free-5.0.4/web-fonts-with-css/css/fa-brands.min.css">
+    <style>
+        .grp{
+            margin-top:50px;
+            border:none;
+            float: left;
+            width: 38%;
+            background-color: rgba(255, 255, 255, 0.316);
+            border-radius: 10px;
+        }
+        .grp1{
+            margin-top:50px;
+            border:none;
+            float: right;
+            width: 38%;
+            background-color: rgba(255, 255, 255, 0.316);
+            border-radius: 10px;
+        }   
+        .brd{
+            padding:2px;
+            border:none;
+            width: 40%;
+            border-bottom: 2px solid black;
+            margin:18px;
+            transition: width 1s ease-in-out;
+       }
+       .brd:focus{
+           width:75%;
+       }
+        .sty{
+            border:none;
+            padding: 8px;
+            background-color: rgba(255, 255, 255, 0);
+            font-weight:bold;
+            font-size: 18px;
+            font-family: agency;
+            transition: border;
+        }
+        .sty:focus{
+            border:none;
+        }
+        .width{
+            width:80%;
+            overflow-y: auto;
+            background: linear-gradient(to top right,navy,blueviolet,black);
+            margin-left: 10%;
+            padding:18px;
+            padding-bottom: 50px;
+             border-radius: 10px;
+        }
+        .bold{
+            font-weight:bold;
+        }
+    </style>
+</head>
+<body>
+<div class="width">
+    <div class="grp">
+        <div class="brd"><i class="fa fa-user"></i><input type="text" placeholder="Username" class="sty"></div>
+        <div class="brd"><i class="fa fa-lock"></i><input type="password" placeholder="Password" class="sty"></div>
+        <div><input type="radio" class="radio" style="margin-left: 15px;"> Remember me</div>
+    </div>
+    <div class="grp1">
+            <div class="brd"><i class="bold">Facebook</i><input type="text" placeholder="Username" class="sty"></div>
+            <div class="brd"><i class="bold">Instagram</i><input type="password" placeholder="Password" class="sty"></div>
+            <div><input type="radio" class="radio" style="margin-left: 15px;"> Remember me</div>
+        </div>
+</div>
+</body>
+<script src="main.js"></script>
+</html>
