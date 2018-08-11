@@ -47,7 +47,11 @@
     margin: auto;
 }
 .wid80{
+<<<<<<< HEAD
     max-width: 75%;
+=======
+    max-width: 900px;
+>>>>>>> 1280a80ca431abe7cc2c31f703109f7f154c8fbb
     overflow: hidden;
 }
 .h1fnt{
@@ -57,8 +61,12 @@
     font-size: 130%;
     font-weight: bold;
     padding: 10px;
+<<<<<<< HEAD
     position: relative;
     margin-left:95%;
+=======
+    margin-left:840px;
+>>>>>>> 1280a80ca431abe7cc2c31f703109f7f154c8fbb
     background-color: white;
 }
 .fnt-text{
@@ -68,5 +76,9 @@
 
 }
 .shadow1{
+<<<<<<< HEAD
     box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.635);
+=======
+    box-shadow: 0px 5px 4px rgba(0, 0, 0, 0.553);
+>>>>>>> 1280a80ca431abe7cc2c31f703109f7f154c8fbb
 }
