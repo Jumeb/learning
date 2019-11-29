@@ -1,0 +1,34 @@
+<header class="header__user">
+    <div class="logo__box">
+        <img src="/img/caracakes5.png" alt="Logo" class="logo__img">
+    </div>
+    <div class="search">
+        <form action="#" class="search__form">
+            <input type="text" placeholder="Search event" class="search__input">
+            <span class="search__icon fas fa-search"></span>
+        </form>
+    </div>
+    <nav class="notify">
+        <ul class="notify__list">
+            <li class="notify__item <%= path == '/user' ? 'notify__active' : '' %>">
+                <a href="/user" class="notify__link">
+                    Events
+                </a>
+            </li>
+            <li class="notify__item">
+                <a href="#" class="notify__link fas fa-user-friends">
+                    <span class="notify__num">
+                        99+
+                    </span>
+                </a>
+            </li>
+            <li class="notify__item">
+                <a href="#" class="notify__link fas fa-user-alt">
+                    <span class="notify__num">
+                        8
+                    </span>
+                </a>
+            </li>
+        </ul>
+    </nav>
+</header>

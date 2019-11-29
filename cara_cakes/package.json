@@ -1,0 +1,23 @@
+{
+  "name": "cara_cakes",
+  "version": "1.0.0",
+  "description": "Online cake orders",
+  "main": "app.js",
+  "scripts": {
+    "start": "nodemon app.js",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Just Brilliant Inc",
+  "license": "ISC",
+  "devDependencies": {
+    "nodemon": "^1.19.3"
+  },
+  "dependencies": {
+    "body-parser": "^1.19.0",
+    "ejs": "^2.7.1",
+    "express": "^4.17.1",
+    "font-awesome": "^4.7.0",
+    "mongodb": "^3.3.3",
+    "mongoose": "^5.7.6"
+  }
+}

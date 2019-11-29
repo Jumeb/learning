@@ -1,0 +1,27 @@
+<div class="panel__order">
+    <% if(order.length > 0 ) { %>
+        <% order.forEach(order => { %>
+        <div class="events__order">
+            <h2 class="events__name">
+                <%= order.event.name %>
+            </h2>
+            <h3><%= order.event.purpose %></h3>
+            <% let total = 0 %>
+            <div>
+                <% order.pastries.forEach(p => { %>
+                <p class="events__confirm-msg"><%= p.pastry.name %>: <%= p.quantity %></p>
+                <div style="display: none;"><%= total += p.quantity * p.pastry.price %></div>
+                <% }); %>
+            </div>
+            <div class="events__budget">
+                total: <%= total %> frs
+            </div>
+        </div>
+        <% }); %>
+    <% } else { %>
+        <h1>No orders for this event</h1>
+    <% } %>
+        <div class="align-right">
+            <a href="#" class="btn__func">Checkout</a>
+        </div>
+</div>
