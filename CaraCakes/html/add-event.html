@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Lato:100,300,400,700,900">
+
+    <link rel="stylesheet" href="../css/style.css">
+    <link rel="stylesheet" href="../css/user.css">
+    <link rel="stylesheet" href="../fontawesome-free-5.9.0-web/css/all.css">
+    <link rel="shortcut icon" type="image/png" href="../img/favicon.png">
+
+    <title>Cara Cakes| Resting place for flavours</title>
+</head>
+
+<body class="pos">
+    <header class="header__user">
+        <div class="logo__box">
+            <img src="../img/caracakes5.png" alt="Logo" class="logo__img">
+        </div>
+        <div class="search">
+            <form action="#" class="search__form">
+                <input type="text" placeholder="Search event" class="search__input">
+                <span class="search__icon fas fa-search"></span>
+            </form>
+        </div>
+        <nav class="notify">
+            <ul class="notify__list">
+                <li class="notify__item">
+                    <a href="#" class="notify__link fas fa-user-friends">
+                        <span class="notify__num">
+                            99+
+                        </span>
+                    </a>
+                </li>
+                <li class="notify__item">
+                    <a href="#" class="notify__link fas fa-user-alt">
+                        <span class="notify__num">
+                            8
+                        </span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </header>
+
+    <section class="panel">
+        <div class="panel__user">
+            <div class="panel__user--frame">
+                <img src="../img/cookies-7.jpg" alt="User image" class="panel__user--img">
+            </div>
+            <div class="panel__user--info">
+                <h3 class="panel__user--name">Jume Brice</h3>
+            </div>
+            <div class="panel__user--events">
+                <div class="panel__user--association">
+                    <span class="num">78</span>
+                    <span class="type">Events</span>
+                </div>
+                <div class="panel__user--association">
+                    <span class="type notify__item"><a href="#" class="edit txt-white">Edit profile</a></span>
+                </div>
+            </div>
+            <div class="txt-cnt panel__logout">
+                <a href="#" class="btn-2 btn-2__hover-icon">Logout<span class="btn-2__icon fas fa-power-off"></span></a>
+            </div>
+            <div class="power">
+                Copyrighted &copy;<a href="#" class="dev">JB Inc</a>
+            </div>
+        </div>
+        <div class="panel__event">
+            <section class="sheet user">
+                <div class="sheet__form user__form">
+                    <div class="user__frame">
+                        <img src="../img/chris-1.jpg" alt="" class="user__img">
+                        <a href="#" class="user__upload txt-cnt">Add</a>
+                    </div>
+                    <form action="" class="sheet__signup">
+                        <div class="sheet__group">
+                            <input type="text" class="sheet__input" id="Name" placeholder="Name" required>
+                            <label for="Name" class="sheet__label">Name</label>
+                        </div>
+                        <div class="sheet__group">
+                            <input type="text" class="sheet__input" id="Purpose" placeholder="Purpose" required>
+                            <label for="Purpose" class="sheet__label">Purpose</label>
+                        </div>
+                        <div class="sheet__group">
+                            <input type="date" class="sheet__input" id="date" placeholder="Date" required>
+                            <label for="date" class="sheet__label">Date</label>
+                        </div>
+                        <div class="sheet__group">
+                            <input type="time" class="sheet__input" id="time" placeholder="Time" required>
+                            <label for="time" class="sheet__label">Time</label>
+                        </div>
+                        <div class="sheet__btns">
+                            <button class="btn-2 btn-deep--pink">Create Event</button>
+                            <a href="#login" class="btn-2 btn-deep--pink txt-cnt">Cancel</a>
+                        </div>
+                    </form>
+                </div>
+    
+            </section>
+        </div>
+    </section>
+
+    <div class="add">
+        <a href="#new-event" title="Add event" class="add__event">
+            <span class="add__icon"></span>
+        </a>
+    </div>
+    <div class="signup" id="new-event">
+        <div class="signup__form">
+            <a href="#~" class="signup__close">&times;</a>
+            <div class="user__frame">
+                <img src="../img/chris-1.jpg" alt="" class="user__img">
+                <a href="#" class="user__upload txt-cnt">Add</a>
+            </div>
+
+            <form action="#" class="signup__sheet">
+                <div class="signup__sheet--group">
+                    <input type="text" name="" id="name" placeholder="Name" class="signup__input" required>
+                    <label for="name" class="signup__label">Name</label>
+                </div>
+                <div class="signup__sheet--group">
+                    <input type="email" name="" id="name" placeholder="Purpose" class="signup__input" required>
+                    <label for="name" class="signup__label">Purpose</label>
+                </div>
+                <div class="signup__sheet--group">
+                    <input type="date" name="" id="name" placeholder="Date" class="signup__input" required>
+                    <label for="name" class="signup__label">Date</label>
+                </div>
+                <div class="signup__sheet--group">
+                    <input type="password" name="" id="name" placeholder="Password" class="signup__input" required>
+                    <label for="name" class="signup__label">Password</label>
+                </div>
+                <div class="signup__sheet--group">
+                    <input type="password" name="" id="name" placeholder="Retype Password" class="signup__input"
+                        required>
+                    <label for="name" class="signup__label">Retype Password</label>
+                </div>
+                <div class="margin-bottom-small-ve">
+                    <a href="#" class="btn-2 txt-cnt btn-deep--pink ">Create Event</a>
+                    <a href="#login" class="btn-2 txt-cnt btn-deep--pink ">Login</a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="../js/jquery-3.4.1.js"></script>
+<script src="../js/main.js"></script>
+
+</html>

@@ -1,0 +1,229 @@
+
+
+.panel {
+    display: flex;
+    height: $panel;
+    overflow: hidden;
+
+    @include respon(tp) {
+        flex-direction: column;
+    }
+
+    @include respon(stp) {
+        flex-direction: column;
+    }
+
+
+    &__user {
+        flex: 0 0 23%;
+        background-color: rgba($black, .8);
+
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        align-items: center;
+        height: $panel;
+        // margin-bottom: -20rem;
+
+        @include respon(tp) {
+            flex-direction: row-reverse;
+            align-items: center;
+            flex-basis: 18%;
+            background-color: rgba($black, .8);
+            margin-bottom: 0;
+        }
+
+        &--frame {
+            margin-top: 3rem;
+
+            @include respon(tp) {
+                margin: 0;
+            }
+        }
+
+        &--img {
+            width: 17rem;
+            height: 17rem;
+            border-radius: 50%;
+            background-size: cover;
+            background-position: center;
+
+            @include respon(tp) {
+                width: 7rem;
+                height: 7rem;
+                margin-right: 3rem;
+            }
+        }
+
+        &--info {
+            margin-top: 2rem;
+            margin-bottom: auto;
+
+            @include respon(tp) {
+                margin-top: auto;
+                margin-bottom: auto;
+                margin-right: 1rem;
+            }
+        }
+
+        &--name {
+            font-size: 1.8rem;
+            color: $white;
+
+            @include respon(tp) {
+                font-size: 1.4rem;
+            }
+        }
+
+        &--events {
+            display: flex;
+            justify-content: space-around;
+            align-self: stretch;
+
+            @include respon(tp) {
+                flex-basis: 35%;
+                justify-content: space-around;
+
+            }
+
+            @include respon(ph) {
+                flex-basis: 50%
+            }
+        }
+
+
+        &--association {
+            display: flex;
+            flex-direction: column;
+            flex: 0 0 40%;
+            justify-content: space-around;
+            align-items: center;
+
+
+            @include respon(tp) {
+                flex-direction: column;
+                justify-content: center;
+            }
+        }
+    }
+
+    &__logout {
+
+        margin-right: auto;
+        margin-left: auto;
+        
+        @include respon(tp) {
+            margin-left: 1rem;
+            margin-right: auto;
+        }
+    }
+
+    &__event {
+        flex: 0 0 77%;
+        padding: 4rem 10rem;
+        display: flex;
+        flex-direction: column;
+        height: $event;
+        overflow-y: auto;
+        position: relative;
+        
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }
+
+        @include respon(stp) {
+            padding: 3rem 8rem;
+        }
+
+        @include respon(ph) {
+            padding: 3rem 6rem;
+        }
+
+        @include respon(ph) {
+            padding: 3rem 4rem;
+        }
+    }
+
+    &__order {
+        flex: 0 0 77%;
+        padding: 3rem 10rem;
+        display: flex;
+        flex-wrap: wrap;
+        flex-direction: row;
+        justify-content: space-between;
+        height: $event;
+        overflow-y: auto;
+        position: relative;
+
+        &::-webkit-scrollbar {
+            width: 0 !important;
+        }
+    }
+}
+
+.num {
+    font-size: 1.2rem;
+    color: $white;
+
+    @include respon(tp) {
+        
+    }
+}
+
+.type {
+    font-size: 1.4rem;
+    color: $white;
+
+    @include respon(stl) {
+        margin-top: -1.5rem;
+    }
+
+    @include respon(tp) {
+        margin: 0;
+    }
+}
+
+.power {
+    font-size: 1.4rem;
+
+    @include respon(tp) {
+        display: none;
+    }
+}
+
+.edit {
+    &:link,
+    &:visited {
+        text-decoration: none;
+        padding: 1.3rem;
+        font-size: 1.4rem;
+
+        @include respon(tl) {
+            // font-size: 1.2rem;
+            padding: 1.3rem .2rem;
+        }
+    
+        // @include respon(stl) {
+            
+            
+        // }
+    }
+}
+
+.dev {
+    &:link,
+    &:visited {
+        text-decoration: none;
+        padding: 1.2rem;
+        color: $light-grey;
+
+    }
+}
+
+.user {
+    justify-content: center;
+
+    &__form {
+        flex: 0 0 65%;
+    }
+}
