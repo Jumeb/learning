@@ -32,7 +32,11 @@
         </div>
     </div>
     <div class="txt-cnt panel__logout">
-        <a href="#" class="btn-2 btn-2__hover-icon">Logout<span class="btn-2__icon fas fa-power-off"></span></a>
+        <form action="/logout" method="post">
+            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+            <button type="submit" class="btn-2 btn-2__hover-icon">Logout<span
+                    class="btn-2__icon fas fa-power-off"></span></button>
+        </form>
     </div>
     <div class="power">
         Copyrighted &copy;<a href="#" class="dev">JB Inc</a>

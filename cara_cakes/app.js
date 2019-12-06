@@ -4,14 +4,23 @@ const path = require('path');
 const express = require('express');
 const bodyParser = require('body-parser');
 const mongoose = require('mongoose');
+const session = require('express-session');
+const mongoDbStore = require('connect-mongodb-session')(session);
+const csrf = require('csurf');
+const flash = require('connect-flash');
 
 /////////////////////////////
-
+const MONGODB_URI = 'mongodb://localhost:27017/CaraCakes';
 // STARTING THE APP
 
 const app = express();
-
+const store = new mongoDbStore({
+    uri: MONGODB_URI,
+    collection: 'sessions'
+});
 /////////////////
+
+const csrfProtection = csrf();
 
 // SETTING THE ENGINE
 
@@ -29,7 +38,6 @@ const adminRoute = require('./routes/admin');
 
 const Admin = require('./models/admin');
 const User = require('./models/user');
-const Event = require('./models/events');
 
 /////////////////////////////
 
@@ -45,14 +53,26 @@ app.use(bodyParser.urlencoded({
 // USING PUBLIC FILES LIKE CSS, IMG, JS etc
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(session({
+    secret: 'mySecretIsBest',
+    resave: false,
+    saveUninitialized: false,
+    store: store
+}));
+
+app.use(csrfProtection);
+
+app.use(flash());
 
 /////////////////////////////
 
 app.use((req, res, next) => {
-    User.findById('5ddeeb523f92d10d645a2deb')
+    if(!req.session.user){
+        return next();
+    }
+    User.findById(req.session.user._id)
         .then(user => {
             req.user = user;
-            console.log(user);
             next();
         })
         .catch(err => {
@@ -62,7 +82,10 @@ app.use((req, res, next) => {
 
 
 app.use((req, res, next) => {
-    Admin.findById('5dc523fa0a61f71fb8fefabf')
+    if(!req.session.admin){
+        return next();
+    }
+    Admin.findById(req.session.admin._id)
         .then(admin => {
             req.admin = admin;
             next();
@@ -70,6 +93,12 @@ app.use((req, res, next) => {
         .catch(err => {
             console.log(err);
         })
+})
+
+app.use((req, res, next) => {
+    res.locals.authenticated = req.session.loggedIn;
+    res.locals.csrfToken  = req.csrfToken()
+    next();
 })
 
 // USING THE ROUTES
@@ -88,20 +117,11 @@ app.use(errRoute.get404);
 ///////////////////////////
 
 // CONNECT TO DB
-mongoose.connect('mongodb://localhost:27017/CaraCakes', {
+mongoose.connect(MONGODB_URI, {
         useUnifiedTopology: true,
         useNewUrlParser: true
     })
     .then(result => {
-        User.findOne().then(user => {
-            if (!user) {
-                const user = new User({
-                    name: 'Jume Brice',
-                    email: 'bricejume@gmail.com'
-                })
-                user.save();
-            }
-        })
         Admin.findOne().then(admin => {
             if (!admin) {
                 const admin = new Admin({

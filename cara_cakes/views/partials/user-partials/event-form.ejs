@@ -36,6 +36,7 @@
                 <input type="hidden" name="eventId" value="<%= event._id %>">
                 <% } %>
                 <div class="sheet__btns">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <button type="submit" class="btn-2 btn-deep--pink"><% if (editing) { %>Update
                         Event<% } else { %>Create Event<% } %></button>
                     <a href="/user" class="btn-2 btn-deep--pink txt-cnt">Cancel</a>

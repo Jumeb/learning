@@ -25,6 +25,7 @@
                         <button class="shop__button" type="submit">&minus;</button>
                         <input type="hidden" name="pastryId" value="<%= pastry._id %>">
                         <input type="hidden" name="eventId" value="<%= eventId %>">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </span>
                 <span class="shop__hide shop__details">
@@ -35,6 +36,7 @@
                         <button class="btn__func txt-primary" type="submit">Add to Event</button>
                         <input type="hidden" name="pastryId" value="<%= pastry._id %>">
                         <input type="hidden" name="eventId" value="<%= eventId %>">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </span>
                 <span class="shop__num shop__display shop__hide">1</span>
@@ -43,6 +45,7 @@
                         <button class="shop__button" type="submit">&plus;</button>
                         <input type="hidden" name="pastryId" value="<%= pastry._id %>">
                         <input type="hidden" name="eventId" value="<%= eventId %>">
+                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </span>
             </div>

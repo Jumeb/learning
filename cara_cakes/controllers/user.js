@@ -1,6 +1,7 @@
 const Event = require('../models/events');
 const Cake = require('../models/product');
 const Order = require('../models/orders');
+const User = require('../models/user')
 
 exports.getBds = (req, res, next) => {
     const eventId = req.params.eventId;
@@ -12,7 +13,9 @@ exports.getBds = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/cakes',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -30,7 +33,9 @@ exports.getWeds = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/weds',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -48,7 +53,9 @@ exports.getCookies = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/cookies',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -66,7 +73,9 @@ exports.getPans = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/pans',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -84,7 +93,9 @@ exports.getDons = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/dons',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -102,7 +113,9 @@ exports.getCups = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/cups',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -120,7 +133,9 @@ exports.getVals = (req, res, next) => {
                 pageTitle: 'Add anything',
                 path: '/user/vals',
                 pastries: cakes,
-                eventId: eventId
+                eventId: eventId,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             });
         })
         .catch(err => {
@@ -136,37 +151,74 @@ exports.getPastry = (req, res, next) => {
                 pageTitle: cake.name,
                 path: '/user/pastry-detail',
                 pastry: cake,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             })
         })
 }
 
 exports.getUser = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Event.find({
-            userId: req.user
+            userId: req.session.user
         })
         .populate('cart.items.pastryId')
         .populate('userId')
         .exec()
-        .then(events => { 
-            console.log(events)
-            res.render('user/index', {
-                pageTitle: 'Welcome',
-                path: '/user',
-                events: events
-            })
+        .then(events => {
+            if (events[0] == null) {
+                User.findById(req.session.user)
+                    .then(user => {
+                        let title = 'Welcome, ' + user.name;
+                        res.render('user/index0', {
+                            pageTitle: title,
+                            path: '/user',
+                            event: user,
+                            success: message
+                        })
+                    })
+            } else if (events) {
+                let title = 'Welcome, ' + events[0].userId.name;
+                res.render('user/index', {
+                    pageTitle: title,
+                    path: '/user',
+                    events: events,
+                    success: message
+                })
+            }
 
         })
 }
 
 exports.getAddEvent = (req, res, next) => {
-    Event.find()
+    Event.find({
+            userId: req.user
+        })
+        .populate('userId')
         .then(events => {
-            res.render('user/add-event', {
-                pageTitle: 'Add your event',
-                path: '/user/add-event',
-                editing: false,
-                events: events
-            })
+            if (events[0] == null) {
+                User.findById(req.session.user)
+                    .then(user => {
+                        res.render('user/add-event0', {
+                            pageTitle: 'Welcome',
+                            path: '/user/add-event',
+                            event: user,
+                            editing: false
+                        })
+                    })
+            } else if (events) {
+                res.render('user/add-event', {
+                    pageTitle: 'Add your event',
+                    path: '/user/add-event',
+                    editing: false,
+                    events: events
+                })
+            }
         })
         .catch(err => {
             console.log(err);
@@ -207,6 +259,7 @@ exports.getEditEvent = (req, res, next) => {
     const eventId = req.params.eventId;
 
     Event.findById(eventId)
+        .populate('userId')
         .then(event => {
             if (!event) {
                 res.redirect('/user');
@@ -215,7 +268,9 @@ exports.getEditEvent = (req, res, next) => {
                 pageTitle: "Edit your event",
                 path: '/user/edit-event',
                 event: event,
-                editing: editMode
+                editing: editMode,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             })
         })
 }
@@ -247,14 +302,17 @@ exports.postEditEvent = (req, res, next) => {
 exports.getDeleteEvent = (req, res, next) => {
     const eventId = req.params.eventId;
     Event.findById(eventId)
-        .then(events => {
-            if (!events) {
+        .populate('userId')
+        .then(event => {
+            if (!event) {
                 res.redirect('/user');
             }
             res.render('user/confirm', {
                 pageTitle: 'Deleting event',
                 path: '/user/delete-event',
-                events: events
+                event: event,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             })
         })
 }
@@ -275,6 +333,8 @@ exports.getCart = (req, res, next) => {
     const eventId = req.params.eventId;
     Event.findById(eventId)
         .populate('cart.items.pastryId')
+        .populate('userId')
+        // .exec()
         .then(pastries => {
             event = pastries;
             pastries = pastries.cart.items;
@@ -282,7 +342,9 @@ exports.getCart = (req, res, next) => {
                 pageTitle: event.name,
                 path: '/user/event-cart',
                 event: event,
-                pastries: pastries
+                pastries: pastries,
+                authenticated: req.session.loggedIn,
+                csrfToken: req.csrfToken()
             })
         })
 }
@@ -329,22 +391,34 @@ exports.postSubCart = (req, res, next) => {
                 })
         })
         .then(result => {
-            console.log(result);
             res.redirect('/user/cakes');
         });
 };
 
 exports.getOrders = (req, res, next) => {
     Order.find({
-            "user.userId": req.user._id
+            "user.userId": req.user
         })
+        .populate('userId')
         .then(orders => {
-            console.log(orders);
-            res.render('user/userOrder', {
-                path: '/user/orders',
-                pageTitle: 'Your Orders',
-                order: orders
-            })
+            if (orders[0] == null) {
+                User.findById(req.user)
+                    .then(user => {
+                        res.render('user/userOrder0', {
+                            path: '/user/orders',
+                            pageTitle: 'Your Orders',
+                            event: user,
+                            success: message
+                        })
+                    })
+            } else if (orders) {
+                res.render('user/userOrder', {
+                    path: '/user/orders',
+                    pageTitle: 'Your Orders',
+                    order: orders,
+                    event: orders
+                })
+            }
         })
 }
 

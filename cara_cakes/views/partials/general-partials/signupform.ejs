@@ -1,32 +1,40 @@
+<% if (errorMessage) { %>
+    <div class="flash">
+        <div class="flash__message flash__message-danger">
+            <%= errorMessage %>
+        </div>
+    </div>
+<% } %>
 <section class="sheet">
         <div class="sheet__form">
             <div class="user__frame">
                 <img src="../img/chris-1.jpg" alt="" class="user__img">
                 <a href="#" class="user__upload txt-cnt">Add</a>
             </div>
-            <form action="" class="sheet__signup">
+            <form action="/signup" class="sheet__signup" method="POST">
                 <div class="sheet__group">
-                    <input type="text" class="sheet__input" id="Name" placeholder="Name" required>
+                    <input type="text" class="sheet__input" name="name" id="Name" placeholder="Name" required>
                     <label for="Name" class="sheet__label">Name</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="email" class="sheet__input" id="Email" placeholder="Email" required>
+                    <input type="email" class="sheet__input" name="email" id="Email" placeholder="Email" required>
                     <label for="Email" class="sheet__label">Email</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="number" class="sheet__input" id="Tel" placeholder="Telephone No" required>
+                    <input type="number" class="sheet__input" name="telNo" id="Tel" placeholder="Telephone No" required>
                     <label for="Tel" class="sheet__label">Telephone No</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="password" class="sheet__input" id="password" placeholder="Password" required>
+                    <input type="password" class="sheet__input" name="password" id="password" placeholder="Password" required>
                     <label for="password" class="sheet__label">Password</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="password" class="sheet__input" id="con" placeholder="Confirm password" required>
+                    <input type="password" class="sheet__input" name="confirmPassword" id="con" placeholder="Confirm password" required>
                     <label for="con" class="sheet__label">Confirm password</label>
                 </div>
                 <div class="sheet__btns">
-                    <a href="#" class="btn btn-deep--pink">Get started</a>
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn~ btn-deep--pink~">Get started</button>
                     <a href="/login" class="btn btn-deep--pink">Login</a>
                 </div>
             </form>

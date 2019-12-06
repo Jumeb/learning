@@ -46,28 +46,11 @@
                 <a href="/user/edit-event/<%= event._id %>?edit=true" class="btn-flat btn-inline">Edit</a>
             </span>
             <span class="events__complete-info click">
-                <a href="#" class="btn-flat btn-inline">View</a>
+                <a href="/user/event-cart/<%= event._id %>" class="btn-flat btn-inline">Cart</a>
             </span>
             <span class="events__complete-info">
                 <a href="/user/cakes/<%= event._id %>" class="btn-flat btn-inline">Shop</a>
             </span>
-            <span class="events__complete-info">
-                <a href="#" class="btn-flat btn-inline">Order</a>
-            </span>
-        </div>
-        <div class="events__view-display">
-            <% if (event.cart.items.length > 0) { %>
-            <ul class="events__view-list">
-                <% event.cart.items.forEach(p => { %>
-                <li class="events__view-item"><%= p.pastryId.name %> : <%= p.quantity %></li>
-                <% }) %>
-            </ul>
-            <div class="align-right">
-                <a href="/user/event-cart/<%= event._id %>" class="btn__func txt-primary">Event Cart</a>
-            </div>
-            <% } else { %>
-            <h1>No Orders</h1>
-            <% } %>
         </div>
     </div>
     <% } %>

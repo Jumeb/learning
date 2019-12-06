@@ -1,20 +1,20 @@
 <section class="sheet">
-        <div class="sheet__form">
-            <form action="" class="sheet__signup margin-top-medium">
-                <div class="sheet__group">
-                    <input type="email" class="sheet__input" id="Email" placeholder="Email" required>
-                    <label for="Email" class="sheet__label">Email</label>
-                </div>
-                <div class="sheet__group margin-bottom-huge">
-                    <input type="password" class="sheet__input" id="password" placeholder="Password" required>
-                    <label for="password" class="sheet__label">Password</label>
-                </div>
-                <div class="sheet__btns">
-                    <a href="#login" class="btn btn-deep--pink">Login</a>
-                    <a href="/signup" class="btn btn-deep--pink">Sign up</a>
-                </div>
-                <a href="#" class="btn-3 txt-white">Forgot password</a>
-            </form>
-        </div>
-
-    </section>
+    <div class="sheet__form">
+        <form action="/login" class="sheet__signup margin-top-medium" method="POST">
+            <div class="sheet__group">
+                <input type="email" class="sheet__input" name="email" id="Email" placeholder="Email" required>
+                <label for="Email" class="sheet__label">Email</label>
+            </div>
+            <div class="sheet__group margin-bottom-huge">
+                <input type="password" class="sheet__input" name="password" id="password" placeholder="Password" required>
+                <label for="password" class="sheet__label">Password</label>
+            </div>
+            <div class="sheet__btns">
+                <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                <button type="submit" class="btn~ btn-deep--pink~">Login</button>
+                <a href="/signup" class="btn btn-deep--pink">Sign up</a>
+            </div>
+            <a href="#" class="btn-3 txt-white">Forgot password</a>
+        </form>
+    </div>
+</section>

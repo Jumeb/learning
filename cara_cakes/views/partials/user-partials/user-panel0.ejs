@@ -1,0 +1,9 @@
+<section class="panel">
+    <% if (path == '/user') { %>
+    <%- include('user-info0.ejs') %>
+    <%- include('user-event0.ejs') %>
+    <% } else if (path == '/user/add-event') { %>
+    <%- include('user-info0.ejs') %>
+    <%- include('event-form.ejs') %>
+    <% } %>
+</section>
