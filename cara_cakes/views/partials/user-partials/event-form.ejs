@@ -25,12 +25,12 @@
                 <div class="sheet__group">
                     <input type="date" name="date" class="sheet__input" id="date" placeholder="Date"
                         value="<% if (editing) { %><%= event.date %><% } %>" required>
-                    <label for="date" class="sheet__label">Date</label>
+                    <label for="date" class="sheet__label">Date of event</label>
                 </div>
                 <div class="sheet__group">
                     <input type="time" name="time" class="sheet__input" id="time" placeholder="Time"
                         value="<% if (editing) { %><%= event.time %><% } %>" required>
-                    <label for="time" class="sheet__label">Time</label>
+                    <label for="time" class="sheet__label">Time of event</label>
                 </div>
                 <% if (editing) { %>
                 <input type="hidden" name="eventId" value="<%= event._id %>">

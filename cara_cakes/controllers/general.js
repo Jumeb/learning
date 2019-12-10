@@ -147,13 +147,13 @@ exports.postLogin = (req, res, next) => {
             email: email
         })
         .then(user => {
-            let name = user.name;
             if (!user) {
                 req.flash('error', 'Invalid email or password.');
                 return res.redirect('/login');
             }
             bcrypt.compare(password, user.password)
                 .then(doMatch => {
+                    let name = user.name;
                     let message = 'Welcome, ' + name;
                     if (doMatch) {
                         req.session.loggedIn = true;
@@ -180,6 +180,6 @@ exports.postLogin = (req, res, next) => {
 exports.postLogout = (req, res, next) => {
     req.session.destroy((err) => {
         console.log(err)
-        res.redirect('/');
+        res.redirect('/login');
     });
 }

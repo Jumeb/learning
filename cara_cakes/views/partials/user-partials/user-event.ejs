@@ -1,4 +1,9 @@
 <div class="panel__event">
+    <% if (success) { %>
+    <div class="flash">
+        <div class="flash__message flash__message-success"><%= success %></div>
+    </div>
+    <% } %>
 
     <% if (events.length > 0) { %>
     <% for (let event of events) { %>

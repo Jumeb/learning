@@ -7,7 +7,7 @@
             </h2>
             <h3><%= order.event.purpose %></h3>
             <% let total = 0 %>
-            <div>
+            <div style="margin: auto;">
                 <% order.pastries.forEach(p => { %>
                 <p class="events__confirm-msg"><%= p.pastry.name %>: <%= p.quantity %></p>
                 <div style="display: none;"><%= total += p.quantity * p.pastry.price %></div>

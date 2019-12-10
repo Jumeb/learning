@@ -338,6 +338,7 @@ exports.getCart = (req, res, next) => {
         .then(pastries => {
             event = pastries;
             pastries = pastries.cart.items;
+            console.log(event)
             res.render('user/eventCart', {
                 pageTitle: event.name,
                 path: '/user/event-cart',
@@ -407,8 +408,7 @@ exports.getOrders = (req, res, next) => {
                         res.render('user/userOrder0', {
                             path: '/user/orders',
                             pageTitle: 'Your Orders',
-                            event: user,
-                            success: message
+                            event: user
                         })
                     })
             } else if (orders) {
