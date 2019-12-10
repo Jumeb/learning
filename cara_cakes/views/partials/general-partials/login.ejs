@@ -1,3 +1,9 @@
+<% if (errorMessage) { %>
+<div class="flash">
+    <div class="flash__message flash__message-danger"><%= errorMessage %></div>
+</div>
+<% } %>
+
 <section class="sheet">
     <div class="sheet__form">
         <form action="/login" class="sheet__signup margin-top-medium" method="POST">
@@ -6,12 +12,13 @@
                 <label for="Email" class="sheet__label">Email</label>
             </div>
             <div class="sheet__group margin-bottom-huge">
-                <input type="password" class="sheet__input" name="password" id="password" placeholder="Password" required>
+                <input type="password" class="sheet__input" name="password" id="password" placeholder="Password"
+                    required>
                 <label for="password" class="sheet__label">Password</label>
             </div>
             <div class="sheet__btns">
                 <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                <button type="submit" class="btn~ btn-deep--pink~">Login</button>
+                <button type="submit" class="btn btn-deep--pink">Login</button>
                 <a href="/signup" class="btn btn-deep--pink">Sign up</a>
             </div>
             <a href="#" class="btn-3 txt-white">Forgot password</a>

@@ -280,21 +280,29 @@ ORDER: base + typography > general layout + grid > page layout > components
       border-bottom: 0.3rem solid #ff1493; }
   .events__delete {
     flex: 0 0 100%;
-    display: flex; }
+    display: flex;
+    justify-content: center;
+    align-items: center; }
     .events__delete-btn {
-      margin: -.9rem 1.1rem 0 auto;
+      margin-left: auto;
+      margin-right: 1rem;
+      margin-top: -1rem;
       font-size: 1.7rem;
-      border: 0.2rem solid red;
+      border: 0.2rem solid #dd1111;
       border-radius: 50%;
+      width: 3.5rem;
+      height: 3.5rem;
+      display: flex;
+      justify-content: center;
+      align-items: center;
       font-weight: bold;
-      color: red;
+      color: #dd1111;
       transition: all .4s ease-in-out; }
       .events__delete-btn:link, .events__delete-btn:visited {
-        text-decoration: none;
-        padding: .1rem 1rem; }
+        text-decoration: none; }
       .events__delete-btn:hover {
         color: #fff;
-        background-color: rgba(255, 0, 0, 0.8); }
+        background-color: rgba(221, 17, 17, 0.8); }
   .events__confirm {
     position: absolute;
     top: 50%;

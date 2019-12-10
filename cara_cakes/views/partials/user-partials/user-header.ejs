@@ -15,23 +15,14 @@
                     Events
                 </a>
             </li>
-            <li class="notify__item <%= path == '/user' ? 'notify__active' : '' %>">
+            <li class="notify__item <%= path == '/user/add-event' ? 'notify__active' : '' %>">
                 <a href="/user/add-event" class="notify__link">
                     New Event
                 </a>
             </li>
-            <li class="notify__item">
-                <a href="#" class="notify__link fas fa-user-friends">
-                    <span class="notify__num">
-                        99+
-                    </span>
-                </a>
-            </li>
-            <li class="notify__item">
-                <a href="#" class="notify__link fas fa-user-alt">
-                    <span class="notify__num">
-                        8
-                    </span>
+            <li class="notify__item <%= path == '/user/orders' ? 'notify__active' : '' %>">
+                <a href="/user/orders" class="notify__link">
+                    Orders
                 </a>
             </li>
         </ul>

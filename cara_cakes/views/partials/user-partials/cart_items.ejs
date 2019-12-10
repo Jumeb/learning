@@ -17,10 +17,11 @@
         </div>
         <div class="events__countdown margin-auto">
             <div class="events__func">
-                <button class="btn__func space">Sub</button>
-                <button class="btn__func space">Add</button>
+                <!-- <button class="btn__func space">Sub</button>
+                <button class="btn__func space">Add</button> -->
                 <form action="/user/cart-delete" method="post">
                     <input type="hidden" name="eventId" value="<%= event._id %>">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     <input type="hidden" name="pastryId" value="<%= p.pastryId._id %>">
                     <button class="btn__func space btn__func-delete">Delete</button>
                 </form>
@@ -31,8 +32,8 @@
         <%= total += p.quantity * p.pastryId.price %>
     </div>
     <% }) %>
-    <hr style="width: 90%; margin: auto; margin-bottom: 2rem;">
-    <span class="events__confirm-msg btn-flat">Total: <%= total %> FCFA</span>
+    <hr style="width: 90%; margin-bottom: 2rem;">
+    <span class="events__confirm-msg txt-primary">Total: <%= total %> FCFA</span>
     <div class="align-right">
         <form action="/user/make-order" method="POST">
             <input type="hidden" name="_csrf" value="<%= csrfToken %>">

@@ -1,4 +1,23 @@
+/*
 
+ 0 - 412px:     Small phone
+ 412 - 600px:     Phone
+
+ 600 - 900px:   Tablet portrait
+ 900 - 1200px:  Tablet landscape
+ [1200 - 1800px] is where our normal styles apply
+ 1800px +:   Big screens
+
+/*
+$breakpoint argument choices:
+- ph
+- tp
+- tl
+- bs
+1em - 16px
+
+ORDER: base + typography > general layout + grid > page layout > components
+*/
 @-webkit-keyframes moveInTop {
   0% {
     transform: translateY(-10rem);
@@ -316,10 +335,9 @@ body {
 .space {
   margin: .5rem; }
 
-.btn:link,
-.btn:visited {
+.btn {
   text-decoration: none;
-  padding: 1rem 3.5rem;
+  padding: 1.3rem 3.5rem;
   margin: 2rem .5rem;
   display: inline-block;
   color: #fff;
@@ -327,14 +345,18 @@ body {
   font-weight: 400;
   border-radius: 10rem;
   outline: none;
+  border: none;
   transition: all 0.4s ease-in-out;
   position: relative; }
+  .btn:visited, .btn:link {
+    text-decoration: none;
+    padding: 1rem 3.5rem; }
 
 .btn--brown {
   background-color: rgba(160, 82, 45, 0.8); }
 
 .btn-deep--pink {
-  background-color: rgba(199, 21, 133, 0.8); }
+  background-color: rgba(199, 21, 133, 0.8) !important; }
 
 .btn:hover {
   transform: translateY(-0.4rem);
@@ -361,7 +383,7 @@ body {
   opacity: 0; }
 
 .btn-deep--pink::after {
-  background-color: rgba(199, 21, 133, 0.8); }
+  background-color: rgba(199, 21, 133, 0.8) !important; }
 
 .btn-animated--left {
   animation: moveInLeft 1s ease-in-out .8s;
@@ -380,7 +402,8 @@ body {
   display: inline-block;
   font-size: 1.4rem;
   border-radius: 10rem;
-  width: 17rem; }
+  width: 17rem;
+  background-color: transparent; }
   .btn-2:link, .btn-2:visited {
     text-decoration: none;
     padding: 1rem 3.5rem; }
@@ -435,16 +458,20 @@ body {
   color: #777;
   text-align: center;
   outline: none;
-  border: none;
-  border-bottom: 0.2rem solid #ff1493;
+  font-weight: bold;
+  border: 0.2rem solid #ff1493;
+  border-radius: .5rem;
   display: inline-block;
   background-color: transparent;
   font-size: 1.5rem;
-  padding: 1rem;
-  padding-bottom: .6rem; }
+  padding: .5rem 1rem;
+  transition: all ease-in .4s; }
   .btn-flat:link, .btn-flat:visited {
-    text-decoration: none;
-    padding-bottom: .2rem; }
+    text-decoration: none; }
+  .btn-flat:hover {
+    border: 0.2rem solid #ff1493;
+    background-color: rgba(255, 20, 147, 0.8);
+    color: #fff; }
 
 .btn__func {
   border: 0.1rem solid #ff1493;
@@ -457,12 +484,12 @@ body {
     text-decoration: none;
     font-size: 1.1rem; }
   .btn__func-delete {
-    border: 0.1rem solid red;
+    border: 0.1rem solid #dd1111;
     color: #777;
     transition: all .3s ease; }
     .btn__func-delete:hover {
       color: #fff;
-      background-color: rgba(255, 0, 0, 0.8); }
+      background-color: rgba(221, 17, 17, 0.8); }
 
 .card {
   perspective: 250rem;
@@ -870,6 +897,26 @@ body {
     @media only screen and (max-width: 75em) {
       .info:hover .info__name {
         transform: translate(80%, -190%); } }
+
+.flash {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin: 2rem; }
+  .flash__message {
+    padding: 1.2rem 1.5rem;
+    flex: 0 0 50%;
+    text-align: center;
+    font-size: 1.8rem;
+    border-radius: .4rem; }
+    .flash__message-success {
+      border: 0.2rem #ff1493 solid;
+      background-color: rgba(255, 20, 147, 0.4);
+      color: #ff1493; }
+    .flash__message-danger {
+      border: .2rem #eb1212 solid;
+      background-color: rgba(235, 18, 18, 0.4);
+      color: #b60707; }
 
 .login {
   background-image: linear-gradient(60deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 60%, rgba(199, 21, 133, 0.5) 60%), url(../img/bds-6.jpg);

@@ -92,3 +92,31 @@
         }
     }
 }
+
+.flash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 2rem;
+
+    &__message {
+        padding: 1.2rem 1.5rem;
+        flex: 0 0 50%;
+        text-align: center;
+        font-size: 1.8rem;
+        border-radius: .4rem;
+
+        &-success {
+            border: .2rem $primary solid;
+            background-color: rgba($primary, .4);
+            color: $primary;
+        }
+
+        &-danger {
+            border: .2rem #eb1212 solid;
+            background-color: rgba(#eb1212, .4);
+            color: #b60707;
+        }
+        
+    }
+}

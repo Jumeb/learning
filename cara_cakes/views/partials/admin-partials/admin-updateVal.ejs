@@ -19,6 +19,7 @@
             <label for="image" class="add__label">Image</label>
         </div>
         <input type="hidden" name="type" value='Valentine'>
+        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
         <div class="add__form--sheet">
             <textarea name="desc" cols="30" rows="5" class="add__input"
                 placeholder="Description"><% if (editing) { %><%= pastry.description %> <% } %></textarea>
