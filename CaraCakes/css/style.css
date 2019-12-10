@@ -114,6 +114,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     opacity: 1;
     transform: scale(1); } }
 
+
 @keyframes leftRight {
   0% {
     transform: rotateZ(-20deg); }
@@ -228,6 +229,7 @@ body {
 .txt-primary {
   color: #ff1493 !important; }
 
+
 .txt-black-1 {
   background-image: linear-gradient(to right, rgba(24, 23, 23, 0.8), rgba(24, 23, 23, 0.6));
   color: transparent;
@@ -256,6 +258,7 @@ body {
   background-repeat: no-repeat;
   background-attachment: fixed; }
 
+
 .back-signup {
   background-image: linear-gradient(to right bottom, rgba(0, 0, 0, 0.2), rgba(255, 20, 147, 0.5), rgba(199, 21, 133, 0.7)), url(../img/pans-6.jpg);
   background-size: cover;
@@ -270,11 +273,13 @@ body {
 
 .back-abt {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(../img/cookies-3.jpg);
+
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; }
 
 .back-story {
+
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(../img/cups-5.jpg);
   background-size: cover;
   background-repeat: no-repeat;
@@ -288,6 +293,7 @@ body {
 
 .back-careers {
   background-image: linear-gradient(to right, rgba(0, 0, 0, 0.5), rgba(0, 0, 0, 0.8)), url(../img/pans-5.jpg);
+
   background-size: cover;
   background-repeat: no-repeat;
   background-attachment: fixed; }
@@ -296,6 +302,7 @@ body {
   background-image: linear-gradient(to right bottom, rgba(255, 105, 180, 0.5), rgba(160, 82, 45, 0.5)), url(../img/cups-7.jpg);
   background-size: cover;
   background-position: center; }
+
 
 .head-story {
   background-image: linear-gradient(to right bottom, rgba(255, 105, 180, 0.5), rgba(160, 82, 45, 0.5)), url(../img/cookies-8.jpg);
@@ -307,11 +314,11 @@ body {
   background-size: cover;
   background-position: center; }
 
+
 .head-gall {
   background-image: linear-gradient(to right bottom, rgba(255, 105, 180, 0.5), rgba(160, 82, 45, 0.5)), url(../img/weds-2.jpg);
   background-size: cover;
   background-position: center; }
-
 .head-abt {
   background-image: linear-gradient(to right bottom, rgba(255, 105, 180, 0.5), rgba(160, 82, 45, 0.5)), url(../img/don-2.jpg);
   background-size: cover;
@@ -334,6 +341,7 @@ body {
 
 .space {
   margin: .5rem; }
+
 
 .btn:link,
 .btn:visited {
@@ -403,6 +411,7 @@ body {
   .btn-2:link, .btn-2:visited {
     text-decoration: none;
     padding: 1rem 3.5rem; }
+
   .btn-2:hover {
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5); }
   .btn-2:active {
@@ -424,6 +433,7 @@ body {
     visibility: visible; }
 
 .btn-3 {
+
   transition: all .4s ease-in-out;
   color: #181717;
   padding: 1.2rem 3.5rem;
@@ -435,6 +445,7 @@ body {
   .btn-3:link, .btn-3:visited {
     text-decoration: none;
     padding: 1rem 3.5rem; }
+
   .btn-3:hover {
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.5); }
   .btn-3:active {
@@ -482,6 +493,7 @@ body {
     .btn__func-delete:hover {
       color: #fff;
       background-color: rgba(255, 0, 0, 0.8); }
+
 
 .card {
   perspective: 250rem;
@@ -736,7 +748,8 @@ body {
   border: none;
   padding: 1.4rem 1.9rem;
   background-color: rgba(255, 255, 255, 0.8);
-  border-bottom: 3px solid transparent;
+border-bottom: 3px solid transparent;
+
   outline: none;
   transition: all .3s; }
   @media only screen and (max-width: 37.5em) {
@@ -745,6 +758,7 @@ body {
       width: 95%; } }
   .form__input:focus {
     box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.8);
+
     border-bottom: 3px solid #c71585; }
     .form__input:focus:invalid {
       border-bottom: 3px solid #8b4513; }
@@ -1046,7 +1060,6 @@ body {
     text-decoration: none;
     color: #777;
     transition: all .3s; }
-
 .sheet {
   display: flex;
   justify-content: flex-end;
@@ -1127,6 +1140,7 @@ body {
   .sheet__select:hover::before {
     background-color: #ff1493;
     color: #fff; }
+
 
 .footer {
   font-size: 1.4rem; }
@@ -1349,7 +1363,9 @@ body {
       padding: 1.8rem 1.2rem;
       text-transform: uppercase;
       color: #fff; }
+
     .container__nav--link::before, .container__nav--active::before {
+
       content: "";
       display: block;
       height: .5rem;
@@ -1361,8 +1377,10 @@ body {
       transition: all ease-in-out 0.4s; }
     .container__nav--link:hover::before {
       width: 100%; }
+
     .container__nav--active::before {
       width: 100%; }
+
 
 .header {
   height: 95vh;
@@ -1449,16 +1467,19 @@ body {
       .title--main {
         letter-spacing: .4rem;
         font-size: 3.5rem; } }
+
   .title--sad {
     margin-top: 6rem;
     font-size: 6rem;
     transform: translateZ(-5rem);
     animation: leftRight 2s ease-in-out 10ms infinite alternate; }
+
   .title--sub {
     display: block;
     font-size: 2rem;
     letter-spacing: 1.1rem;
     font-weight: 700;
+
     animation: moveInBottom 1s ease-in-out .5s backwards; }
     .title--sub-404 {
       display: block;
@@ -1484,6 +1505,7 @@ body {
         .title--sub-404 {
           letter-spacing: .1rem;
           font-size: 1.2rem; } }
+
     @media only screen and (max-width: 75em) {
       .title--sub {
         letter-spacing: .8rem; } }
@@ -1547,9 +1569,11 @@ body {
 
 .navi {
   position: fixed;
+
   top: 4.5rem;
   right: 3rem;
   transition: all .5s ease;
+
   z-index: 30; }
   @media only screen and (max-width: 25.75em) {
     .navi {
@@ -1600,14 +1624,18 @@ body {
       transform: scale(1); }
   .navi__button:hover .navi__icon::after {
     top: -.8rem; }
+
     @media only screen and (max-width: 25.75em) {
       .navi__button:hover .navi__icon::after {
         top: -.7rem; } }
+
   .navi__button:hover .navi__icon::before {
     top: 1.1rem; }
     @media only screen and (max-width: 75em) {
       .navi__button:hover .navi__icon::before {
+
         top: 1.1rem; } }
+
   .navi__checkbox {
     display: none; }
   .navi__icon, .navi__icon::after, .navi__icon::before {
@@ -1623,9 +1651,11 @@ body {
     transition: all .3s ease-in-out; }
   .navi__icon::after {
     top: -.6rem; }
+
     @media only screen and (max-width: 25.75em) {
       .navi__icon::after {
         top: -.5rem; } }
+
   .navi__icon::before {
     top: .9rem; }
     @media only screen and (max-width: 75em) {
@@ -1634,6 +1664,7 @@ body {
     @media (max-width: 56.25em) {
       .navi__icon::before {
         top: 1rem; } }
+
   .navi__checkbox:checked + .navi__button .navi__icon::after {
     top: 0;
     transform: translate(-50%, -50%) rotate(-225deg); }
@@ -1658,6 +1689,7 @@ body {
     margin-top: 36rem;
     opacity: 1;
     visibility: visible; }
+
   .navi__hidden {
     position: fixed;
     top: 4.5rem;
@@ -1670,6 +1702,7 @@ body {
   .navi__active {
     background-color: #c71585;
     color: #fff !important; }
+
 
 .sideup__checkbox {
   display: none; }
@@ -1847,7 +1880,9 @@ body {
 
 .sec-login {
   background-image: linear-gradient(to right, rgba(199, 21, 133, 0.95), rgba(160, 82, 45, 0.95));
+
   padding: 12rem 0; }
+
 
 .sec-footer {
   background-color: #181717;

@@ -68,7 +68,9 @@ ORDER: base + typography > general layout + grid > page layout > components
     align-self: flex-start;
     overflow: hidden;
     height: auto;
-    flex: 0 0 29%;
+
+      flex: 0 0 26%;
+
     margin-top: 1rem;
     margin-bottom: 3rem;
     border-radius: 1rem;
@@ -84,6 +86,7 @@ ORDER: base + typography > general layout + grid > page layout > components
         flex-basis: 60%; } }
   .shop__info {
     width: 100%;
+
     height: 25rem;
     position: relative; }
   .shop__control {
@@ -169,6 +172,7 @@ ORDER: base + typography > general layout + grid > page layout > components
       display: none;
       flex-basis: 0%;
       transition: all .5s ease; }
+
   .shop__power {
     flex: 0 0 100%;
     text-align: center;
@@ -198,6 +202,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     font-size: 1.4rem;
     margin-right: .6rem;
     color: #c71585; }
+
 
 .nav {
   padding: 1rem 2rem;

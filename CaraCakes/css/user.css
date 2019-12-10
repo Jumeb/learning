@@ -1,3 +1,4 @@
+
 /*
 
  0 - 412px:     Small phone
@@ -107,6 +108,7 @@ ORDER: base + typography > general layout + grid > page layout > components
   font-size: 1.2rem;
   color: #181717; }
 
+
 .events {
   display: flex;
   justify-content: space-between;
@@ -114,7 +116,9 @@ ORDER: base + typography > general layout + grid > page layout > components
   flex-wrap: wrap;
   border-radius: .8rem;
   margin-bottom: 4rem;
+
   position: relative;
+
   padding: 2rem .6rem;
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.6); }
   .events__con {
@@ -181,6 +185,7 @@ ORDER: base + typography > general layout + grid > page layout > components
       .events__days {
         margin-left: auto;
         margin-right: 4rem; } }
+
   .events__func {
     display: flex;
     flex-direction: column;
@@ -192,6 +197,7 @@ ORDER: base + typography > general layout + grid > page layout > components
       .events__func {
         margin-left: auto;
         margin-right: 4rem; } }
+
   .events__HMS {
     display: flex;
     flex-direction: column;
@@ -205,10 +211,12 @@ ORDER: base + typography > general layout + grid > page layout > components
   .events__time {
     font-size: 1.6rem;
     word-spacing: .6rem; }
+
     .events__time-dDay {
       font-size: 1.2rem;
       margin-top: .5rem;
       margin-bottom: -1rem; }
+
   .events__indicators {
     word-spacing: .8rem;
     text-transform: uppercase;
@@ -249,6 +257,7 @@ ORDER: base + typography > general layout + grid > page layout > components
       .events__complete-info {
         border: 0.3rem solid #fff;
         flex-basis: 12%; } }
+
   .events__view {
     flex: 0 0 100%;
     margin-top: 0;
@@ -506,14 +515,18 @@ ORDER: base + typography > general layout + grid > page layout > components
     opacity: 1;
     visibility: visible;
     margin: 0;
-    transition: visibility .5s ease-in-out, height .5s ease-in-out, margin .5s ease-in-out; }
+    transition: visibility .5s ease-in-out,
+ height .5s ease-in-out,
+ margin .5s ease-in-out; }
     .admin__options--hidden {
       opacity: 0;
       visibility: hidden;
       height: 0;
       margin-top: -2rem;
       margin-bottom: 1rem;
-      transition: visibility .5s ease-in-out, height .5s ease-in-out, margin .5s ease-in-out; }
+      transition: visibility .5s ease-in-out,
+ height .5s ease-in-out,
+ margin .5s ease-in-out; }
   .admin__link {
     text-decoration: none;
     font-size: 1.4rem;
@@ -645,7 +658,8 @@ ORDER: base + typography > general layout + grid > page layout > components
       background-color: rgba(255, 255, 255, 0.8);
       transform: scaleX(0);
       left: 0;
-      transition: transform .25s ease-in-out, height .4s ease-in-out .25s; }
+      transition: transform .25s ease-in-out,
+ height .4s ease-in-out .25s; }
     .admin__btn::before {
       top: 0; }
     .admin__btn::after {
@@ -655,6 +669,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     .admin__btn:hover::after, .admin__btn:hover::before {
       transform: scaleX(1);
       height: 50%; }
+
 
 .panel {
   display: flex;
@@ -745,8 +760,10 @@ ORDER: base + typography > general layout + grid > page layout > components
     display: flex;
     flex-direction: column;
     height: 78vh;
+
     overflow-y: auto;
     position: relative; }
+
     .panel__event::-webkit-scrollbar {
       width: 0 !important; }
     @media (max-width: 50em) {
@@ -770,6 +787,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     position: relative; }
     .panel__order::-webkit-scrollbar {
       width: 0 !important; }
+
 
 .num {
   font-size: 1.2rem;
@@ -804,10 +822,12 @@ ORDER: base + typography > general layout + grid > page layout > components
   padding: 1.2rem;
   color: #777; }
 
+
 .user {
   justify-content: center; }
   .user__form {
     flex: 0 0 65%; }
+
 
 .header__user {
   height: 13vh;
@@ -823,8 +843,10 @@ ORDER: base + typography > general layout + grid > page layout > components
   height: 7rem;
   width: 13rem; }
 
+
 .notify__active {
   width: 94%; }
+
 
 .notify__list {
   display: flex;
