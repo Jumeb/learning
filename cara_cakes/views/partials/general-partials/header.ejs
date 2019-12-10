@@ -1,0 +1,8 @@
+<header class="header <%= headerType %>">
+    <%- include('header-nav.ejs') %>
+    <% if (path !== '/404' ) { %>
+    <%- include('header-textbox.ejs') %>
+    <% } else { %>
+        <%- include('header404.ejs') %>
+    <% } %>
+</header>
