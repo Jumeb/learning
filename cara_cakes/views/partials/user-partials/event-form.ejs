@@ -1,0 +1,48 @@
+<div class="panel__event">
+    <section class="sheet user">
+        <div class="sheet__form user__form">
+            <div class="user__frame">
+                <img src="/img/chris-1.jpg" alt="" class="user__img">
+            </div>
+            <form action="/user/<% if (editing) { %>edit-event<% } else { %>add-event<% } %>" class="sheet__signup"
+                method="POST">
+                <div class="sheet__group">
+                    <input type="text" name="name" class="sheet__input" id="Name" placeholder="Name"
+                        value="<% if (editing) { %><%= event.name %><% } %>" required>
+                    <label for="Name" class="sheet__label">Name</label>
+                </div>
+                <div class="sheet__group">
+                    <input type="text" name="purpose" class="sheet__input" id="Purpose" placeholder="Purpose"
+                        value="<% if (editing) { %><%= event.purpose %><% } %>" required>
+                    <label for="Purpose" class="sheet__label">Purpose</label>
+                </div>
+                <div class="sheet__group">
+                    <input type="text" name="image" class="sheet__input" id="Image"
+                        value="<% if (editing) { %><%= event.image %><% } %>" placeholder="Image">
+                    <label for="Image" class="sheet__label">Image</label>
+                </div>
+
+                <div class="sheet__group">
+                    <input type="date" name="date" class="sheet__input" id="date" placeholder="Date"
+                        value="<% if (editing) { %><%= event.date %><% } %>" required>
+                    <label for="date" class="sheet__label">Date of event</label>
+                </div>
+                <div class="sheet__group">
+                    <input type="time" name="time" class="sheet__input" id="time" placeholder="Time"
+                        value="<% if (editing) { %><%= event.time %><% } %>" required>
+                    <label for="time" class="sheet__label">Time of event</label>
+                </div>
+                <% if (editing) { %>
+                <input type="hidden" name="eventId" value="<%= event._id %>">
+                <% } %>
+                <div class="sheet__btns">
+                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                    <button type="submit" class="btn-2 btn-deep--pink"><% if (editing) { %>Update
+                        Event<% } else { %>Create Event<% } %></button>
+                    <a href="/user" class="btn-2 btn-deep--pink txt-cnt">Cancel</a>
+                </div>
+            </form>
+        </div>
+
+    </section>
+</div>

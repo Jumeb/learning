@@ -1,0 +1,119 @@
+.sheet {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    padding: 1rem;
+
+    &__form {
+        position: relative;
+        flex: 0 0 40%;
+
+        margin-top: -1.5rem;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-image: linear-gradient(to bottom right, rgba($black, .8), rgba($black, .4));
+        border-radius: 1rem;
+        padding: 2rem;
+
+    }
+
+    &__signup {
+        flex: 0 0 100%;
+
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        flex-direction: column;
+        padding: 1.5rem;
+        position: relative;
+    }
+
+    &__group {
+
+        width: 100%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+
+        &:not(:last-child) {
+            margin-bottom: 3.5rem;
+        }
+    }
+
+    &__input {
+        padding: 1.2rem;
+        font-size: 1.5rem;
+        flex: 0 0 90%;
+        border-radius: .4rem;
+        outline: none;
+        border: none;
+        background-color: rgba($white, .8);
+        border-bottom: .3rem solid transparent;
+        transition: all .3s;
+
+        &:focus {
+            border-bottom: .3rem solid $primary;
+            box-shadow: 0 2re 4rem rgba($black, .4);
+
+            &:invalid {
+                border-bottom: .3rem solid $secondary-dark;
+            }
+        }
+
+        &::-webkit-input-placeholder {
+            color: $light-grey;
+        }
+    }
+
+    &__label {
+        position: absolute;
+        top: -55%;
+        left: 8%;
+        transform: translateY(-50%, -50%);
+        font-size: 1.3rem;
+        color: $primary-dark;
+        font-weight: bold;
+        opacity: 1;
+        visibility: visible;
+        transition: all .4s ease;
+    }
+
+    &__input:placeholder-shown+&__label {
+        visibility: hidden;
+        opacity: 0;
+        top: 20%;
+    }
+
+    &__btns {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        // flex-direction: row;
+    }
+
+    &__option {
+        font-size: 1.8rem;
+        padding: 20rem;
+
+        &:hover {
+            background-color: $primary !important;
+            color: $white !important;
+        }
+
+        &:first-child {
+            margin-top: 5rem;
+        }
+    }
+
+    &__select {
+        &::before {
+            content: "";
+        }
+        &:hover::before {
+            background-color: $primary;
+            color: $white;
+        }
+    }
+}
