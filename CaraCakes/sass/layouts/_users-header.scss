@@ -1,0 +1,83 @@
+
+
+.header__user {
+    height: $user-nav;
+    padding: 1rem 1.5rem;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.logo {
+
+    &__box {
+        padding: 1rem;
+    }
+
+    &__img {
+        height: 7rem;
+        width: 13rem;
+    }
+}
+
+.notify {
+
+    &__active {
+        width: 94%;
+    }
+    
+    &__list {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    &__link {
+        &:link,
+        &:visited {
+            text-decoration: none;
+            color: $light-grey;
+            position: relative;
+            padding: .7rem 1.5rem;
+        }
+        
+    }
+
+    &__num {
+        position: absolute;
+        background-color: $primary;
+        border-radius: 50%;
+        padding: .4rem .6rem;
+        align-self: stretch;
+        text-align: center;
+        color: $white;
+        font-size: .9rem;
+        top: -1rem;
+        right: .1rem;
+    }
+
+    &__item {
+        list-style: none;
+        font-size: 1.6rem;
+        padding: .4rem .8rem;
+        position: relative;
+        margin: .5rem;
+
+        &::before {
+            content: "";
+            position: absolute;
+            margin-left: -.7rem;
+            bottom: 0;
+            background-color: $primary-dark;
+            width: 0%;
+            height: .4rem;
+            transition: all .4s;
+        }
+
+        &:hover::before {
+            width: 94%;
+        }
+
+    }
+}

@@ -68,7 +68,9 @@ ORDER: base + typography > general layout + grid > page layout > components
     align-self: flex-start;
     overflow: hidden;
     height: auto;
-    flex: 0 0 26%;
+
+      flex: 0 0 26%;
+
     margin-top: 1rem;
     margin-bottom: 3rem;
     border-radius: 1rem;
@@ -84,38 +86,93 @@ ORDER: base + typography > general layout + grid > page layout > components
         flex-basis: 60%; } }
   .shop__info {
     width: 100%;
-    height: 20rem;
+
+    height: 25rem;
     position: relative; }
   .shop__control {
     background-color: #fff;
-    padding: 1.2rem .8rem;
+    padding: .6rem .8rem .2rem .8rem;
     color: #ff1493;
+    position: relative;
     display: flex;
-    justify-content: space-around;
+    justify-content: space-evenly;
     align-items: center; }
   .shop__decrement, .shop__increment {
     font-size: 1.7rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
     font-weight: 700;
     height: 3rem;
     width: 3rem;
-    text-align: center;
+    margin: 0;
+    cursor: pointer;
+    visibility: visible;
     border: 0.2rem solid #ff1493;
     border-radius: 50%;
-    cursor: pointer;
-    display: none;
-    transition: all .4s; }
+    overflow: hidden;
+    opacity: 1;
+    transition: all .5s ease; }
     .shop__decrement:hover, .shop__increment:hover {
       box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.6); }
-  .shop__num {
-    font-size: 1.5rem;
-    transition: all .4s;
-    display: none; }
-  .shop__add {
+    .shop__decrement:active, .shop__increment:active {
+      transform: translateY(0.5rem);
+      box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.6); }
+  .shop__details {
+    margin-top: -1rem;
     font-size: 1.3rem;
     font-weight: 700;
-    padding: 1rem 2rem;
+    padding: 1.5rem 2rem;
     cursor: pointer;
-    top: 0; }
+    top: 0;
+    transition: all .1s ease; }
+  .shop__centered-dec {
+    margin-left: 10rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s ease; }
+  .shop__centered-inc {
+    margin-right: 10rem;
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s ease; }
+  .shop__button {
+    padding: 1rem;
+    text-align: center;
+    background-color: transparent;
+    border: none;
+    outline: none;
+    color: #ff1493; }
+    .shop__button::selection {
+      background-color: transparent;
+      color: #ff1493; }
+  .shop__num {
+    font-size: 1.5rem;
+    font-weight: 700;
+    padding: 1rem 2rem;
+    visibility: visible;
+    opacity: 1;
+    transition: all .5s ease; }
+  .shop__display {
+    display: none; }
+  .shop__hide {
+    visibility: hidden;
+    opacity: 0;
+    transition: all .5s ease; }
+  .shop__add {
+    position: absolute;
+    z-index: 40;
+    font-size: 1.3rem;
+    font-weight: 700;
+    padding: 1.5rem 2rem;
+    cursor: pointer;
+    top: 0;
+    transition: all .5s ease; }
+    .shop__add-done {
+      display: none;
+      flex-basis: 0%;
+      transition: all .5s ease; }
+
   .shop__power {
     flex: 0 0 100%;
     text-align: center;
@@ -129,10 +186,23 @@ ORDER: base + typography > general layout + grid > page layout > components
     background-color: #fff;
     padding: .1rem .5rem;
     border-radius: .7rem; }
+  .shop__price {
+    position: absolute;
+    bottom: 1rem;
+    right: 1rem;
+    color: #ff1493;
+    background-color: #fff;
+    padding: .1rem .5rem;
+    border-radius: .7rem; }
   .shop__reviews {
-    font-size: 1.6rem;
+    font-size: 1.4rem;
     margin-left: .6rem;
     color: #c71585; }
+  .shop__value {
+    font-size: 1.4rem;
+    margin-right: .6rem;
+    color: #c71585; }
+
 
 .nav {
   padding: 1rem 2rem;

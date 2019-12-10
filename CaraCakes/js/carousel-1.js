@@ -57,43 +57,6 @@ $(function() {
         currentIndex = index;
         nextIndex = index == lastIndex ? 0 : index + 1;
         nnextIndex = nextIndex == lastIndex ? 0 : nextIndex + 1;
-
-        // currentIndex = index;
-
-        // if (index == 0) {
-        //     prevIndex = lastIndex;
-        //     pprevIndex = lastIndex - 1;
-        //     nextIndex = index + 1;
-        //     nnextIndex = nextIndex + 1;
-        // } else if(index != 0) {
-        //     prevIndex = index - 1;
-
-        //     if(index < lastIndex){
-        //         nextIndex = index + 1;
-
-        //         if(nextIndex < lastIndex){
-        //             nnextIndex = nextIndex + 1;
-        //         }
-        //     }
-
-        //     if (index == lastIndex){
-        //         nextIndex = 0;
-        //         nnextIndex = 1;
-        //     }
-            
-        //     if(prevIndex >= 1) {
-        //         pprevIndex = prevIndex -1;
-        //     }
-
-        //     if(prevIndex == 0) {
-        //         pprevIndex = lastIndex;
-        //     }
-
-        //     if(nextIndex == lastIndex) {
-        //         nnextIndex = 0;
-        //     }
-        // }
-
         updateCaroPos();
         setLeftClass();
         setRightClass();
