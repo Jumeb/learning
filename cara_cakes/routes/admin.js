@@ -47,6 +47,9 @@ router.get('/delete-pastry/:pastryId', getAdminRoutes.getDeletePastry);
 
 router.post('/delete-pastry', getAdminRoutes.postDeletePastry);
 
+router.post('/signIn', getAdminRoutes.postSignIn);
+router.post('/logout', getAdminRoutes.postLogout);
+
 
 
 module.exports = router;

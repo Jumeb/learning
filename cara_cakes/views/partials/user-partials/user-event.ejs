@@ -4,6 +4,11 @@
         <div class="flash__message flash__message-success"><%= success %></div>
     </div>
     <% } %>
+    <% if (errorMessage) { %>
+    <div class="flash">
+        <div class="flash__message flash__message-success"><%= errorMessage %></div>
+    </div>
+    <% } %>
 
     <% if (events.length > 0) { %>
     <% for (let event of events) { %>
@@ -17,11 +22,11 @@
         <div class="events__info">
             <span class="events__purpose">Purpose : <%= event.purpose %></span>
             <span class="events__date">Date: <b class="dayName"></b>, <b
-                    class="day"><%= event.date.split('-')[2] %></b><sup class="pos"></sup> <b
-                    class="month"><%= event.date.split('-')[1] %></b>, <b
-                    class="year"><%= event.date.split('-')[0] %></b></span>
-            <span class="events__time-dDay">Time: <b class="hour"><%= event.time.split(':')[0] %></b> : <b
-                    class="mins"><%= event.time.split(':')[1] %></b>
+                    class="day"><%= event.day %></b><sup class="pos"></sup> <b
+                    class="month"><%= event.month %></b>, <b
+                    class="year"><%= event.year %></b></span>
+            <span class="events__time-dDay">Time: <b class="hour" style="display: none;"><%= event.hour %></b><b class="pre-hour"></b> : <b
+                    class="mins"><%= event.mins %></b> : <b><%= event.per %></b>
         </div>
         <div class="events__countdown">
 

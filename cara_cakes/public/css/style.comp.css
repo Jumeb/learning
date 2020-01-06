@@ -318,7 +318,7 @@ body {
   background-position: center; }
 
 .pad-8 {
-  padding: 2rem; }
+  padding: 1.5rem; }
 
 .pad-4 {
   padding: .5rem 2rem; }
@@ -356,7 +356,7 @@ body {
   background-color: rgba(160, 82, 45, 0.8); }
 
 .btn-deep--pink {
-  background-color: rgba(199, 21, 133, 0.8); }
+  background-color: rgba(199, 21, 133, 0.8) !important; }
 
 .btn:hover {
   transform: translateY(-0.4rem);
@@ -383,7 +383,7 @@ body {
   opacity: 0; }
 
 .btn-deep--pink::after {
-  background-color: rgba(199, 21, 133, 0.8); }
+  background-color: rgba(199, 21, 133, 0.8) !important; }
 
 .btn-animated--left {
   animation: moveInLeft 1s ease-in-out .8s;

@@ -15,11 +15,14 @@
                     <b class="fas fa-star"></b>
                     <b class="shop__reviews">4.8</b>
                 </span>
+                <span class="shop__details">
+                    <a href="/user/pastry-detail/<%= pastry._id %>" class="btn__func">Details</a>
+                </span>
                 <span class="shop__price">
                     <b class="shop__value">Price: <%= pastry.price %>frs</b>
                 </span>
             </div>
-            <div class="shop__control">
+            <div class="shop__control  pad-8">
                 <span class="shop__decrement shop__centered-dec shop__hide">
                     <form action="/user/sub-from-event" method="POST">
                         <button class="shop__button" type="submit">&minus;</button>
@@ -28,12 +31,9 @@
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </span>
-                <span class="shop__hide shop__details">
-                    <a href="/user/pastry-detail/<%= pastry._id %>" class="btn-flat txt-primary">Details</a>
-                </span>
                 <span class="shop__adder shop__add">
                     <form action="/user/add-to-event" method="POST">
-                        <button class="btn__func txt-primary" type="submit">Add to Event</button>
+                        <button class="btn__func" type="submit">Add to Event</button>
                         <input type="hidden" name="pastryId" value="<%= pastry._id %>">
                         <input type="hidden" name="eventId" value="<%= eventId %>">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
@@ -45,7 +45,6 @@
                         <button class="shop__button" type="submit">&plus;</button>
                         <input type="hidden" name="pastryId" value="<%= pastry._id %>">
                         <input type="hidden" name="eventId" value="<%= eventId %>">
-                        <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
                     </form>
                 </span>

@@ -1,4 +1,7 @@
 <div class="admin__form admin__bg">
+    <% if (success) { %>
+    <div class="flash__message flash__message-success"><%= success %></div>
+    <% } %>
     <h3 class="title-lil-2 txt-black">
         <% if (editing) { %>Update Wedding Cake<% } else { %>Add Wedding Cake<% } %>
     </h3>
@@ -27,8 +30,8 @@
         <% if (editing) { %>
         <input type="hidden" value="<%= pastry._id %>" name="pastryId">
         <% } %>
-        <button class="btn-3 btn-deep--pink" type="submit"><% if (editing) { %>Update Wedding Cake<% } else { %>Add
-            Wedding Cake<% } %></button>
-        <a href="/admin/weds" class="btn-3 btn-deep--pink">Wedding Cakes</a>
+        <button class="btn-3 btn-deep--pink" type="submit"><% if (editing) { %>Update <% } else { %>Add
+            <% } %></button>
+        <a href="/admin/weds" class="btn-3 btn-deep--pink">View</a>
     </form>
 </div>

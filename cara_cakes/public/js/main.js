@@ -1,5 +1,6 @@
 $(function () {
     let max;
+
     const month = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
     const day = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday', 'Sunday'];
     let viewInfo = $('.events').find('.events__view-display');
@@ -16,6 +17,8 @@ $(function () {
     let dayName = $('.panel__event').find('.dayName');
     let pos = $('.panel__event').find('.pos');
     let eventMins = $('.panel__event').find('.mins');
+    let preHour = $('.panel__event').find('.hour');
+    let hour = $('.panel__event').find('.pre-hour');
     let numEvents = $('.panel__event').find('.events').length - 1;
     let Dday = $('.panel__event').find('.events__day');
     let Dhours = $('.panel__event').find('.events__hours');
@@ -102,7 +105,7 @@ $(function () {
     $('.shop__control').on('click', '.shop__decrement', decItem);
 
     function decItem() {
-        let index = $('.shop__decrement b').index(event.target);
+        let index = $('.shop__decrement button').index(event.target);
         let operand = '-';
         updateNumber(index, operand);
     }
@@ -110,7 +113,7 @@ $(function () {
     $('.shop__control').on('click', '.shop__increment', incItem);
 
     function incItem() {
-        let index = $('.shop__increment b').index(event.target);
+        let index = $('.shop__increment button').index(event.target);
         let operand = '+';
         updateNumber(index, operand);
     }
@@ -140,12 +143,12 @@ $(function () {
         }
     }
 
-    console.log(parseInt($(eventDay[1]).text().toString().split("").length));
-
     for (i = 0; i <= numEvents; i++) {
 
         let completeDate = $(eventMonth[i]).text() + " " + $(eventDay[i]).text() + ", " + $(eventYear[i]).text() + " " + $(eventHour[i]).text() + ":" + $(eventMins[i]).text() + ":00";
         let countDown = new Date(completeDate);
+        let pHour = $(preHour[i]).text();
+        updateHour(i, pHour);
         updateTime(i, countDown);
 
         // var mon = ;
@@ -157,19 +160,16 @@ $(function () {
         $(dayName[i]).html(day[countDown.getUTCDay() - 1]);
 
         if (parseInt($(eventDay[i]).text().toString().split("").length) == 2) {
-            if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 1) {
+            if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 1 && parseInt($(eventDay[i]).text().toString().split("")[0]) != 1) {
                 $(pos[i]).html('st');
-            } else if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 2) {
+            } else if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 2 && parseInt($(eventDay[i]).text().toString().split("")[0]) != 1) {
                 $(pos[i]).html('nd');
-            } else if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 3) {
+            } else if (parseInt($(eventDay[i]).text().toString().split("")[1]) == 3 && parseInt($(eventDay[i]).text().toString().split("")[0]) != 1) {
                 $(pos[i]).html('rd');
             } else {
                 $(pos[i]).html('th');
             }
         }
-
-
-
     }
 
     function updateTime(event, date) {
@@ -192,5 +192,14 @@ $(function () {
             $(Dhours[event]).html(hours);
             $(Dday[event]).html(days);
         }, 1000);
+    }
+
+    function updateHour(event, prehour) {
+        if (prehour > 13){
+            preHour -= 12;
+            $(hour[event]).html(prehour); 
+        } else {
+            $(hour[event]).html(prehour);
+        }
     }
 });

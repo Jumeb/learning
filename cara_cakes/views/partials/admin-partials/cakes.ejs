@@ -1,5 +1,11 @@
 <div class="admin__data">
     <% if (pastries.length > 0) { %>
+    <div style="width: 100%;" class="txt-cnt">
+        <h2 class="title-lil-1 txt-white">Birthday Cakes</h2>
+    </div>
+    <% if (success) { %>
+    <div class="flash__message flash__message-success"><%= success %></div>
+    <% } %>
     <div class="admin__table">
         <table class="table">
             <tr class="table__head">
@@ -27,7 +33,18 @@
             <% } %>
         </table>
     </div>
+    <div style="width:100%;" class="txt-rt">
+        <a href="/admin/add-bds" class="btn-3 btn-deep--pink">Add</a>
+    </div>
     <% } else { %>
-    <h1 class="title-lil-1">No Birthday cakes yets!</h1>
+    <div style="width:100%;" class="txt-cnt">
+        <h1 class="title-lil-1 txt-white">No Birthday cakes yets!</h1>
+    </div>
+    <% if (success) { %>
+    <div class="flash__message flash__message-success"><%= success %></div>
+    <% } %>
+    <div style="width:100%;" class="txt-cnt">
+        <a href="/admin/add-bds" class="btn-3 btn-deep--pink">Add</a>
+    </div>
     <% } %>
 </div>
