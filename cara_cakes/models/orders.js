@@ -38,13 +38,37 @@ const orderSchema = new Schema({
             ref: 'Event',
             required: true
         },
-        date: {
+        location: {
             type: String,
             required: true
         },
-        time: {
+        day: {
+            type: String,
+            required: true
+        },
+        month: {
             type: String,
             requred: true
+        },
+        year: {
+            type: String,
+            required: true
+        },
+        min: {
+            type: String,
+            required: true
+        },
+        hour: {
+            type: String,
+            required: true
+        },
+        per: {
+            type: String,
+            required: true
+        },
+        totalAmount: {
+            type: Number,
+            required: true
         }
     }
 });

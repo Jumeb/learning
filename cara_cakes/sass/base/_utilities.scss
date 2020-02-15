@@ -79,6 +79,12 @@
     color: $primary !important;
 }
 
+.txt-red {
+    color: $danger !important;
+    font-size: 1.6rem;
+    font-weight: bold;
+}
+
 .txt-black-1 {
     background-image: linear-gradient(to right, rgba($dark-grey, .8), rgba($dark-grey, .6));
     color: transparent;
@@ -228,4 +234,8 @@
 
 .space {
     margin: .5rem;
+}
+
+.pAuth {
+    display: none;
 }

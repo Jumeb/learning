@@ -36,6 +36,10 @@ router.get('/add-dons', getAdminRoutes.getAddDon);
 
 router.get('/add-vals', getAdminRoutes.getAddVal);
 
+router.get('/orders', getAdminRoutes.getOrders);
+
+router.get('/orders/:orderId', getAdminRoutes.getClientOrder);
+
 router.post('/add-pastry', getAdminRoutes.postAddPastry);
 
 router.post('/edit-pastry', getAdminRoutes.postEditPastry);

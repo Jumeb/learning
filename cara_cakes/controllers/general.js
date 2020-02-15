@@ -77,6 +77,10 @@ exports.postSignup = (req, res, next) => {
     const telNo = req.body.telNo;
     const password = req.body.password;
     const confirmPassword = req.body.confirmPassword;
+    if (password !== confirmPassword) {
+        req.flash('error', 'Password Mismatch');
+        return res.redirect('/signup');
+    }
     User.findOne({
             email: email
         })

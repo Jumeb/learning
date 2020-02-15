@@ -1,5 +1,7 @@
 const Cake = require('../models/product');
 const Admin = require('../models/admin');
+const Orders = require('../models/orders');
+
 
 
 
@@ -523,4 +525,33 @@ exports.postDeletePastry = (req, res, next) => {
             req.flash('error', 'Pastry successfully deleted.')
             res.redirect(path);
         });
+}
+
+
+exports.getOrders = (req, res, next) => {
+    Orders.find()
+        .then(orders => {
+            res.render('admin/orders', {
+                pageTitle: 'All Orders',
+                path: '/admin/orders',
+                editing: false,
+                orders: orders
+            })
+        })
+}
+
+exports.getClientOrder = (req, res, next) => {
+    const orderId = req.params.orderId;
+    Orders.findById(orderId)
+        .populate('pastries.pastryId')
+        .then(order => {
+            console.log(order);
+            let name = order.user.name + '\'s orders';
+            res.render('admin/orders', {
+                pageTitle: name,
+                path: '/admin/client-order',
+                editing: false,
+                order: order
+            })
+        })
 }

@@ -4,10 +4,12 @@
         <% if (success) { %>
         <div class="flash" style="margin:2rem 20rem"><%= success %></div>
         <% } %></h2>
-        <br>
+    <br>
     <%- include('admin-general.ejs') %>
-    <% } else if (path === '/admin/bamenda') { %>
+    <% } else if (path === '/admin/orders') { %>
     <%- include('admin-table.ejs') %>
+    <% } else if (path === '/admin/client-order') { %>
+    <%- include('admin-user-info.ejs') %>
     <% } else if (path === '/admin/view-info') { %>
     <%- include('admin-user-info.ejs') %>
     <% } else if (path === '/admin/user-orders') { %>

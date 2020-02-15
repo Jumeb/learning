@@ -237,6 +237,11 @@ body {
 .txt-primary {
   color: #ff1493 !important; }
 
+.txt-red {
+  color: #dd1111 !important;
+  font-size: 1.6rem;
+  font-weight: bold; }
+
 .txt-black-1 {
   background-image: linear-gradient(to right, rgba(24, 23, 23, 0.8), rgba(24, 23, 23, 0.6));
   color: transparent;
@@ -343,6 +348,9 @@ body {
 
 .space {
   margin: .5rem; }
+
+.pAuth {
+  display: none; }
 
 .btn {
   text-decoration: none;

@@ -118,9 +118,45 @@
         }
     }
 
+
+
     &__event {
         flex: 0 0 77%;
         padding: 4rem 10rem;
+        display: flex;
+        flex-direction: column;
+        height: $event;
+        overflow-y: auto;
+        position: relative;
+        
+        &::-webkit-scrollbar {
+            width: .6rem;
+            background-color: $light-grey-1;
+            border-radius: 2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: .6rem;
+            background-color: rgba($primary, .8);
+            border-radius: 2rem;
+        }
+
+        @include respon(stp) {
+            padding: 3rem 8rem;
+        }
+
+        @include respon(ph) {
+            padding: 3rem 6rem;
+        }
+
+        @include respon(ph) {
+            padding: 3rem 4rem;
+        }
+    }
+
+    &__event2 {
+        flex: 0 0 80%;
+        padding: 4rem 5rem;
         display: flex;
         flex-direction: column;
         height: $event;

@@ -12,7 +12,7 @@
             <div class="login__form-1">
                 <form action="/signup" class="form" method="POST">
                     <div class="form__group-2">
-                        <input type="text" class="form__input form__length-1" name="name" id="Name" placeholder="Name"
+                        <input type="text" class="form__input form__length-1" name="name" id="Name" placeholder="Name" value=""
                             required>
                         <label for="Name" class="form__label">Name</label>
                     </div>
@@ -27,14 +27,16 @@
                         <label for="Tel" class="form__label">Telephone No</label>
                     </div>
                     <div class="form__group-2">
-                        <input type="password" class="form__input form__length-4" name="password" id="password"
+                        <input type="password" class="form__input form__length-4" name="password" id="password" value=""
                             placeholder="Password" required>
                         <label for="password" class="form__label">Password</label>
+                        <p class="txt-red pAuth">Password length most be greater than 5</p>
                     </div>
                     <div class="form__group-2">
-                        <input type="password" class="form__input form__length-5" name="confirmPassword" id="con"
+                        <input type="password" class="form__input form__length-5" name="confirmPassword" id="conPassword" value=""
                             placeholder="Confirm password" required>
                         <label for="con" class="form__label">Confirm password</label>
+                        <p class="txt-red pAuth">Password Mismatch</p>
                     </div>
                     <div class="form__group-2">
                         <input type="hidden" name="_csrf" value="<%= csrfToken %>">
