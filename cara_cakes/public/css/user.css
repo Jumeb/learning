@@ -828,7 +828,7 @@ ORDER: base + typography > general layout + grid > page layout > components
         padding: 3rem 4rem; } }
   .panel__event2 {
     flex: 0 0 80%;
-    padding: 4rem 10rem;
+    padding: 4rem 5rem;
     display: flex;
     flex-direction: column;
     height: 78vh;
