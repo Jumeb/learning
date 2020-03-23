@@ -2,6 +2,7 @@
 const getAdminRoutes = require('../controllers/admin');
 const express = require('express');
 const router = express.Router();
+const { check, body } = require('express-validator');
 
 router.get('/', getAdminRoutes.getIndex);
 router.get('/general', getAdminRoutes.getGeneral);
@@ -40,9 +41,31 @@ router.get('/orders', getAdminRoutes.getOrders);
 
 router.get('/orders/:orderId', getAdminRoutes.getClientOrder);
 
-router.post('/add-pastry', getAdminRoutes.postAddPastry);
+router.post('/add-pastry', [
+    body('name')
+    .isAlphanumeric()
+    .isLength({
+        min: 5
+    })
+    .trim(),
+    body('price')
+    .isNumeric(),
+    body('image').isLength({ min: 4}),
+    body('desc').isLength({ min: 10, max: 1000 }).trim()
+], getAdminRoutes.postAddPastry);
 
-router.post('/edit-pastry', getAdminRoutes.postEditPastry);
+router.post('/edit-pastry', [
+    body('name')
+    .isAlphanumeric()
+    .isLength({
+        min: 5
+    })
+    .trim(),
+    body('price')
+    .isNumeric(),
+    body('image').isLength({ min: 4}),
+    body('desc').isLength({ min: 10, max: 1000 }).trim()
+], getAdminRoutes.postEditPastry);
 
 router.get('/edit-pastry/:pastryId', getAdminRoutes.getEditPastry);
 
