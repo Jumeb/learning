@@ -380,8 +380,9 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .sec-carousel {
   background-color: #fff;
-  padding: 18rem 0 12rem 0;
-  margin-top: -21.5vh; }
+  padding: 4rem 0 12rem 0;
+  margin-top: -11.5vh;
+  z-index: -1; }
 
 .sec-pantry {
   background-color: rgba(0, 0, 0, 0.8);

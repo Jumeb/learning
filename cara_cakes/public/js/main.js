@@ -26,14 +26,38 @@ $(function () {
     let Dsec = $('.panel__event').find('.events__sec');
     window.addEventListener('scroll', () => {
         max = pageYOffset
+        console.log(max);
         checkPos(max);
+        navInfo(max);
     })
 
     checkPos = pos => {
         if (pos < 38) {
             hideNav();
+        } 
+        else if (pos < 350) {
+            hideNavigation();
+        }
+        else if (pos > 350) {
+            showNavigation();
         } else {
             showNav();
+        }
+    }
+
+    navInfo = pos => {
+        if (pos >= 0 && pos < 680) {
+            showHome();
+        } else if (pos > 680 && pos < 1360) {
+            showOffers();
+        } else if (pos > 1360 && pos < 2120) {
+            showFlvs();
+        } else if (pos > 2120 && pos < 2840) {
+            showStories();
+        } else if (pos > 2840 && pos < 3340) {
+            showInfo();
+        } else if (pos > 3340 && pos < 6000) {
+            showGall();
         }
     }
 
@@ -42,9 +66,72 @@ $(function () {
         $('.body').find('.dynamic-nav').addClass('navi__hidden')
     }
 
+    hideNavigation = () => {
+        $('.body').find('.container').removeClass('container__show');
+    }
+
+
     showNav = () => {
         $('.body').find('.dynamic-nav').removeClass('navi__hidden');
-        $('.body').find('.dynamic-nav').addClass('navi')
+        $('.body').find('.dynamic-nav').addClass('navi');
+    }
+
+    showNavigation = () => {
+        $('.body').find('.container').addClass('container__show');
+    }
+
+    showHome = () => {
+        $('.container').find('.home').addClass('container__nav--active');
+        $('.container').find('.offers').removeClass('container__nav--active');
+        $('.container').find('.information').removeClass('container__nav--active');
+        $('.container').find('.flvs').removeClass('container__nav--active');
+        $('.container').find('.stry').removeClass('container__nav--active');
+        $('.container').find('.gall').removeClass('container__nav--active');
+    }
+
+    showOffers = () => {
+        $('.container').find('.offers').addClass('container__nav--active');
+        $('.container').find('.home').removeClass('container__nav--active');
+        $('.container').find('.flvs').removeClass('container__nav--active');
+        $('.container').find('.information').removeClass('container__nav--active');
+        $('.container').find('.stry').removeClass('container__nav--active');
+        $('.container').find('.gall').removeClass('container__nav--active');
+    }
+
+    showFlvs = () => {
+        $('.container').find('.flvs').addClass('container__nav--active');
+        $('.container').find('.offers').removeClass('container__nav--active');
+        $('.container').find('.home').removeClass('container__nav--active');
+        $('.container').find('.information').removeClass('container__nav--active');
+        $('.container').find('.stry').removeClass('container__nav--active');
+        $('.container').find('.gall').removeClass('container__nav--active');
+    }
+
+    showStories = () => {
+        $('.container').find('.stry').addClass('container__nav--active');
+        $('.container').find('.information').removeClass('container__nav--active');
+        $('.container').find('.flvs').removeClass('container__nav--active');
+        $('.container').find('.home').removeClass('container__nav--active');
+        $('.container').find('.offers').removeClass('container__nav--active');
+        $('.container').find('.gall').removeClass('container__nav--active');
+    }
+
+    showGall = () => {
+        $('.container').find('.gall').addClass('container__nav--active');
+        $('.container').find('.information').removeClass('container__nav--active');
+        $('.container').find('.flvs').removeClass('container__nav--active');
+        $('.container').find('.stry').removeClass('container__nav--active');
+        $('.container').find('.offers').removeClass('container__nav--active');
+        $('.container').find('.home').removeClass('container__nav--active');
+    }
+
+    showInfo = () => {
+        $('.container').find('.information').addClass('container__nav--active');
+        $('.container').find('.stry').removeClass('container__nav--active');
+        $('.container').find('.home').removeClass('container__nav--active');
+        $('.container').find('.flvs').removeClass('container__nav--active');
+        $('.container').find('.offers').removeClass('container__nav--active');
+        $('.container').find('.gall').removeClass('container__nav--active');
     }
 
     $('.events').on('click', '.click', showDets);
@@ -195,9 +282,9 @@ $(function () {
     }
 
     function updateHour(event, prehour) {
-        if (prehour > 13){
+        if (prehour > 13) {
             preHour -= 12;
-            $(hour[event]).html(prehour); 
+            $(hour[event]).html(prehour);
         } else {
             $(hour[event]).html(prehour);
         }

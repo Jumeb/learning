@@ -4,6 +4,10 @@
 <script src="/js/carousel-1.js"></script>
 <script src="/js/carousel-2.js"></script>
 <script src="/js/main.js"></script>
+<% if (path == '/user/add-event') { %>
 <script src="/js/select.js"></script>
-</html>
+<% } else if (path == '/signup') { %>
+<script src="/js/auth.js"></script>
+<% } %>
 
+</html>

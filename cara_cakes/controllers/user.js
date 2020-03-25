@@ -473,6 +473,7 @@ exports.getOrders = (req, res, next) => {
 
 exports.postOrder = (req, res, next) => {
     const eventId = req.body.eventId;
+    const totalAmount = req.body.totalAmount;
     Event.findById(eventId)
         .populate('cart.items.pastryId')
         .then(event => {
@@ -492,9 +493,16 @@ exports.postOrder = (req, res, next) => {
                 event: {
                     name: event.name,
                     eventId: event,
+                    location: event.location,
                     purpose: event.purpose,
-                    date: event.date,
-                    time: event.time
+                    day: event.day,
+                    month: event.month,
+                    min: event.mins,
+                    per: event.per,
+                    hour: event.hour,
+                    year: event.year,
+                    totalAmount: totalAmount
+
                 },
                 pastries: pastries
             });

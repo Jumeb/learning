@@ -1,5 +1,8 @@
 const Cake = require('../models/product');
 const Admin = require('../models/admin');
+const Orders = require('../models/orders');
+const { validationResult } = require('express-validator');
+
 
 
 
@@ -277,7 +280,8 @@ exports.getAddBds = (req, res, next) => {
         pageTitle: 'Add Birthday Cake',
         path: '/admin/add-bds',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -292,7 +296,8 @@ exports.getAddWeds = (req, res, next) => {
         pageTitle: 'Add Wedding Cake',
         path: '/admin/add-weds',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -307,7 +312,8 @@ exports.getAddDon = (req, res, next) => {
         pageTitle: 'Add Doughnuts',
         path: '/admin/add-dons',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -322,7 +328,8 @@ exports.getAddCookie = (req, res, next) => {
         pageTitle: 'Add Cookie',
         path: '/admin/add-cookies',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -337,7 +344,8 @@ exports.getAddPan = (req, res, next) => {
         pageTitle: 'Add Pancake',
         path: '/admin/add-pans',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -352,7 +360,8 @@ exports.getAddVal = (req, res, next) => {
         pageTitle: 'Add Valentine Gifts',
         path: '/admin/add-vals',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -367,7 +376,8 @@ exports.getAddCup = (req, res, next) => {
         pageTitle: 'Add Cupcake',
         path: '/admin/add-cups',
         editing: false,
-        success: message
+        success: message,
+        hasError: false
     });
 }
 
@@ -378,6 +388,23 @@ exports.postAddPastry = (req, res, next) => {
     const img = req.body.image;
     const desc = req.body.desc;
     const type = req.body.type;
+    const errors = validationResult(req);
+
+    if(!errors.isEmpty()) {
+        res.satus(422).render('admin/updates', {
+            pageTitle: 'Add Pastry',
+            path: '/admin/edit-pastry',
+            editing: false,
+            hasError: true,
+            pastry: {
+                name: name,
+                price: price,
+                img: image,
+                desc: desc,
+                type: type
+            }
+        });
+    }
     const product = new Cake({
         name: name,
         price: price,
@@ -431,7 +458,8 @@ exports.getEditPastry = (req, res, next) => {
                 pageTitle: 'Edit Birthday cake',
                 path: '/admin/edit-pastry',
                 editing: editMode,
-                pastry: cake
+                pastry: cake,
+                hasError: false
             });
         })
 }
@@ -523,4 +551,33 @@ exports.postDeletePastry = (req, res, next) => {
             req.flash('error', 'Pastry successfully deleted.')
             res.redirect(path);
         });
+}
+
+
+exports.getOrders = (req, res, next) => {
+    Orders.find()
+        .then(orders => {
+            res.render('admin/orders', {
+                pageTitle: 'All Orders',
+                path: '/admin/orders',
+                editing: false,
+                orders: orders
+            })
+        })
+}
+
+exports.getClientOrder = (req, res, next) => {
+    const orderId = req.params.orderId;
+    Orders.findById(orderId)
+        .populate('pastries.pastryId')
+        .then(order => {
+            console.log(order);
+            let name = order.user.name + '\'s orders';
+            res.render('admin/orders', {
+                pageTitle: name,
+                path: '/admin/client-order',
+                editing: false,
+                order: order
+            })
+        })
 }
