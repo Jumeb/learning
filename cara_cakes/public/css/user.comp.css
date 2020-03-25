@@ -76,10 +76,14 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .adminc__btn {
   text-decoration: none;
-  padding: 1rem .5rem;
+  padding: .5rem;
   font-size: 1.5rem;
   font-weight: 400;
-  color: #c71585; }
+  color: #c71585;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer; }
 
 .adminc__icon {
   opacity: 0;
@@ -341,20 +345,24 @@ ORDER: base + typography > general layout + grid > page layout > components
   .events__order {
     flex: 0 0 30%;
     display: flex;
-    justify-content: flex-start;
+    flex-wrap: wrap;
     align-items: center;
     flex-direction: column;
     padding: .8rem;
     margin-bottom: 3rem;
+    height: 30rem;
     box-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.3);
-    border-radius: 1rem; }
+    border-radius: 1rem;
+    overflow-y: auto; }
+    .events__order::-webkit-scrollbar {
+      width: 0 !important; }
   .events__budget {
     text-transform: uppercase;
     margin-top: auto;
     font-size: 1.2rem; }
 
 .search {
-  flex: 0 0 30%;
+  flex: 0 0 25%;
   display: flex; }
   .search__input {
     flex: 0 0 70%;
@@ -497,7 +505,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-start; }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow-y: auto; }
+    .admin__data::-webkit-scrollbar {
+      width: 0 !important; }
   .admin__navigate {
     font-size: 1.8rem;
     font-weight: 100;
@@ -628,22 +640,22 @@ ORDER: base + typography > general layout + grid > page layout > components
     visibility: hidden;
     transition: all .4s ease-in-out; }
   .admin__btn {
-    position: relative; }
+    position: relative;
+    font-weight: bold;
+    z-index: 30;
+    padding: 1rem 3rem;
+    font-size: 1.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    border: 0.2rem solid rgba(255, 255, 255, 0.8);
+    border-radius: 10rem;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    transition: all .4s ease-in-out; }
     .admin__btn:not(:last-child) {
       margin-right: 2rem; }
     .admin__btn:link, .admin__btn:visited {
-      position: absolute;
-      font-weight: bold;
-      z-index: 30;
-      text-decoration: none;
-      padding: 1rem 3rem;
-      font-size: 1.7rem;
-      color: rgba(255, 255, 255, 0.8);
-      border: 0.2rem solid rgba(255, 255, 255, 0.8);
-      border-radius: 10rem;
-      overflow: hidden;
-      position: relative;
-      transition: all .4s ease-in-out; }
+      text-decoration: none; }
     .admin__btn::before, .admin__btn::after {
       position: absolute;
       z-index: -3;
@@ -663,6 +675,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     .admin__btn:hover::after, .admin__btn:hover::before {
       transform: scaleX(1);
       height: 50%; }
+  .admin__verify {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    color: rgba(221, 17, 17, 0.8);
+    font-weight: bold; }
 
 .panel {
   display: flex;
@@ -695,8 +712,8 @@ ORDER: base + typography > general layout + grid > page layout > components
         .panel__user--frame {
           margin: 0; } }
     .panel__user--img {
-      width: 17rem;
-      height: 17rem;
+      width: 15rem;
+      height: 15rem;
       border-radius: 50%;
       background-size: cover;
       background-position: center; }
@@ -801,11 +818,7 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .edit:link, .edit:visited {
   text-decoration: none;
-  padding: 1.3rem;
   font-size: 1.4rem; }
-  @media only screen and (max-width: 75em) {
-    .edit:link, .edit:visited {
-      padding: 1.3rem .2rem; } }
 
 .dev:link, .dev:visited {
   text-decoration: none;
@@ -819,58 +832,64 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .header__user {
   height: 13vh;
-  padding: 1rem 1.5rem;
+  padding: 2.5rem 1.5rem;
   display: flex;
   justify-content: space-between;
-  align-items: center; }
+  align-items: center;
+  overflow: hidden; }
+  @media (max-width: 56.25em) {
+    .header__user {
+      padding: 4rem 1.5rem; } }
 
 .logo__box {
+  flex: 0 0 20%;
   padding: 1rem; }
 
 .logo__img {
   height: 7rem;
   width: 13rem; }
 
-.notify__active {
-  width: 94%; }
-
-.notify__list {
-  display: flex;
-  justify-content: center;
-  align-items: center; }
-
-.notify__link:link, .notify__link:visited {
-  text-decoration: none;
-  color: #777;
-  position: relative;
-  padding: .7rem 1.5rem; }
-
-.notify__num {
-  position: absolute;
-  background-color: #ff1493;
-  border-radius: 50%;
-  padding: .4rem .6rem;
-  align-self: stretch;
-  text-align: center;
-  color: #fff;
-  font-size: .9rem;
-  top: -1rem;
-  right: .1rem; }
-
-.notify__item {
-  list-style: none;
-  font-size: 1.6rem;
-  padding: .4rem .8rem;
-  position: relative;
-  margin: .5rem; }
-  .notify__item::before {
-    content: "";
+.notify {
+  flex: 0 0 40%;
+  overflow: hidden;
+  margin-left: 2rem; }
+  .notify__list {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center; }
+  .notify__link:link, .notify__link:visited {
+    text-decoration: none;
+    color: #777;
+    position: relative; }
+  .notify__num {
     position: absolute;
-    margin-left: -.7rem;
-    bottom: 0;
-    background-color: #c71585;
-    width: 0%;
-    height: .4rem;
-    transition: all .4s; }
-  .notify__item:hover::before {
+    background-color: #ff1493;
+    border-radius: 50%;
+    padding: .4rem .6rem;
+    align-self: stretch;
+    text-align: center;
+    color: #fff;
+    font-size: .9rem;
+    top: -1rem;
+    right: .1rem; }
+  .notify__item {
+    list-style: none;
+    font-size: 1.6rem;
+    padding: .4rem .8rem;
+    position: relative;
+    margin: .5rem;
+    display: flex;
+    justify-content: center;
+    align-items: center; }
+    .notify__item::before {
+      content: "";
+      position: absolute;
+      bottom: 0;
+      background-color: #c71585;
+      width: 0%;
+      height: .4rem;
+      transition: all .4s; }
+    .notify__item:hover::before {
+      width: 100%; }
+  .notify__active::before {
     width: 94%; }

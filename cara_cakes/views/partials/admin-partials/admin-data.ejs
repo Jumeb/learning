@@ -1,6 +1,11 @@
 <div class="admin__data">
     <% if (path === '/admin/general') { %>
-    <h2 class="title-lil-1">Welcome</h2>
+    <h2 class="title-lil-1">
+        <% if (success) { %>
+        <div class="flash" style="margin:2rem 20rem"><%= success %></div>
+        <% } %></h2>
+        <br>
+    <%- include('admin-general.ejs') %>
     <% } else if (path === '/admin/bamenda') { %>
     <%- include('admin-table.ejs') %>
     <% } else if (path === '/admin/view-info') { %>

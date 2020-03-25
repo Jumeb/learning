@@ -159,6 +159,12 @@ exports.getPastry = (req, res, next) => {
 
 exports.getUser = (req, res, next) => {
     let message = req.flash('success');
+    let msg = req.flash('error');
+    if (msg.length > 0) {
+        msg = msg[0];
+    } else {
+        msg = null;
+    }
     if (message.length > 0) {
         message = message[0];
     } else {
@@ -179,7 +185,8 @@ exports.getUser = (req, res, next) => {
                             pageTitle: title,
                             path: '/user',
                             event: user,
-                            success: message
+                            success: message,
+                            errorMessage: msg
                         })
                     })
             } else if (events) {
@@ -188,7 +195,8 @@ exports.getUser = (req, res, next) => {
                     pageTitle: title,
                     path: '/user',
                     events: events,
-                    success: message
+                    success: message,
+                    errorMessage: msg
                 })
             }
 
@@ -228,24 +236,38 @@ exports.getAddEvent = (req, res, next) => {
 exports.postAddEvent = (req, res, next) => {
     const name = req.body.name;
     const purpose = req.body.purpose;
-    const date = req.body.date;
-    const time = req.body.time;
+    const day = req.body.day;
+    const month = req.body.month;
+    const year = req.body.year;
+    const hour = req.body.hour;
+    const mins = req.body.minute;
+    const per = req.body.period;
     const image = req.body.image;
+    const location = req.body.location;
+    console.log(day);
+    console.log(per)
     const event = new Event({
         name: name,
         image: image,
         purpose: purpose,
-        date: date,
-        time: time,
-        userId: req.user
+        day: day,
+        month: month,
+        year: year,
+        hour: hour,
+        mins: mins,
+        per: per,
+        userId: req.user,
+        location: location
     });
 
     event
         .save()
         .then(result => {
+            req.flash('success', 'Event successfully added.');
             res.redirect('/user');
         })
         .catch(err => {
+            req.flash('error', 'Could not add event, Please try again later.')
             console.log(err);
         })
 };
@@ -262,6 +284,7 @@ exports.getEditEvent = (req, res, next) => {
         .populate('userId')
         .then(event => {
             if (!event) {
+                req.flash('error', 'Could not find this event.')
                 res.redirect('/user');
             }
             res.render('user/add-event', {
@@ -279,22 +302,34 @@ exports.postEditEvent = (req, res, next) => {
     const eventId = req.body.eventId
     const updatedPurpose = req.body.purpose;
     const updatedName = req.body.name;
-    const updatedDate = req.body.date;
-    const updatedTime = req.body.time;
+    const updatedDay = req.body.day;
+    const updatedMonth = req.body.month;
+    const updatedYear = req.body.year;
+    const updatedHour = req.body.hour;
+    const updatedMins = req.body.minute;
+    const updatedPer = req.body.period;
+    const updatedLoc = req.body.location;
     const updatedImage = req.body.image;
     Event.findById(eventId)
         .then(event => {
             event.name = updatedName;
             event.purpose = updatedPurpose;
-            event.date = updatedDate;
+            event.day = updatedDay;
+            event.month = updatedMonth;
+            event.year = updatedYear;
+            event.hour = updatedHour;
+            event.mins = updatedMins;
             event.image = updatedImage;
-            event.time = updatedTime;
+            event.per = updatedPer;
+            event.location = updatedLoc;
             return event.save();
         })
         .then(result => {
+            req.flash('success', 'Event successfully updated.');
             res.redirect('/user');
         })
         .catch(err => {
+            req.flash('error', 'Could not edit event, Please try again later.');
             console.log(err);
         });
 }
@@ -321,6 +356,7 @@ exports.postDeleteEvent = (req, res, next) => {
     const eventId = req.body.eventId;
     Event.findByIdAndRemove(eventId)
         .then(result => {
+            req.flash('success', 'Event successfully deleted.')
             res.redirect('/user');
         })
         .catch(err => {
@@ -330,6 +366,12 @@ exports.postDeleteEvent = (req, res, next) => {
 
 
 exports.getCart = (req, res, next) => {
+    let message = req.flash('success');
+    if(message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     const eventId = req.params.eventId;
     Event.findById(eventId)
         .populate('cart.items.pastryId')
@@ -344,6 +386,7 @@ exports.getCart = (req, res, next) => {
                 path: '/user/event-cart',
                 event: event,
                 pastries: pastries,
+                success: message,
                 authenticated: req.session.loggedIn,
                 csrfToken: req.csrfToken()
             })
@@ -360,6 +403,7 @@ exports.postCartDelete = (req, res, next) => {
             event.removeFromCart(pastryId)
         })
         .then(result => {
+            req.flash('success', 'Pastry successfully removed from cart.')
             res.redirect(path);
         })
 }
@@ -377,7 +421,9 @@ exports.postAddCart = (req, res, next) => {
                 })
         })
         .then(result => {
-            res.redirect(path);
+            setTimeout(() => {
+                res.redirect(path);
+            }, 3600000)
         });
 };
 
@@ -392,7 +438,9 @@ exports.postSubCart = (req, res, next) => {
                 })
         })
         .then(result => {
-            res.redirect('/user/cakes');
+            setTimeout(() => {
+                res.redirect('/user/cakes');
+            }, 3600000)
         });
 };
 
@@ -457,6 +505,7 @@ exports.postOrder = (req, res, next) => {
             event.clearCart();
         })
         .then(result => {
+            req.flash('success', 'Order successfully placed.')
             res.redirect('/user/orders');
         })
         .catch(err => {

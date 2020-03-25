@@ -1,25 +1,91 @@
 const Cake = require('../models/product');
+const Admin = require('../models/admin');
 
 
 
 exports.getIndex = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/index', {
         pageTitle: 'Welcome Admin',
         path: '/admin',
-        bodyType: 'admin__center back-admin'
-
+        bodyType: 'admin__center back-admin',
+        errorMessage: message
     });
+}
+
+exports.postSignIn = (req, res, next) => {
+    const userName = req.body.user;
+    const password = req.body.password;
+
+    Admin.findOne({
+            name: userName
+        })
+        .then(admin => {
+            if (!admin) {
+                req.flash('error', 'Invalid credentials, Please try again.');
+                return res.redirect('/admin');
+            } else {
+                let name = admin.name;
+                let message = 'Welcome, Mr ' + name;
+                if (password.toString() === admin.password.toString()) {
+                    req.session.signedIn = true;
+                    req.session.admin = admin;
+                    return req.session.save(err => {
+                        console.log(err);
+                        req.flash('success', message);
+                        res.redirect('/admin/general');
+                    });
+                }
+                req.flash('error', 'Invalid credentials, please try again.');
+                res.redirect('/admin');
+            }
+        })
+        .catch(err => {
+            console.log(err);
+        })
+}
+
+exports.postLogout = (req, res, next) => {
+    req.session.destroy(err => {
+        console.log(err);
+        res.redirect('/admin');
+    })
 }
 
 exports.getGeneral = (req, res, next) => {
-    res.render('admin/general', {
-        pageTitle: 'Welcome Admin',
-        path: '/admin/general',
-        editing: false
-    });
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
+    Admin.findOne({
+            name: req.session.admin.name
+        })
+        .then(admin => {
+            let title = 'Welcome ' + admin.name;
+            res.render('admin/general', {
+                pageTitle: title,
+                path: '/admin/general',
+                editing: false,
+                success: message,
+                admin: admin
+            });
+        })
 }
 
 exports.getBds = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Birthday-cake'
         })
@@ -27,7 +93,8 @@ exports.getBds = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Birthday cakes',
                 path: '/admin/cakes',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -36,6 +103,12 @@ exports.getBds = (req, res, next) => {
 }
 
 exports.getWeds = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Wedding-cake'
         })
@@ -43,7 +116,8 @@ exports.getWeds = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Wedding cakes',
                 path: '/admin/weds',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -52,6 +126,12 @@ exports.getWeds = (req, res, next) => {
 }
 
 exports.getCookie = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Cookie'
         })
@@ -59,7 +139,8 @@ exports.getCookie = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Cookies',
                 path: '/admin/cookies',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -68,6 +149,12 @@ exports.getCookie = (req, res, next) => {
 }
 
 exports.getPans = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Pancake'
         })
@@ -75,7 +162,8 @@ exports.getPans = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Pancakes',
                 path: '/admin/pans',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -84,6 +172,12 @@ exports.getPans = (req, res, next) => {
 }
 
 exports.getDons = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Doughnuts'
         })
@@ -91,7 +185,8 @@ exports.getDons = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Doughnuts',
                 path: '/admin/dons',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -100,6 +195,12 @@ exports.getDons = (req, res, next) => {
 }
 
 exports.getCups = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Cupcake'
         })
@@ -107,7 +208,8 @@ exports.getCups = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Cupcakes',
                 path: '/admin/cups',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -116,6 +218,12 @@ exports.getCups = (req, res, next) => {
 }
 
 exports.getVal = (req, res, next) => {
+    let message = req.flash('error');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     Cake.find({
             genre: 'Valentine'
         })
@@ -123,7 +231,8 @@ exports.getVal = (req, res, next) => {
             res.render('admin/admin-products', {
                 pageTitle: 'Your Valentine gifts',
                 path: '/admin/vals',
-                pastries: cakes
+                pastries: cakes,
+                success: message
             });
         })
         .catch(err => {
@@ -158,58 +267,107 @@ exports.getBdaClients = (req, res, next) => {
 }
 
 exports.getAddBds = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Birthday Cake',
         path: '/admin/add-bds',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddWeds = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Wedding Cake',
         path: '/admin/add-weds',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddDon = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Doughnuts',
         path: '/admin/add-dons',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddCookie = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Cookie',
         path: '/admin/add-cookies',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddPan = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Pancake',
         path: '/admin/add-pans',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddVal = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Valentine Gifts',
         path: '/admin/add-vals',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
 exports.getAddCup = (req, res, next) => {
+    let message = req.flash('success');
+    if (message.length > 0) {
+        message = message[0];
+    } else {
+        message = null;
+    }
     res.render('admin/updates', {
         pageTitle: 'Add Cupcake',
         path: '/admin/add-cups',
-        editing: false
+        editing: false,
+        success: message
     });
 }
 
@@ -248,7 +406,7 @@ exports.postAddPastry = (req, res, next) => {
     product
         .save()
         .then(result => {
-            console.log('Created Product');
+            req.flash('success', 'Pastry successfully added.')
             res.redirect(path);
         })
         .catch(err => {
@@ -345,7 +503,24 @@ exports.postDeletePastry = (req, res, next) => {
     console.log(pastryId)
     Cake.findByIdAndRemove(pastryId)
         .then(result => {
-            console.log('destroyed')
-            res.redirect('/admin/cakes');
+            let type = result.genre;
+            let path = '';
+            if (type == 'Birthday-cake') {
+                path = '/admin/cakes'
+            } else if (type == 'Wedding-cake') {
+                path = '/admin/weds';
+            } else if (type == 'Doughnuts') {
+                path = '/admin/dons';
+            } else if (type == 'Cupcake') {
+                path = '/admin/cups';
+            } else if (type == 'Cookie') {
+                path = '/admin/cookies';
+            } else if (type == 'Valentine') {
+                path = '/admin/vals';
+            } else if (type == 'Pancake') {
+                path = '/admin/pans';
+            }
+            req.flash('error', 'Pastry successfully deleted.')
+            res.redirect(path);
         });
 }

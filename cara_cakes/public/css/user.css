@@ -76,10 +76,14 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .adminc__btn {
   text-decoration: none;
-  padding: 1rem .5rem;
+  padding: .5rem;
   font-size: 1.5rem;
   font-weight: 400;
-  color: #c71585; }
+  color: #c71585;
+  border: none;
+  outline: none;
+  background-color: transparent;
+  cursor: pointer; }
 
 .adminc__icon {
   opacity: 0;
@@ -501,7 +505,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     position: relative;
     display: flex;
     justify-content: center;
-    align-items: flex-start; }
+    flex-wrap: wrap;
+    align-items: flex-start;
+    overflow-y: auto; }
+    .admin__data::-webkit-scrollbar {
+      width: 0 !important; }
   .admin__navigate {
     font-size: 1.8rem;
     font-weight: 100;
@@ -554,11 +562,21 @@ ORDER: base + typography > general layout + grid > page layout > components
     flex: 0 0 98%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     border-radius: .4rem;
     padding: .5rem;
     border: 0.2rem solid #ff1493;
-    background-color: rgba(0, 0, 0, 0.7); }
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 40rem;
+    overflow-y: auto; }
+    .admin__table::-webkit-scrollbar {
+      width: .5rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .admin__table::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
   .admin__form {
     flex: 0 0 50%;
     padding: 1rem; }
@@ -632,22 +650,22 @@ ORDER: base + typography > general layout + grid > page layout > components
     visibility: hidden;
     transition: all .4s ease-in-out; }
   .admin__btn {
-    position: relative; }
+    position: relative;
+    font-weight: bold;
+    z-index: 30;
+    padding: 1rem 3rem;
+    font-size: 1.7rem;
+    color: rgba(255, 255, 255, 0.8);
+    border: 0.2rem solid rgba(255, 255, 255, 0.8);
+    border-radius: 10rem;
+    overflow: hidden;
+    outline: none;
+    background-color: transparent;
+    transition: all .4s ease-in-out; }
     .admin__btn:not(:last-child) {
       margin-right: 2rem; }
     .admin__btn:link, .admin__btn:visited {
-      position: absolute;
-      font-weight: bold;
-      z-index: 30;
-      text-decoration: none;
-      padding: 1rem 3rem;
-      font-size: 1.7rem;
-      color: rgba(255, 255, 255, 0.8);
-      border: 0.2rem solid rgba(255, 255, 255, 0.8);
-      border-radius: 10rem;
-      overflow: hidden;
-      position: relative;
-      transition: all .4s ease-in-out; }
+      text-decoration: none; }
     .admin__btn::before, .admin__btn::after {
       position: absolute;
       z-index: -3;
@@ -667,6 +685,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     .admin__btn:hover::after, .admin__btn:hover::before {
       transform: scaleX(1);
       height: 50%; }
+  .admin__verify {
+    text-transform: uppercase;
+    font-size: 1.5rem;
+    color: rgba(221, 17, 17, 0.8);
+    font-weight: bold; }
 
 .panel {
   display: flex;
@@ -760,7 +783,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow-y: auto;
     position: relative; }
     .panel__event::-webkit-scrollbar {
-      width: 0 !important; }
+      width: .6rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .panel__event::-webkit-scrollbar-thumb {
+      width: .6rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
     @media (max-width: 50em) {
       .panel__event {
         padding: 3rem 8rem; } }
@@ -770,6 +799,8 @@ ORDER: base + typography > general layout + grid > page layout > components
     @media only screen and (max-width: 37.5em) {
       .panel__event {
         padding: 3rem 4rem; } }
+  .panel__form {
+    padding: 2rem 4rem !important; }
   .panel__order {
     flex: 0 0 77%;
     padding: 3rem 10rem;
@@ -805,11 +836,7 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .edit:link, .edit:visited {
   text-decoration: none;
-  padding: 1.3rem;
   font-size: 1.4rem; }
-  @media only screen and (max-width: 75em) {
-    .edit:link, .edit:visited {
-      padding: 1.3rem .2rem; } }
 
 .dev:link, .dev:visited {
   text-decoration: none;

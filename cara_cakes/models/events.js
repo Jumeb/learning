@@ -14,11 +14,31 @@ const eventSchema = new Schema({
         type: String,
         required: true
     },
-    date: {
+    location: {
         type: String,
         required: true
     },
-    time: {
+    day: {
+        type: String,
+        required: true
+    },
+    month: {
+        type: String,
+        required: true
+    },
+    year: {
+        type: String,
+        required: true
+    },
+    hour: {
+        type: String,
+        required: true
+    },
+    mins: {
+        type: String,
+        required: true
+    },
+    per: {
         type: String,
         required: true
     },

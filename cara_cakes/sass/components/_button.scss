@@ -172,11 +172,12 @@
     display: inline-block;
     background-color: transparent;
     font-size: 1.5rem;
-    padding: .5rem 1rem;
+    padding: .9rem;
     transition: all ease-in .4s;
 
     &:link,
     &:visited {
+        padding: .5rem 1rem;
         text-decoration: none;
     }
 
@@ -191,9 +192,16 @@
     border: .1rem solid $primary;
     padding: .4rem .8rem;
     border-radius: .4rem;
-    color: $light-grey;
+    color: $primary;
     outline: none;
     background-color: transparent;
+    transition: all .5s ease-in-out;
+    cursor: pointer;
+
+    &:hover {
+        background-color: $primary;
+        color: $white;
+    }
 
 
     &:link,

@@ -5,6 +5,20 @@ body {
     color: $light-grey;
 
     position: relative;
+
+    overflow-y: auto;
+
+    &::-webkit-scrollbar {
+        width: .8rem;
+        background-color: $light-grey-1;
+        border-radius: 2rem;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        width: .8rem;
+        background-color: rgba($primary, .8);
+        border-radius: 2rem;
+    }
 }
 
 .para {

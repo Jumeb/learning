@@ -128,7 +128,15 @@
         position: relative;
         
         &::-webkit-scrollbar {
-            width: 0 !important;
+            width: .6rem;
+            background-color: $light-grey-1;
+            border-radius: 2rem;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            width: .6rem;
+            background-color: rgba($primary, .8);
+            border-radius: 2rem;
         }
 
         @include respon(stp) {
@@ -142,6 +150,10 @@
         @include respon(ph) {
             padding: 3rem 4rem;
         }
+    }
+
+    &__form {
+        padding: 2rem 4rem !important;
     }
 
     &__order {
@@ -195,18 +207,7 @@
     &:link,
     &:visited {
         text-decoration: none;
-        padding: 1.3rem;
         font-size: 1.4rem;
-
-        @include respon(tl) {
-            // font-size: 1.2rem;
-            padding: 1.3rem .2rem;
-        }
-    
-        // @include respon(stl) {
-            
-            
-        // }
     }
 }
 

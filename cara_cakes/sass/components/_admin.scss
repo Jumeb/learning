@@ -36,10 +36,14 @@
 
     &__btn {
         text-decoration: none;
-        padding: 1rem .5rem;
+        padding: .5rem;
         font-size: 1.5rem;
         font-weight: 400;
         color: $primary-dark;
+        border: none;
+        outline: none;
+        background-color: transparent;
+        cursor: pointer;
     }
 
     &__icon {
