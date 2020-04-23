@@ -1,4 +1,3 @@
-
 const getAdminRoutes = require('../controllers/admin');
 const express = require('express');
 const router = express.Router();
@@ -42,28 +41,28 @@ router.get('/orders', getAdminRoutes.getOrders);
 router.get('/orders/:orderId', getAdminRoutes.getClientOrder);
 
 router.post('/add-pastry', [
-    body('name')
-    .isAlphanumeric()
+    body('name', 'Please enter a valid name')
+    .isString()
     .isLength({
         min: 5
     })
     .trim(),
-    body('price')
+    body('price', 'Please enter a valid price')
     .isNumeric(),
-    body('image').isLength({ min: 4}),
-    body('desc').isLength({ min: 10, max: 1000 }).trim()
+    body('image').isLength({ min: 4 }),
+    body('desc', 'Please enter a longer description').isLength({ min: 10, max: 1000 }).trim()
 ], getAdminRoutes.postAddPastry);
 
 router.post('/edit-pastry', [
-    body('name')
-    .isAlphanumeric()
+    body('name', 'Please enter a valid name')
+    .isString()
     .isLength({
         min: 5
     })
     .trim(),
-    body('price')
+    body('price', 'Please enter a valid price')
     .isNumeric(),
-    body('image').isLength({ min: 4}),
+    body('image').isLength({ min: 4 }),
     body('desc').isLength({ min: 10, max: 1000 }).trim()
 ], getAdminRoutes.postEditPastry);
 

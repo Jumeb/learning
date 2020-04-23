@@ -1,7 +1,8 @@
 const Event = require('../models/events');
 const Cake = require('../models/product');
 const Order = require('../models/orders');
-const User = require('../models/user')
+const User = require('../models/user');
+const { validationResult } = require('express-validator');
 
 exports.getBds = (req, res, next) => {
     const eventId = req.params.eventId;
@@ -19,7 +20,9 @@ exports.getBds = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -39,7 +42,9 @@ exports.getWeds = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -59,7 +64,9 @@ exports.getCookies = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -79,7 +86,9 @@ exports.getPans = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -99,7 +108,9 @@ exports.getDons = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -119,7 +130,9 @@ exports.getCups = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -139,7 +152,9 @@ exports.getVals = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -154,6 +169,11 @@ exports.getPastry = (req, res, next) => {
                 authenticated: req.session.loggedIn,
                 csrfToken: req.csrfToken()
             })
+        })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -201,6 +221,11 @@ exports.getUser = (req, res, next) => {
             }
 
         })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 }
 
 exports.getAddEvent = (req, res, next) => {
@@ -216,7 +241,23 @@ exports.getAddEvent = (req, res, next) => {
                             pageTitle: 'Welcome',
                             path: '/user/add-event',
                             event: user,
-                            editing: false
+                            editing: false,
+                            hasError: false,
+                            event: {
+                                name: '',
+                                purpose: '',
+                                day: '',
+                                month: '',
+                                year: '',
+                                hour: '',
+                                mins: '',
+                                per: '',
+                                image: '',
+                                location: ''
+                            },
+                            errorMessage: null,
+                            validationErrors: null
+
                         })
                     })
             } else if (events) {
@@ -224,12 +265,29 @@ exports.getAddEvent = (req, res, next) => {
                     pageTitle: 'Add your event',
                     path: '/user/add-event',
                     editing: false,
-                    events: events
+                    hasError: false,
+                    events: events,
+                    event: {
+                        name: '',
+                        purpose: '',
+                        day: '',
+                        month: '',
+                        year: '',
+                        hour: '',
+                        mins: '',
+                        per: '',
+                        image: '',
+                        location: ''
+                    },
+                    errorMessage: null,
+                    validationErrors: null
                 })
             }
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         });
 }
 
@@ -244,8 +302,37 @@ exports.postAddEvent = (req, res, next) => {
     const per = req.body.period;
     const image = req.body.image;
     const location = req.body.location;
+    const errors = validationResult(req);
+
+
+    if (!errors.isEmpty()) {
+        console.log(errors)
+        return res.status(422).render('user/add-event0', {
+            pageTitle: "Add your event",
+            path: '/user/add-event',
+            editing: false,
+            hasError: true,
+            authenticated: req.session.loggedIn,
+            csrfToken: req.csrfToken(),
+            event: {
+                name: name,
+                purpose: purpose,
+                day: day,
+                month: month,
+                year: year,
+                hour: hour,
+                mins: mins,
+                per: per,
+                image: image,
+                location: location
+            },
+            validationErrors: errors.array(),
+            errorMessage: errors.array()[0].msg
+        });
+    }
     console.log(day);
-    console.log(per)
+    console.log(per);
+
     const event = new Event({
         name: name,
         image: image,
@@ -279,6 +366,34 @@ exports.getEditEvent = (req, res, next) => {
         res.redirect('/user');
     }
     const eventId = req.params.eventId;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('user/add-event', {
+            pageTitle: "Edit your event",
+            path: '/user/edit-event',
+            editing: false,
+            hasError: true,
+            authenticated: req.session.loggedIn,
+            csrfToken: req.csrfToken(),
+            event: {
+                name: name,
+                purpose: purpose,
+                day: day,
+                month: month,
+                year: year,
+                hour: hour,
+                mins: mins,
+                per: per,
+                image: image,
+                location: location,
+                _id: eventId
+
+            },
+            validationErrors: errors.array(),
+            errorMessage: errors.array()[0].msg
+        });
+    }
 
     Event.findById(eventId)
         .populate('userId')
@@ -293,8 +408,15 @@ exports.getEditEvent = (req, res, next) => {
                 event: event,
                 editing: editMode,
                 authenticated: req.session.loggedIn,
-                csrfToken: req.csrfToken()
+                csrfToken: req.csrfToken(),
+                errorMessage: null,
+                validationErrors: null
             })
+        })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -310,6 +432,34 @@ exports.postEditEvent = (req, res, next) => {
     const updatedPer = req.body.period;
     const updatedLoc = req.body.location;
     const updatedImage = req.body.image;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('user/add-event', {
+            pageTitle: "Edit your event",
+            path: '/user/edit-event',
+            editing: true,
+            hasError: true,
+            authenticated: req.session.loggedIn,
+            csrfToken: req.csrfToken(),
+            event: {
+                name: updatedName,
+                purpose: updatedPurpose,
+                day: updatedDay,
+                month: updatedMonth,
+                year: updatedYear,
+                hour: updatedHour,
+                mins: updatedMins,
+                per: updatedPer,
+                image: updatedImage,
+                location: updatedLoc,
+                _id: eventId
+            },
+            validationErrors: errors.array(),
+            errorMessage: errors.array()[0].msg
+        });
+    }
+
     Event.findById(eventId)
         .then(event => {
             event.name = updatedName;
@@ -350,6 +500,11 @@ exports.getDeleteEvent = (req, res, next) => {
                 csrfToken: req.csrfToken()
             })
         })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 }
 
 exports.postDeleteEvent = (req, res, next) => {
@@ -360,14 +515,16 @@ exports.postDeleteEvent = (req, res, next) => {
             res.redirect('/user');
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
 
 exports.getCart = (req, res, next) => {
     let message = req.flash('success');
-    if(message.length > 0) {
+    if (message.length > 0) {
         message = message[0];
     } else {
         message = null;
@@ -391,6 +548,11 @@ exports.getCart = (req, res, next) => {
                 csrfToken: req.csrfToken()
             })
         })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 }
 
 
@@ -406,6 +568,7 @@ exports.postCartDelete = (req, res, next) => {
             req.flash('success', 'Pastry successfully removed from cart.')
             res.redirect(path);
         })
+
 }
 
 
@@ -468,6 +631,11 @@ exports.getOrders = (req, res, next) => {
                 })
             }
         })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 }
 
 
@@ -517,6 +685,8 @@ exports.postOrder = (req, res, next) => {
             res.redirect('/user/orders');
         })
         .catch(err => {
-            console.log(err)
-        });
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 };

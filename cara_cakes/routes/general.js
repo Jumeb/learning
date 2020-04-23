@@ -27,50 +27,49 @@ router.post('/login', [
     .trim()
 ], generalRoutes.postLogin);
 router.post('/logout', generalRoutes.postLogout);
-router.post('/signup',
-    [check('email')
-        .isEmail()
-        .withMessage('Please Enter a valid email')
-        .normalizeEmail()
-        .custom((value, {
-            req
-        }) => {
-            // if(value === 'test@test.com') {
-            //     throw new Error("This email is forbidden.")
-            // }
-            // return true;
-            return User.findOne({
-                    email: value
-                })
-                .then(userDoc => {
-                    if (userDoc) {
-                        return Promise.reject('Existing E-mail, please try another.');
-                    }
-                })
-        })
-        .trim(),
-        body('telNo', 'Telephone number is invalid')
-        .isLength({
-            min: 9,
-            max: 9,
-        })
-        .trim(),
-        body('password', 'Please enter only Alphnumeric password and it should be at least 5 characters')
-        .isLength({
-            min: 5,
-            max: 20
-        })
-        .isAlphanumeric(),
-        body('confirmPassword')
-        .custom((value, {
-            req
-        }) => {
-            if (value !== req.body.password) {
-                throw new Error('Passwords do not match!')
-            }
-            return true;
-        })
-    ], generalRoutes.postSignup)
+router.post('/signup', [check('email')
+    .isEmail()
+    .withMessage('Please enter a valid email')
+    .normalizeEmail()
+    .custom((value, {
+        req
+    }) => {
+        // if(value === 'test@test.com') {
+        //     throw new Error("This email is forbidden.")
+        // }
+        // return true;
+        return User.findOne({
+                email: value
+            })
+            .then(userDoc => {
+                if (userDoc) {
+                    return Promise.reject('Existing E-mail, please try another.');
+                }
+            })
+    })
+    .trim(),
+    body('telNo', 'Telephone number is invalid')
+    .isLength({
+        min: 9,
+        max: 9,
+    })
+    .trim(),
+    body('password', 'Please enter only Alphnumeric password and it should be at least 5 characters')
+    .isLength({
+        min: 5,
+        max: 20
+    })
+    .isAlphanumeric(),
+    body('confirmPassword')
+    .custom((value, {
+        req
+    }) => {
+        if (value !== req.body.password) {
+            throw new Error('Passwords do not match!')
+        }
+        return true;
+    })
+], generalRoutes.postSignup)
 
 
 

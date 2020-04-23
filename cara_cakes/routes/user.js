@@ -6,6 +6,7 @@ const userRoute = require('../controllers/user');
 
 const isAuth = require('../middleware/isAuth');
 
+const { body } = require('express-validator');
 
 router.get('/', isAuth, userRoute.getUser);
 
@@ -25,15 +26,97 @@ router.get('/cookies/:eventId', userRoute.getCookies);
 
 router.get('/add-event', isAuth, userRoute.getAddEvent);
 
-router.post('/add-event', isAuth, userRoute.postAddEvent);
+router.post('/add-event', [
+    body('name', 'Name is too short')
+    .isString()
+    .isLength({
+        min: 5
+    })
+    .trim(),
+    body('purpose', 'Purpose is too short')
+    .isString()
+    .isLength({
+        min: 4
+    })
+    .trim(),
+    body('image')
+    .isString()
+    .trim(),
+    body('location', 'Please set a valid location')
+    .isString()
+    .isLength({
+        min: 10,
+        max: 20
+    })
+    .trim(),
+    body('day', 'Please set the day')
+    .isString()
+    .trim(),
+    body('month', 'Please set the month')
+    .isString()
+    .trim(),
+    body('year', 'Please set the year')
+    .isString()
+    .trim(),
+    body('period', 'Please set the period')
+    .isString()
+    .trim(),
+    body('hour', 'Please set the hour')
+    .isString()
+    .trim(),
+    body('minute', 'Please set the minute')
+    .isString()
+    .trim()
+], isAuth, userRoute.postAddEvent);
 
 router.get('/pastry-detail/:cakeId', userRoute.getPastry);
 
 router.get('/edit-event/:eventId', userRoute.getEditEvent);
 
-router.post('/edit-event', isAuth, userRoute.postEditEvent);
+router.post('/edit-event', [
+    body('name', 'Name is too short')
+    .isString()
+    .isLength({
+        min: 5
+    })
+    .trim(),
+    body('purpose', 'Purpose is too short')
+    .isString()
+    .isLength({
+        min: 4
+    })
+    .trim(),
+    body('image')
+    .isString()
+    .trim(),
+    body('location', 'Please set a valid location')
+    .isString()
+    .isLength({
+        min: 10,
+        max: 20
+    })
+    .trim(),
+    body('day', 'Please set the day')
+    .isString()
+    .trim(),
+    body('month', 'Please set the month')
+    .isString()
+    .trim(),
+    body('year', 'Please set the year')
+    .isString()
+    .trim(),
+    body('period', 'Please set the period')
+    .isString()
+    .trim(),
+    body('hour', 'Please set the hour')
+    .isString()
+    .trim(),
+    body('minute', 'Please set the minute')
+    .isString()
+    .trim()
+], isAuth, userRoute.postEditEvent);
 
-router.get('/delete-event/:eventId',userRoute.getDeleteEvent);
+router.get('/delete-event/:eventId', userRoute.getDeleteEvent);
 
 router.get('/orders', isAuth, userRoute.getOrders);
 

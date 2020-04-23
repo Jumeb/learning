@@ -2,25 +2,21 @@
     <section class="sheet user">
         <div class="sheet__event">Event</div>
         <div class="sheet__form user__form">
-            <form action="/user/<% if (editing) { %>edit-event<% } else { %>add-event<% } %>" class="sheet__signup"
-                method="POST">
+            <form action="/user/<% if (editing) { %>edit-event <% } else { %>add-event <% } %>" class="sheet__signup" method="POST">
                 <div class="sheet__group">
-                    <input type="text" name="name" class="sheet__input" id="Name" placeholder="For: Name"
-                        value="<% if (editing) { %><%= event.name %><% } %>" required>
+                    <input type="text" name="name" class="sheet__input" id="Name" placeholder="For: Name" value="<% if (editing || hasError) { %><%= event.name %><% } %>" required>
                     <label for="Name" class="sheet__label">Name</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="text" name="purpose" class="sheet__input" id="Purpose" placeholder="Message on cake"
-                        value="<% if (editing) { %><%= event.purpose %><% } %>" required>
+                    <input type="text" name="purpose" class="sheet__input" id="Purpose" placeholder="Message on cake" value="<% if (editing || hasError) { %><%= event.purpose %><% } %>" required>
                     <label for="Purpose" class="sheet__label">Message</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="text" name="image" class="sheet__input" id="Image"
-                        value="<% if (editing) { %><%= event.image %><% } %>" placeholder="Image of person">
+                    <input type="text" name="image" class="sheet__input" id="Image" value="<% if (editing || hasError) { %><%= event.image %><% } %>" placeholder="Image of person">
                     <label for="Image" class="sheet__label">Image</label>
                 </div>
                 <div class="sheet__Date">
-                    <input type="hidden" name="location" id="locale" value="<% if (editing) { %><%= event.location %><% } %>">
+                    <input type="hidden" name="location" id="locale" value="<% if (editing || hasError) { %><%= event.location %><% } %>">
                     <div class="sheet__date-box sheet__location">
                         <div class="sheet__date locations">
                             <div class="sheet__date-option Locations">
@@ -53,15 +49,18 @@
                             </div>
                         </div>
                         <div class="sheet__selected location">
-                            <% if (editing) { %><%= event.location %><% } else {%> Select Delivery Location <% } %>
-                            <span class="sheet__icon"><i class="fas fa-chevron-down"></i></span>
+                            <% if (editing || hasError) { %>
+                                <%= event.location %>
+                                    <% } else {%> Select Delivery Location
+                                        <% } %>
+                                            <span class="sheet__icon"><i class="fas fa-chevron-down"></i></span>
                         </div>
                     </div>
                 </div>
                 <div class="sheet__Date">
-                    <input type="hidden" name="day" id="day" value="<% if (editing) { %><%= event.day %><% } %>">
-                    <input type="hidden" name="month" id="month" value="<% if (editing) { %><%= event.month %><% } %>">
-                    <input type="hidden" name="year" id="year" value="<% if (editing) { %><%= event.year %><% } %>">
+                    <input type="hidden" name="day" id="day" value="<% if (editing || hasError) { %><%= event.day %><% } %>">
+                    <input type="hidden" name="month" id="month" value="<% if (editing || hasError) { %><%= event.month %><% } %>">
+                    <input type="hidden" name="year" id="year" value="<% if (editing || hasError) { %><%= event.year %><% } %>">
                     <div class="sheet__date-box sheet__day">
                         <div class="sheet__date days">
                             <div class="sheet__date-option Days">
@@ -186,7 +185,10 @@
                             </div>
                         </div>
                         <div class="sheet__selected day">
-                            <% if (editing) { %><%= event.day %><% } else {%> Day <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.day %>
+                                    <% } else {%> Day
+                                        <% } %>
                         </div>
                     </div>
                     <div class="sheet__date-box sheet__month">
@@ -241,7 +243,10 @@
                             </div>
                         </div>
                         <div class="sheet__selected month">
-                            <% if (editing) { %><%= event.month %><% } else {%> Month <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.month %>
+                                    <% } else {%> Month
+                                        <% } %>
                         </div>
                     </div>
                     <div class="sheet__date-box sheet__year">
@@ -292,15 +297,18 @@
                             </div>
                         </div>
                         <div class="sheet__selected year">
-                            <% if (editing) { %><%= event.year %> <% } else {%> Year <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.year %>
+                                    <% } else {%> Year
+                                        <% } %>
                         </div>
                     </div>
                 </div>
 
                 <div class="sheet__Date">
-                    <input type="hidden" name="period" id="per" value="<% if (editing) { %><%= event.per %><% } %>">
-                    <input type="hidden" name="hour" id="hour" value="<% if (editing) { %><%= event.hour %><% } %>">
-                    <input type="hidden" name="minute" id="mins" value="<% if (editing) { %><%= event.mins %><% } %>">
+                    <input type="hidden" name="period" id="per" value="<% if (editing || hasError) { %><%= event.per %><% } %>">
+                    <input type="hidden" name="hour" id="hour" value="<% if (editing || hasError) { %><%= event.hour %><% } %>">
+                    <input type="hidden" name="minute" id="mins" value="<% if (editing || hasError) { %><%= event.mins %><% } %>">
                     <div class="sheet__date-box sheet__hour">
                         <div class="sheet__date hours">
                             <div class="sheet__date-option Hours">
@@ -353,7 +361,10 @@
                             </div>
                         </div>
                         <div class="sheet__selected hour">
-                            <% if (editing) { %><%= event.hour %><% } else {%> HH <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.hour %>
+                                    <% } else {%> HH
+                                        <% } %>
                         </div>
                     </div>
                     <div class="sheet__date-box sheet__minute">
@@ -408,7 +419,10 @@
                             </div>
                         </div>
                         <div class="sheet__selected minute">
-                            <% if (editing) { %><%= event.mins %><% } else {%> MM <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.mins %>
+                                    <% } else {%> MM
+                                        <% } %>
                         </div>
                     </div>
                     <div class="sheet__date-box sheet__period">
@@ -423,19 +437,22 @@
                             </div>
                         </div>
                         <div class="sheet__selected period">
-                            <% if (editing) { %><%= event.per %><% } else {%> Per <% } %>
+                            <% if (editing || hasError) { %>
+                                <%= event.per %>
+                                    <% } else {%> Per
+                                        <% } %>
                         </div>
                     </div>
                 </div>
-                <% if (editing) { %>
-                <input type="hidden" name="eventId" value="<%= event._id %>">
-                <% } %>
-                <div class="sheet__btns">
-                    <input type="hidden" name="_csrf" value="<%= csrfToken %>">
-                    <button type="submit" class="btn-2 btn-deep--pink"><% if (editing) { %>Update
+                <% if (editing || hasError) { %>
+                    <input type="hidden" name="eventId" value="<%= event._id %>">
+                    <% } %>
+                        <div class="sheet__btns">
+                            <input type="hidden" name="_csrf" value="<%= csrfToken %>">
+                            <button type="submit" class="btn-2 btn-deep--pink"><% if (editing) { %>Update
                         Event<% } else { %>Create Event<% } %></button>
-                    <a href="/user" class="btn-2 btn-deep--pink txt-cnt">Cancel</a>
-                </div>
+                            <a href="/user" class="btn-2 btn-deep--pink txt-cnt">Cancel</a>
+                        </div>
             </form>
         </div>
 

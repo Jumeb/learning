@@ -49,7 +49,9 @@ exports.postSignIn = (req, res, next) => {
             }
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -80,6 +82,11 @@ exports.getGeneral = (req, res, next) => {
                 admin: admin
             });
         })
+        .catch(err => {
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 }
 
 exports.getBds = (req, res, next) => {
@@ -101,7 +108,9 @@ exports.getBds = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -124,7 +133,9 @@ exports.getWeds = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -147,7 +158,9 @@ exports.getCookie = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -170,7 +183,9 @@ exports.getPans = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -193,7 +208,9 @@ exports.getDons = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -216,7 +233,9 @@ exports.getCups = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -239,7 +258,9 @@ exports.getVal = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -257,7 +278,9 @@ exports.getCake = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 
@@ -281,7 +304,9 @@ exports.getAddBds = (req, res, next) => {
         path: '/admin/add-bds',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -297,7 +322,9 @@ exports.getAddWeds = (req, res, next) => {
         path: '/admin/add-weds',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -313,7 +340,9 @@ exports.getAddDon = (req, res, next) => {
         path: '/admin/add-dons',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -329,7 +358,9 @@ exports.getAddCookie = (req, res, next) => {
         path: '/admin/add-cookies',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -345,7 +376,9 @@ exports.getAddPan = (req, res, next) => {
         path: '/admin/add-pans',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -361,7 +394,9 @@ exports.getAddVal = (req, res, next) => {
         path: '/admin/add-vals',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -377,7 +412,9 @@ exports.getAddCup = (req, res, next) => {
         path: '/admin/add-cups',
         editing: false,
         success: message,
-        hasError: false
+        hasError: false,
+        errorMessage: null,
+        validationErrors: null
     });
 }
 
@@ -390,8 +427,8 @@ exports.postAddPastry = (req, res, next) => {
     const type = req.body.type;
     const errors = validationResult(req);
 
-    if(!errors.isEmpty()) {
-        res.satus(422).render('admin/updates', {
+    if (!errors.isEmpty()) {
+        return res.status(422).render('admin/updates', {
             pageTitle: 'Add Pastry',
             path: '/admin/edit-pastry',
             editing: false,
@@ -402,7 +439,9 @@ exports.postAddPastry = (req, res, next) => {
                 img: image,
                 desc: desc,
                 type: type
-            }
+            },
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array()
         });
     }
     const product = new Cake({
@@ -437,7 +476,9 @@ exports.postAddPastry = (req, res, next) => {
             res.redirect(path);
         })
         .catch(err => {
-            console.log(err);
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 
 };
@@ -459,7 +500,9 @@ exports.getEditPastry = (req, res, next) => {
                 path: '/admin/edit-pastry',
                 editing: editMode,
                 pastry: cake,
-                hasError: false
+                hasError: false,
+                errorMessage: null,
+                validationErrors: null
             });
         })
 }
@@ -475,6 +518,27 @@ exports.postEditPastry = (req, res, next) => {
     const updatedPrice = req.body.price;
     const updatedImage = req.body.image;
     const updatedDesc = req.body.desc;
+    const errors = validationResult(req);
+
+
+    if (!errors.isEmpty()) {
+        return res.status(422).render('admin/updates', {
+            pageTitle: 'Edit Pastry',
+            path: '/admin/edit-pastry',
+            editing: true,
+            hasError: true,
+            pastry: {
+                name: updatedName,
+                price: updatedPrice,
+                image: updatedImage,
+                description: updatedDesc,
+                genre: type,
+                _id: pastryId
+            },
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array()
+        });
+    }
 
     if (type == 'Birthday-cake') {
         path = '/admin/cakes'
@@ -504,8 +568,10 @@ exports.postEditPastry = (req, res, next) => {
             res.redirect(path)
         })
         .catch(err => {
-            console.log(err);
-        });
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
+        })
 
 }
 
@@ -520,7 +586,9 @@ exports.getDeletePastry = (req, res, next) => {
             });
         })
         .catch(err => {
-            console.log(err)
+            const errror = new Error(err);
+            error.httpStatusCode = 500;
+            return next(error);
         })
 }
 

@@ -64,10 +64,16 @@ app.use(csrfProtection);
 
 app.use(flash());
 
+app.use((req, res, next) => {
+    res.locals.authenticated = req.session.loggedIn;
+    res.locals.csrfToken = req.csrfToken()
+    next();
+})
+
 /////////////////////////////
 
 app.use((req, res, next) => {
-    if(!req.session.user){
+    if (!req.session.user) {
         return next();
     }
     User.findById(req.session.user._id)
@@ -82,7 +88,7 @@ app.use((req, res, next) => {
 
 
 app.use((req, res, next) => {
-    if(!req.session.admin){
+    if (!req.session.admin) {
         return next();
     }
     Admin.findById(req.session.admin._id)
@@ -95,23 +101,30 @@ app.use((req, res, next) => {
         })
 })
 
-app.use((req, res, next) => {
-    res.locals.authenticated = req.session.loggedIn;
-    res.locals.csrfToken  = req.csrfToken()
-    next();
-})
+
 
 // USING THE ROUTES
 
 app.use('/user', userRoute);
 app.use('/admin', adminRoute);
 app.use(generalRoute);
+app.get('/500', errRoute.get500);
+
 
 //////////////////
 
 // ERROR ROUTES
 
 app.use(errRoute.get404);
+
+app.use((error, req, res, next) => {
+    res.status(500).render('500', {
+        pageTitle: 'Error occured',
+        path: '/500',
+        headerType: 'ba',
+        bodyType: 'back-page404 body'
+    });
+})
 
 
 ///////////////////////////
