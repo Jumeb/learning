@@ -8,6 +8,7 @@ const session = require('express-session');
 const mongoDbStore = require('connect-mongodb-session')(session);
 const csrf = require('csurf');
 const flash = require('connect-flash');
+const multer = require('multer');
 
 /////////////////////////////
 const MONGODB_URI = 'mongodb://localhost:27017/CaraCakes';
@@ -27,32 +28,39 @@ const csrfProtection = csrf();
 app.set('view engine', 'ejs');
 app.set('views', 'views');
 
-////////////////////////////
 
-// ROUTES
 
-const errRoute = require('./controllers/errors');
-const generalRoute = require('./routes/general');
-const userRoute = require('./routes/user');
-const adminRoute = require('./routes/admin');
+var fileStorage = multer.diskStorage({
+    destination: (req, file, cb) => {
+        cb(null, 'images');
+    },
+    filename: (req, file, cb) => {
+        cb(null, new Date().toISOString().replace(/:/g, '-') + '-' + file.originalname)
+    }
+});
 
-const Admin = require('./models/admin');
-const User = require('./models/user');
+var imageFilter = (req, file, cb) => {
+    if (file.mimetype === 'image/png' || file.mimetype === 'image/jpg' || file.mimetype === 'image/jpeg') {
+        cb(null, true);
+    } else {
+        cb(null, false);
+    }
+};
+
 
 /////////////////////////////
 
 // PARSING THE VIEW
 
-app.use(bodyParser.urlencoded({
-    extended: false
-}));
-
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(multer({ storage: fileStorage, fileFilter: imageFilter }).single('image'));
 ///////////////////////////
 
 
 // USING PUBLIC FILES LIKE CSS, IMG, JS etc
 
 app.use(express.static(path.join(__dirname, 'public')));
+app.use('/images', express.static(path.join(__dirname, 'images')));
 app.use(session({
     secret: 'mySecretIsBest',
     resave: false,
@@ -82,6 +90,7 @@ app.use((req, res, next) => {
             next();
         })
         .catch(err => {
+            console.log("ahdfjkl")
             console.log(err);
         })
 });
@@ -97,10 +106,22 @@ app.use((req, res, next) => {
             next();
         })
         .catch(err => {
-            console.log(err);
+            console.log("Error")
+            next(new Error(err));
         })
 })
 
+////////////////////////////
+
+// ROUTES
+
+const errRoute = require('./controllers/errors');
+const generalRoute = require('./routes/general');
+const userRoute = require('./routes/user');
+const adminRoute = require('./routes/admin');
+
+const Admin = require('./models/admin');
+const User = require('./models/user');
 
 
 // USING THE ROUTES
@@ -118,6 +139,7 @@ app.get('/500', errRoute.get500);
 app.use(errRoute.get404);
 
 app.use((error, req, res, next) => {
+    console.log(error + "  here");
     res.status(500).render('500', {
         pageTitle: 'Error occured',
         path: '/500',
