@@ -26,7 +26,6 @@
             "styles": [
               "node_modules/bootstrap/dist/css/bootstrap.min.css",
               "src/styles.css"
-
             ],
             "scripts": []
           },
@@ -122,6 +121,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "first-apps"
+    }
+  },
+  "defaultProject": "first-apps",
+  "cli": {
+    "analytics": false
+  }
 }
