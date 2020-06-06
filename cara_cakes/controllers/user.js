@@ -1,3 +1,9 @@
+const fs = require('fs');
+const path = require('path');
+
+const fileHelper = require('../util/file');
+const PDFDocument = require('pdfkit');
+
 const Event = require('../models/events');
 const Cake = require('../models/product');
 const Order = require('../models/orders');
@@ -205,16 +211,19 @@ exports.getUser = (req, res, next) => {
                             pageTitle: title,
                             path: '/user',
                             event: user,
+                            user: user,
                             success: message,
                             errorMessage: msg
                         })
                     })
             } else if (events) {
                 let title = 'Welcome, ' + events[0].userId.name;
+                console.log('I happen here1; ')
                 res.render('user/index', {
                     pageTitle: title,
                     path: '/user',
                     events: events,
+                    user: events,
                     success: message,
                     errorMessage: msg
                 })
@@ -237,6 +246,7 @@ exports.getAddEvent = (req, res, next) => {
             if (events[0] == null) {
                 User.findById(req.session.user)
                     .then(user => {
+                        console.log(user + ' i hap')
                         res.render('user/add-event0', {
                             pageTitle: 'Welcome',
                             path: '/user/add-event',
@@ -255,6 +265,7 @@ exports.getAddEvent = (req, res, next) => {
                                 image: '',
                                 location: ''
                             },
+                            user: user,
                             errorMessage: null,
                             validationErrors: null
 
@@ -279,6 +290,7 @@ exports.getAddEvent = (req, res, next) => {
                         image: '',
                         location: ''
                     },
+                    user: events,
                     errorMessage: null,
                     validationErrors: null
                 })
@@ -300,7 +312,7 @@ exports.postAddEvent = (req, res, next) => {
     const hour = req.body.hour;
     const mins = req.body.minute;
     const per = req.body.period;
-    const image = req.body.image;
+    const image = req.file;
     const location = req.body.location;
     const errors = validationResult(req);
 
@@ -323,9 +335,9 @@ exports.postAddEvent = (req, res, next) => {
                 hour: hour,
                 mins: mins,
                 per: per,
-                image: image,
                 location: location
             },
+            user: [],
             validationErrors: errors.array(),
             errorMessage: errors.array()[0].msg
         });
@@ -333,9 +345,34 @@ exports.postAddEvent = (req, res, next) => {
     console.log(day);
     console.log(per);
 
+    if (!image.path) {
+        return res.status(422).render('user/add-event0', {
+            pageTitle: "Add your event",
+            path: '/user/add-event',
+            editing: false,
+            hasError: true,
+            authenticated: req.session.loggedIn,
+            csrfToken: req.csrfToken(),
+            event: {
+                name: name,
+                purpose: purpose,
+                day: day,
+                month: month,
+                year: year,
+                hour: hour,
+                mins: mins,
+                per: per,
+                location: location
+            },
+            user: [],
+            validationErrors: [],
+            errorMessage: 'File is not an image (png,jpg,jpeg)'
+        });
+    }
+    console.log(image.path);
     const event = new Event({
         name: name,
-        image: image,
+        image: image.path,
         purpose: purpose,
         day: day,
         month: month,
@@ -344,6 +381,7 @@ exports.postAddEvent = (req, res, next) => {
         mins: mins,
         per: per,
         userId: req.user,
+        image: image.path,
         location: location
     });
 
@@ -398,6 +436,7 @@ exports.getEditEvent = (req, res, next) => {
     Event.findById(eventId)
         .populate('userId')
         .then(event => {
+            console.log(event)
             if (!event) {
                 req.flash('error', 'Could not find this event.')
                 res.redirect('/user');
@@ -406,6 +445,7 @@ exports.getEditEvent = (req, res, next) => {
                 pageTitle: "Edit your event",
                 path: '/user/edit-event',
                 event: event,
+                user: event,
                 editing: editMode,
                 authenticated: req.session.loggedIn,
                 csrfToken: req.csrfToken(),
@@ -431,7 +471,7 @@ exports.postEditEvent = (req, res, next) => {
     const updatedMins = req.body.minute;
     const updatedPer = req.body.period;
     const updatedLoc = req.body.location;
-    const updatedImage = req.body.image;
+    const Image = req.file;
     const errors = validationResult(req);
 
     if (!errors.isEmpty()) {
@@ -459,7 +499,6 @@ exports.postEditEvent = (req, res, next) => {
             errorMessage: errors.array()[0].msg
         });
     }
-
     Event.findById(eventId)
         .then(event => {
             event.name = updatedName;
@@ -469,7 +508,10 @@ exports.postEditEvent = (req, res, next) => {
             event.year = updatedYear;
             event.hour = updatedHour;
             event.mins = updatedMins;
-            event.image = updatedImage;
+            if (Image) {
+                fileHelper.deleteFile(event.image);
+                event.image = Image.path;
+            }
             event.per = updatedPer;
             event.location = updatedLoc;
             return event.save();
@@ -509,7 +551,14 @@ exports.getDeleteEvent = (req, res, next) => {
 
 exports.postDeleteEvent = (req, res, next) => {
     const eventId = req.body.eventId;
-    Event.findByIdAndRemove(eventId)
+    Event.findById(eventId)
+        .then(event => {
+            if (!event) {
+                return next(new Error('Event not found'));
+            }
+            fileHelper.deleteFile(event.image);
+            return Event.findByIdAndRemove(eventId)
+        })
         .then(result => {
             req.flash('success', 'Event successfully deleted.')
             res.redirect('/user');
@@ -542,6 +591,7 @@ exports.getCart = (req, res, next) => {
                 pageTitle: event.name,
                 path: '/user/event-cart',
                 event: event,
+                user: event,
                 pastries: pastries,
                 success: message,
                 authenticated: req.session.loggedIn,
@@ -616,19 +666,25 @@ exports.getOrders = (req, res, next) => {
             if (orders[0] == null) {
                 User.findById(req.user)
                     .then(user => {
+                        console.log(user)
                         res.render('user/userOrder0', {
                             path: '/user/orders',
                             pageTitle: 'Your Orders',
-                            event: user
+                            user: user
                         })
                     })
             } else if (orders) {
-                res.render('user/userOrder', {
-                    path: '/user/orders',
-                    pageTitle: 'Your Orders',
-                    order: orders,
-                    event: orders
-                })
+                User.findById(req.user)
+                    .then(user => {
+                        console.log(user)
+                        res.render('user/userOrder', {
+                            path: '/user/orders',
+                            pageTitle: 'Your Orders',
+                            order: orders,
+                            event: orders,
+                            user: user
+                        })
+                    })
             }
         })
         .catch(err => {
@@ -689,4 +745,128 @@ exports.postOrder = (req, res, next) => {
             error.httpStatusCode = 500;
             return next(error);
         })
+};
+
+
+///////////////////////////////////
+//      Edit Profile            //
+/////////////////////////////////
+
+exports.getEditForm = (req, res, next) => {
+    const userId = req.params.userId;
+    console.log(userId)
+    User.findById(userId)
+        .then(user => {
+            console.log(user)
+            res.render('user/edit-profile', {
+                path: 'user/edit-profile',
+                pageTitle: 'Edit User Info',
+                user: user,
+                event: user,
+                editing: true,
+                hasError: false
+            })
+        }).catch(err => {
+            console.log(err)
+        })
+}
+
+exports.postEditProfile = (req, res, next) => {
+    const userId = req.body.userId;
+    const name = req.body.name;
+    const telNo = req.body.telNo;
+
+    console.log(name + ' ' + telNo);
+    const image = req.file;
+    const errors = validationResult(req);
+
+    if (!errors.isEmpty()) {
+        console.log(errors)
+        return res.status(422).render('user/edit-profile', {
+            path: '/user/edit-profile',
+            pageTitle: 'Edit Profile',
+            editing: true,
+            hasError: true,
+            authenticated: req.session.loggedIn,
+            csrfToken: req.csrfToken(),
+            user: {
+                name: name,
+                telNo: telNo,
+                _id: userId
+            },
+            validationErrors: errors.array(),
+            errorMessage: errors.array()[0].msg
+        })
+    }
+
+    User.findById(userId)
+        .then(event => {
+            event.name = name;
+            event.telNo = telNo;
+            if (image) {
+                fileHelper.deleteFile(event.image);
+                event.image = image.path;
+            }
+            return event.save();
+        })
+        .then(result => {
+            req.flash('success', 'Profile Edited');
+            res.redirect('/user');
+        }).catch(err => {
+            req.flash('error', 'Profile not Edited, Please try again later.');
+            console.log(err);
+        })
+
+}
+
+exports.getDetails = (req, res, next) => {
+    const orderId = req.params.orderId;
+    Order.findById(orderId)
+        .then(order => {
+            if (!order) {
+                return next(new Error('No order found.'));
+            }
+            if (order.user.userId.toString() !== req.user._id.toString()) {
+                return next(new Error('Unauthorized'));
+            }
+            const order_dets = 'order-dets-' + orderId + '.pdf';
+            const detPath = path.join('data', 'orders', order_dets);
+
+            const pdfDoc = new PDFDocument();
+            res.setHeader('Content-Type', 'application/pdf');
+            res.setHeader('Content-Disposition', 'inline; filename="' + order_dets + '"');
+
+            pdfDoc.pipe(fs.createWriteStream(detPath));
+            pdfDoc.pipe(res);
+
+            pdfDoc.fontSize(24).text('Hello Jume', {
+                underline: true
+            });
+            pdfDoc.text(order.event.name)
+            pdfDoc.text('___________________________________');
+            let totalPrice = 0;
+            order.pastries.forEach(pastry => {
+                totalPrice += pastry.quantity * pastry.pastry.price;
+                pdfDoc.fontSize(14).text(pastry.pastry.name + ' - ' + pastry.quantity + ' x ' + pastry.pastry.price + 'FCFA');
+            })
+            pdfDoc.text('____________________________________')
+            pdfDoc.fontSize(18).text('Total Price: ' + totalPrice + 'FCFA');
+            pdfDoc.end();
+
+            // fs.readFile(detPath, (err, data) => {
+            //     if (err) {
+            //         return next(err);
+            //     }
+            //     res.setHeader('Content-Type', 'application/pdf');
+            //     res.setHeader('Content-Disposition', 'inline; filename="' + order_dets + '"');
+            //     res.send(data);
+            // })
+
+            // const file = fs.createReadStream(detPath);
+            // file.pipe(res);
+
+
+        })
+        .catch(err => next(err))
+
 };

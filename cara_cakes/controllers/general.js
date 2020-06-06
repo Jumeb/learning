@@ -75,9 +75,10 @@ exports.postSignup = (req, res, next) => {
     const name = req.body.name;
     const telNo = req.body.telNo;
     const password = req.body.password;
+
     const errors = validationResult(req);
     if (!errors.isEmpty()) {
-        console.log(errors.array())
+        console.log(errors.array() + ' ok');
         return res.status(422).render('general/signup', {
             pageTitle: 'SignUp for Cara Cakes',
             path: '/signup',
@@ -90,8 +91,7 @@ exports.postSignup = (req, res, next) => {
                 email: email,
                 name: name,
                 telNo: telNo,
-                password: password,
-                confirmPassword: confirmPassword
+                password: password
             }
         })
     }
@@ -115,7 +115,8 @@ exports.postSignup = (req, res, next) => {
             })
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("over here");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -221,6 +222,7 @@ exports.postLogin = (req, res, next) => {
                     res.redirect('/login');
                 })
                 .catch(err => {
+                    console.log("oosje");
                     const errror = new Error(err);
                     error.httpStatusCode = 500;
                     return next(error);

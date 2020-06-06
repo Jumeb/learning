@@ -1,6 +1,8 @@
 const Cake = require('../models/product');
 const Admin = require('../models/admin');
 const Orders = require('../models/orders');
+
+const fileHelper = require('../util/file');
 const { validationResult } = require('express-validator');
 
 
@@ -49,7 +51,8 @@ exports.postSignIn = (req, res, next) => {
             }
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("One");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -83,7 +86,8 @@ exports.getGeneral = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("two");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -108,7 +112,8 @@ exports.getBds = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("three");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -133,7 +138,8 @@ exports.getWeds = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Four");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -158,7 +164,8 @@ exports.getCookie = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Five");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -183,7 +190,8 @@ exports.getPans = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Six");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -208,7 +216,8 @@ exports.getDons = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("seven");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -233,7 +242,8 @@ exports.getCups = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Eigth");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -258,7 +268,8 @@ exports.getVal = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("nine");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -278,7 +289,8 @@ exports.getCake = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Ten")
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -306,6 +318,13 @@ exports.getAddBds = (req, res, next) => {
         success: message,
         hasError: false,
         errorMessage: null,
+        pastry: {
+            name: '',
+            price: '',
+            img: '',
+            desc: '',
+            type: ''
+        },
         validationErrors: null
     });
 }
@@ -422,36 +441,10 @@ exports.postAddPastry = (req, res, next) => {
     let path;
     const name = req.body.name;
     const price = req.body.price;
-    const img = req.body.image;
+    const img = req.file;
     const desc = req.body.desc;
     const type = req.body.type;
     const errors = validationResult(req);
-
-    if (!errors.isEmpty()) {
-        return res.status(422).render('admin/updates', {
-            pageTitle: 'Add Pastry',
-            path: '/admin/edit-pastry',
-            editing: false,
-            hasError: true,
-            pastry: {
-                name: name,
-                price: price,
-                img: image,
-                desc: desc,
-                type: type
-            },
-            errorMessage: errors.array()[0].msg,
-            validationErrors: errors.array()
-        });
-    }
-    const product = new Cake({
-        name: name,
-        price: price,
-        image: img,
-        description: desc,
-        genre: type,
-        adminId: req.admin
-    });
 
     if (type == 'Birthday-cake') {
         path = '/admin/add-bds'
@@ -469,6 +462,57 @@ exports.postAddPastry = (req, res, next) => {
         path = '/admin/add-pans';
     }
 
+    if (!img) {
+        return res.status(422).render('admin/updates', {
+            pageTitle: 'Add Pastry',
+            path: path,
+            editing: false,
+            hasError: true,
+            success: false,
+            pastry: {
+                name: name,
+                price: price,
+                description: desc,
+                type: type
+            },
+            errorMessage: 'Attached file is not an image (png, jpg,jpeg)',
+            validationErrors: []
+        });
+    }
+
+    const imagePath = img.path;
+
+    if (!errors.isEmpty()) {
+        console.log("Again");
+        return res.status(422).render('admin/updates', {
+            pageTitle: 'Add Pastry',
+            path: path,
+            editing: false,
+            hasError: true,
+            success: false,
+            pastry: {
+                name: name,
+                price: price,
+                description: desc,
+                genre: type,
+                image: img
+            },
+            errorMessage: errors.array()[0].msg,
+            validationErrors: errors.array()
+        });
+    }
+
+
+    const product = new Cake({
+        name: name,
+        price: price,
+        image: imagePath,
+        description: desc,
+        genre: type,
+        adminId: req.admin
+    });
+
+
     product
         .save()
         .then(result => {
@@ -476,7 +520,8 @@ exports.postAddPastry = (req, res, next) => {
             res.redirect(path);
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("eleven");
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -516,7 +561,7 @@ exports.postEditPastry = (req, res, next) => {
     const pastryId = req.body.pastryId;
     const updatedName = req.body.name;
     const updatedPrice = req.body.price;
-    const updatedImage = req.body.image;
+    const image = req.file;
     const updatedDesc = req.body.desc;
     const errors = validationResult(req);
 
@@ -530,7 +575,6 @@ exports.postEditPastry = (req, res, next) => {
             pastry: {
                 name: updatedName,
                 price: updatedPrice,
-                image: updatedImage,
                 description: updatedDesc,
                 genre: type,
                 _id: pastryId
@@ -559,7 +603,10 @@ exports.postEditPastry = (req, res, next) => {
     Cake.findById(pastryId)
         .then(cake => {
             cake.name = updatedName;
-            cake.image = updatedImage;
+            if (image) {
+                fileHelper.deleteFile(cake.image);
+                cake.image = image.path;
+            }
             cake.price = updatedPrice;
             cake.description = updatedDesc;
             return cake.save()
@@ -568,7 +615,8 @@ exports.postEditPastry = (req, res, next) => {
             res.redirect(path)
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Twelve")
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -586,7 +634,8 @@ exports.getDeletePastry = (req, res, next) => {
             });
         })
         .catch(err => {
-            const errror = new Error(err);
+            console.log("Thirteen")
+            const error = new Error(err);
             error.httpStatusCode = 500;
             return next(error);
         })
@@ -597,7 +646,13 @@ exports.getDeletePastry = (req, res, next) => {
 exports.postDeletePastry = (req, res, next) => {
     const pastryId = req.body.pastryId;
     console.log(pastryId)
-    Cake.findByIdAndRemove(pastryId)
+    Cake.findById(pastryId).then(pastry => {
+            if (!pastry) {
+                return next(new Error('Pastry not found.'));
+            }
+            fileHelper.deleteFile(pastry.image);
+            return Cake.findByIdAndRemove(pastryId)
+        })
         .then(result => {
             let type = result.genre;
             let path = '';
