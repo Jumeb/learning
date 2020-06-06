@@ -120,7 +120,29 @@ ORDER: base + typography > general layout + grid > page layout > components
   margin-bottom: 4rem;
   position: relative;
   padding: 2rem .6rem;
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.6); }
+  .events__client {
+    background-color: transparent;
+    box-shadow: 0 .5rem 1rem transparent;
+    padding: .2rem; }
+  .events__dets {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .events__dets-img {
+      height: 12rem;
+      width: 18rem;
+      background-size: cover;
+      background-position: center;
+      border-radius: .4rem;
+      margin-bottom: 1rem; }
+      @media only screen and (max-width: 37.5em) {
+        .events__dets-img {
+          height: 12.5rem;
+          width: 18.5rem; } }
   .events__con {
     flex: 0 0 20%;
     display: flex;
@@ -151,6 +173,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     padding: 3rem 1rem;
     border-left: 0.3rem solid #ff1493;
     border-right: 0.3rem solid #ff1493; }
+    .events__info-2 {
+      border-right: .3rem solid transparent; }
+    .events__info-3 {
+      border-left: .3rem solid transparent;
+      padding: 1rem; }
     @media only screen and (max-width: 37.5em) {
       .events__info {
         flex-basis: 70%;
@@ -419,12 +446,23 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow: hidden; }
     .table__dets:not(:last-child) {
       border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
+  .table__det {
+    padding: .5rem;
+    height: 6.5rem;
+    width: 8.5rem;
+    margin: auto;
+    border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
   .table__head {
     color: #c71585 !important;
     font-size: 1.6rem; }
   .table__functions {
     font-size: 1.2rem;
     width: 10%; }
+  .table__img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 .add__form {
   padding: 2rem 1rem;
@@ -562,11 +600,21 @@ ORDER: base + typography > general layout + grid > page layout > components
     flex: 0 0 98%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     border-radius: .4rem;
     padding: .5rem;
     border: 0.2rem solid #ff1493;
-    background-color: rgba(0, 0, 0, 0.7); }
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 40rem;
+    overflow-y: auto; }
+    .admin__table::-webkit-scrollbar {
+      width: .5rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .admin__table::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
   .admin__form {
     flex: 0 0 50%;
     padding: 1rem; }
@@ -773,7 +821,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow-y: auto;
     position: relative; }
     .panel__event::-webkit-scrollbar {
-      width: 0 !important; }
+      width: .6rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .panel__event::-webkit-scrollbar-thumb {
+      width: .6rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
     @media (max-width: 50em) {
       .panel__event {
         padding: 3rem 8rem; } }
@@ -783,6 +837,33 @@ ORDER: base + typography > general layout + grid > page layout > components
     @media only screen and (max-width: 37.5em) {
       .panel__event {
         padding: 3rem 4rem; } }
+  .panel__event2 {
+    flex: 0 0 80%;
+    padding: 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    height: 78vh;
+    overflow-y: auto;
+    position: relative; }
+    .panel__event2::-webkit-scrollbar {
+      width: .6rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .panel__event2::-webkit-scrollbar-thumb {
+      width: .6rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
+    @media (max-width: 50em) {
+      .panel__event2 {
+        padding: 3rem 8rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .panel__event2 {
+        padding: 3rem 6rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .panel__event2 {
+        padding: 3rem 4rem; } }
+  .panel__form {
+    padding: 2rem 4rem !important; }
   .panel__order {
     flex: 0 0 77%;
     padding: 3rem 10rem;

@@ -45,7 +45,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     justify-content: space-around;
     overflow-y: auto; }
     .shop__view::-webkit-scrollbar {
-      width: 0 !important; }
+      width: .5rem !important;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .shop__view::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
     @media only screen and (max-width: 67.5em) {
       .shop__view {
         flex-basis: 93%; } }
@@ -88,7 +94,6 @@ ORDER: base + typography > general layout + grid > page layout > components
     position: relative; }
   .shop__control {
     background-color: #fff;
-    padding: .6rem .8rem .2rem .8rem;
     color: #ff1493;
     position: relative;
     display: flex;
@@ -116,13 +121,13 @@ ORDER: base + typography > general layout + grid > page layout > components
       transform: translateY(0.5rem);
       box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.6); }
   .shop__details {
-    margin-top: -1rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    padding: 1.5rem 2rem;
-    cursor: pointer;
-    top: 0;
-    transition: all .1s ease; }
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: #ff1493;
+    background-color: #fff;
+    padding: .5rem;
+    border-radius: .7rem; }
   .shop__centered-dec {
     margin-left: 10rem;
     visibility: hidden;
@@ -134,19 +139,22 @@ ORDER: base + typography > general layout + grid > page layout > components
     opacity: 0;
     transition: all .5s ease; }
   .shop__button {
-    padding: 1rem;
+    padding: .4rem .8rem;
+    align-self: center;
     text-align: center;
     background-color: transparent;
     border: none;
     outline: none;
-    color: #ff1493; }
+    color: #ff1493;
+    cursor: pointer; }
     .shop__button::selection {
       background-color: transparent;
       color: #ff1493; }
   .shop__num {
     font-size: 1.5rem;
     font-weight: 700;
-    padding: 1rem 2rem;
+    padding: .4rem .8rem;
+    align-self: center;
     visibility: visible;
     opacity: 1;
     transition: all .5s ease; }
@@ -161,7 +169,8 @@ ORDER: base + typography > general layout + grid > page layout > components
     z-index: 40;
     font-size: 1.3rem;
     font-weight: 700;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem;
+    align-self: center;
     cursor: pointer;
     top: 0;
     transition: all .5s ease; }
@@ -176,7 +185,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     font-weight: 700; }
   .shop__rating {
     position: absolute;
-    bottom: 1rem;
+    top: 1rem;
     left: 1rem;
     color: #ff1493;
     background-color: #fff;
@@ -239,6 +248,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     align-items: baseline;
     flex: 0 0 90%;
     justify-content: flex-start;
-    overflow-y: auto; }
+    overflow-x: auto; }
     .nav__elements::-webkit-scrollbar {
-      width: 0 !important; }
+      margin-top: 2rem;
+      height: .5rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .nav__elements::-webkit-scrollbar-thumb {
+      height: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }

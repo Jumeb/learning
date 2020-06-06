@@ -446,12 +446,23 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow: hidden; }
     .table__dets:not(:last-child) {
       border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
+  .table__det {
+    padding: .5rem;
+    height: 6.5rem;
+    width: 8.5rem;
+    margin: auto;
+    border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
   .table__head {
     color: #c71585 !important;
     font-size: 1.6rem; }
   .table__functions {
     font-size: 1.2rem;
     width: 10%; }
+  .table__img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 .add__form {
   padding: 2rem 1rem;

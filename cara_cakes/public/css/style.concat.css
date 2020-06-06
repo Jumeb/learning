@@ -159,7 +159,16 @@ body {
   font-weight: 400;
   line-height: 1.7;
   color: #777;
-  position: relative; }
+  position: relative;
+  overflow-y: auto; }
+  body::-webkit-scrollbar {
+    width: .8rem;
+    background-color: #c0bbbb;
+    border-radius: 2rem; }
+  body::-webkit-scrollbar-thumb {
+    width: .8rem;
+    background-color: rgba(255, 20, 147, 0.8);
+    border-radius: 2rem; }
 
 .para {
   font-size: 1.6rem;
@@ -227,6 +236,11 @@ body {
 
 .txt-primary {
   color: #ff1493 !important; }
+
+.txt-red {
+  color: #dd1111 !important;
+  font-size: 1.6rem;
+  font-weight: bold; }
 
 .txt-black-1 {
   background-image: linear-gradient(to right, rgba(24, 23, 23, 0.8), rgba(24, 23, 23, 0.6));
@@ -318,7 +332,7 @@ body {
   background-position: center; }
 
 .pad-8 {
-  padding: 1.5rem; }
+  padding: 1.5rem 0; }
 
 .pad-4 {
   padding: .5rem 2rem; }
@@ -334,6 +348,9 @@ body {
 
 .space {
   margin: .5rem; }
+
+.pAuth {
+  display: none; }
 
 .btn {
   text-decoration: none;
@@ -464,9 +481,10 @@ body {
   display: inline-block;
   background-color: transparent;
   font-size: 1.5rem;
-  padding: .5rem 1rem;
+  padding: .9rem;
   transition: all ease-in .4s; }
   .btn-flat:link, .btn-flat:visited {
+    padding: .5rem 1rem;
     text-decoration: none; }
   .btn-flat:hover {
     border: 0.2rem solid #ff1493;
@@ -477,9 +495,14 @@ body {
   border: 0.1rem solid #ff1493;
   padding: .4rem .8rem;
   border-radius: .4rem;
-  color: #777;
+  color: #ff1493;
   outline: none;
-  background-color: transparent; }
+  background-color: transparent;
+  transition: all .5s ease-in-out;
+  cursor: pointer; }
+  .btn__func:hover {
+    background-color: #ff1493;
+    color: #fff; }
   .btn__func:link, .btn__func:visited {
     text-decoration: none;
     font-size: 1.1rem; }
@@ -737,13 +760,17 @@ body {
   margin-bottom: 9rem;
   position: relative; }
 
+.form__group-2:not(:last-child) {
+  margin-bottom: 3.5rem;
+  position: relative; }
+
 .form__input {
   width: 85%;
   font-size: 1.6rem;
   clip-path: polygon(0 0, 95% 0, 100% 100%, 0 100%);
   border: none;
   padding: 1.4rem 1.9rem;
-  background-color: rgba(255, 255, 255, 0.8);
+  background-color: rgba(255, 255, 255, 0.9);
   border-bottom: 3px solid transparent;
   outline: none;
   transition: all .3s; }
@@ -772,6 +799,21 @@ body {
   visibility: hidden;
   opacity: 0;
   transform: translateY(4rem); }
+
+.form__length-1 {
+  width: 65%; }
+
+.form__length-2 {
+  width: 75%; }
+
+.form__length-3 {
+  width: 85%; }
+
+.form__length-4 {
+  width: 95%; }
+
+.form__length-5 {
+  width: 105%; }
 
 .frame {
   display: inline-block;
@@ -910,18 +952,19 @@ body {
     font-size: 1.8rem;
     border-radius: .4rem; }
     .flash__message-success {
-      border: 0.2rem #ff1493 solid;
-      background-color: rgba(255, 20, 147, 0.4);
-      color: #ff1493; }
+      border: 0.2rem #0ccc0c solid;
+      background-color: rgba(12, 204, 12, 0.4);
+      color: #0ccc0c; }
     .flash__message-danger {
       border: .2rem #eb1212 solid;
       background-color: rgba(235, 18, 18, 0.4);
       color: #b60707; }
 
 .login {
-  background-image: linear-gradient(60deg, rgba(255, 255, 255, 0.5) 0%, rgba(255, 255, 255, 0.5) 60%, rgba(199, 21, 133, 0.5) 60%), url(../img/bds-6.jpg);
-  background-size: 100%;
+  background-image: linear-gradient(60deg, rgba(255, 255, 255, 0.4) 0%, rgba(255, 255, 255, 0.4) 60%, rgba(199, 21, 133, 0.5) 60%), url(../img/bds-6.jpg);
+  background-size: cover;
   background-position: center;
+  background-repeat: no-repeat;
   border-radius: 4px;
   box-shadow: 0 2rem 4rem rgba(0, 0, 0, 0.6); }
   .login::after {
@@ -1079,15 +1122,113 @@ body {
   display: flex;
   justify-content: flex-end;
   align-items: center;
+  flex-direction: column;
   padding: 1rem; }
+  .sheet__Date {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    align-items: center; }
+    .sheet__Date:not(:last-child) {
+      margin-bottom: 2.6rem; }
+  .sheet__year {
+    width: 8rem;
+    margin: 0 2rem;
+    cursor: pointer; }
+  .sheet__month {
+    width: 8rem;
+    margin: 0 1rem;
+    cursor: pointer; }
+  .sheet__location {
+    width: 90%;
+    margin: auto;
+    cursor: pointer; }
+  .sheet__day {
+    width: 6rem;
+    margin: 0 2rem;
+    cursor: pointer; }
+  .sheet__hour {
+    width: 5rem;
+    margin: 0 2rem;
+    cursor: pointer; }
+  .sheet__minute {
+    width: 5rem;
+    cursor: pointer; }
+  .sheet__period {
+    width: 6rem;
+    margin: 0 2rem;
+    cursor: pointer; }
+  .sheet__active {
+    max-height: 27rem !important;
+    opacity: 1 !important;
+    overflow-y: auto !important;
+    position: absolute;
+    left: 4rem;
+    top: -5rem;
+    z-index: 30; }
+    .sheet__active::-webkit-scrollbar {
+      width: .5rem;
+      background-color: rgba(192, 187, 187, 0.3);
+      border-bottom-right-radius: .5rem;
+      border-top-right-radius: .5rem; }
+    .sheet__active::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(192, 187, 187, 0.8);
+      border-bottom-right-radius: .5rem;
+      border-top-right-radius: .5rem; }
+  .sheet__date {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #181717;
+    max-height: 0;
+    opacity: 0;
+    overflow: hidden;
+    transition: all .4s;
+    border-radius: .5rem;
+    position: absolute;
+    left: 4rem;
+    top: -5rem;
+    z-index: 30; }
+    .sheet__date-box {
+      position: relative;
+      display: flex;
+      flex-direction: column-reverse; }
+      .sheet__date-box label {
+        cursor: pointer; }
+    .sheet__date-option {
+      padding: 1rem 1.5rem;
+      font-size: 1.5rem;
+      text-align: center;
+      cursor: pointer; }
+      .sheet__date-option:hover {
+        background-image: linear-gradient(to right, rgba(255, 20, 147, 0.6), rgba(255, 20, 147, 0.8), rgba(255, 20, 147, 0.6)); }
+    .sheet__date-radio {
+      display: none; }
+  .sheet__selected {
+    display: flex;
+    justify-content: space-around;
+    padding: .5rem;
+    font-size: 1.5rem;
+    outline: none;
+    border: none;
+    border-bottom: 0.16rem solid #8b4513;
+    text-align: center;
+    margin-bottom: .8rem;
+    position: relative;
+    color: #181717;
+    transition: all .3s; }
   .sheet__form {
     position: relative;
-    flex: 0 0 40%;
-    margin-top: -1.5rem;
+    flex: 0 0 60%;
     display: flex;
     justify-content: center;
     align-items: center;
-    background-image: linear-gradient(to bottom right, rgba(0, 0, 0, 0.8), rgba(0, 0, 0, 0.4));
+    background-color: transparent;
+    background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.8), rgba(255, 20, 147, 0.5), rgba(255, 255, 255, 0.8)), url(../img/cookies-2.jpg);
+    background-size: cover;
+    background-position: center;
+    background-repeat: no-repeat;
+    box-shadow: 0 2rem 2rem 0 rgba(192, 187, 187, 0.8);
+    border: 0.3rem solid rgba(255, 20, 147, 0.8);
     border-radius: 1rem;
     padding: 2rem; }
   .sheet__signup {
@@ -1105,24 +1246,23 @@ body {
     align-items: center;
     position: relative; }
     .sheet__group:not(:last-child) {
-      margin-bottom: 3.5rem; }
+      margin-bottom: 3rem; }
   .sheet__input {
-    padding: 1.2rem;
+    padding: 1rem;
     font-size: 1.5rem;
     flex: 0 0 90%;
-    border-radius: .4rem;
     outline: none;
     border: none;
-    background-color: rgba(255, 255, 255, 0.8);
-    border-bottom: .3rem solid transparent;
+    background-color: transparent;
+    box-shadow: 0 0 0 0 rgba(192, 187, 187, 0.8);
+    border-bottom: 0.16rem solid #8b4513;
     transition: all .3s; }
     .sheet__input:focus {
-      border-bottom: 0.3rem solid #ff1493;
-      box-shadow: 0 2re 4rem rgba(0, 0, 0, 0.4); }
+      border-bottom: 0.16rem solid #ff1493; }
       .sheet__input:focus:invalid {
-        border-bottom: 0.3rem solid #8b4513; }
+        border-bottom: 0.16rem solid #8b4513; }
     .sheet__input::-webkit-input-placeholder {
-      color: #777; }
+      color: #181717; }
   .sheet__label {
     position: absolute;
     top: -55%;
@@ -1155,6 +1295,13 @@ body {
   .sheet__select:hover::before {
     background-color: #ff1493;
     color: #fff; }
+  .sheet__event {
+    font-size: 2.8rem;
+    color: #ff1493;
+    padding: .2rem .9rem;
+    border-radius: .8rem;
+    z-index: 2;
+    margin: auto; }
 
 .footer {
   font-size: 1.4rem; }
@@ -1333,15 +1480,18 @@ body {
 
 .container {
   width: 100%;
-  height: 100%;
   margin: 0;
   padding: 0;
-  position: relative;
-  overflow: hidden; }
+  position: fixed;
+  overflow: hidden;
+  z-index: 1000; }
+  .container__show {
+    background-color: rgba(0, 0, 0, 0.7); }
   .container__logo {
     float: left;
     margin-left: 2rem;
-    margin-top: 3rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
     height: 10rem; }
     @media only screen and (max-width: 75em) {
       .container__logo {
@@ -1362,7 +1512,7 @@ body {
         display: none; } }
     .container__nav--list {
       margin: 0;
-      padding: 0;
+      padding: 2.5rem 0.5rem;
       list-style: none; }
     .container__nav--item {
       display: inline-block;
@@ -1410,7 +1560,7 @@ body {
       clip-path: polygon(0 0, 100% 0, 100% 62.8vh, 50% 100%, 0 62.8vh); } }
   .header__text-box {
     position: absolute;
-    top: 40%;
+    top: 50%;
     left: 50%;
     transform: translate(-50%, -50%);
     text-align: center; }
@@ -1537,9 +1687,7 @@ body {
     background-clip: text;
     text-transform: uppercase;
     color: transparent;
-    display: inline-block;
-    font-weight: 700;
-    transition: all .2s; }
+    font-weight: 700; }
     @media (max-width: 56.25em) {
       .title-lil-1 {
         font-size: 3.6rem; } }
@@ -1549,9 +1697,6 @@ body {
     @media only screen and (max-width: 25.75em) {
       .title-lil-1 {
         font-size: 3rem; } }
-    .title-lil-1:hover {
-      transform: scale(1.05);
-      text-shadow: 0 1rem 2rem rgba(0, 0, 0, 0.2); }
   .title-lil-2 {
     font-size: 1.5rem;
     text-transform: uppercase;
@@ -1565,10 +1710,7 @@ body {
     color: transparent;
     display: inline-block;
     font-weight: 700;
-    padding: 2rem 0;
-    transition: all .2s; }
-    .title-lil-3:hover {
-      transform: rotate(6deg) scale(1.05); }
+    padding: 2rem 0; }
 
 .inventory {
   padding-left: 7rem; }
@@ -1883,6 +2025,9 @@ body {
   @media only screen and (max-width: 25.75em) {
     .sec-footer {
       padding: 20rem 8rem 4rem 6rem; } }
+
+.sec-auth {
+  padding: 10rem 0; }
 
 /*
 
@@ -2266,8 +2411,9 @@ ORDER: base + typography > general layout + grid > page layout > components
 
 .sec-carousel {
   background-color: #fff;
-  padding: 18rem 0 12rem 0;
-  margin-top: -21.5vh; }
+  padding: 4rem 0 12rem 0;
+  margin-top: -11.5vh;
+  z-index: -1; }
 
 .sec-pantry {
   background-color: rgba(0, 0, 0, 0.8);
@@ -2395,7 +2541,29 @@ ORDER: base + typography > general layout + grid > page layout > components
   margin-bottom: 4rem;
   position: relative;
   padding: 2rem .6rem;
+  background-color: rgba(255, 255, 255, 0.8);
   box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.6); }
+  .events__client {
+    background-color: transparent;
+    box-shadow: 0 .5rem 1rem transparent;
+    padding: .2rem; }
+  .events__dets {
+    flex: 0 0 40%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center; }
+    .events__dets-img {
+      height: 12rem;
+      width: 18rem;
+      background-size: cover;
+      background-position: center;
+      border-radius: .4rem;
+      margin-bottom: 1rem; }
+      @media only screen and (max-width: 37.5em) {
+        .events__dets-img {
+          height: 12.5rem;
+          width: 18.5rem; } }
   .events__con {
     flex: 0 0 20%;
     display: flex;
@@ -2426,6 +2594,11 @@ ORDER: base + typography > general layout + grid > page layout > components
     padding: 3rem 1rem;
     border-left: 0.3rem solid #ff1493;
     border-right: 0.3rem solid #ff1493; }
+    .events__info-2 {
+      border-right: .3rem solid transparent; }
+    .events__info-3 {
+      border-left: .3rem solid transparent;
+      padding: 1rem; }
     @media only screen and (max-width: 37.5em) {
       .events__info {
         flex-basis: 70%;
@@ -2694,12 +2867,23 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow: hidden; }
     .table__dets:not(:last-child) {
       border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
+  .table__det {
+    padding: .5rem;
+    height: 6.5rem;
+    width: 8.5rem;
+    margin: auto;
+    border-right: 0.2rem solid rgba(0, 0, 0, 0.03); }
   .table__head {
     color: #c71585 !important;
     font-size: 1.6rem; }
   .table__functions {
     font-size: 1.2rem;
     width: 10%; }
+  .table__img {
+    width: 100%;
+    height: 100%;
+    background-repeat: no-repeat;
+    background-size: cover; }
 
 .add__form {
   padding: 2rem 1rem;
@@ -2837,11 +3021,21 @@ ORDER: base + typography > general layout + grid > page layout > components
     flex: 0 0 98%;
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-start;
     border-radius: .4rem;
     padding: .5rem;
     border: 0.2rem solid #ff1493;
-    background-color: rgba(0, 0, 0, 0.7); }
+    background-color: rgba(0, 0, 0, 0.7);
+    height: 40rem;
+    overflow-y: auto; }
+    .admin__table::-webkit-scrollbar {
+      width: .5rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .admin__table::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
   .admin__form {
     flex: 0 0 50%;
     padding: 1rem; }
@@ -3048,7 +3242,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     overflow-y: auto;
     position: relative; }
     .panel__event::-webkit-scrollbar {
-      width: 0 !important; }
+      width: .6rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .panel__event::-webkit-scrollbar-thumb {
+      width: .6rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
     @media (max-width: 50em) {
       .panel__event {
         padding: 3rem 8rem; } }
@@ -3058,6 +3258,33 @@ ORDER: base + typography > general layout + grid > page layout > components
     @media only screen and (max-width: 37.5em) {
       .panel__event {
         padding: 3rem 4rem; } }
+  .panel__event2 {
+    flex: 0 0 80%;
+    padding: 4rem 5rem;
+    display: flex;
+    flex-direction: column;
+    height: 78vh;
+    overflow-y: auto;
+    position: relative; }
+    .panel__event2::-webkit-scrollbar {
+      width: .6rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .panel__event2::-webkit-scrollbar-thumb {
+      width: .6rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
+    @media (max-width: 50em) {
+      .panel__event2 {
+        padding: 3rem 8rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .panel__event2 {
+        padding: 3rem 6rem; } }
+    @media only screen and (max-width: 37.5em) {
+      .panel__event2 {
+        padding: 3rem 4rem; } }
+  .panel__form {
+    padding: 2rem 4rem !important; }
   .panel__order {
     flex: 0 0 77%;
     padding: 3rem 10rem;
@@ -3216,7 +3443,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     justify-content: space-around;
     overflow-y: auto; }
     .shop__view::-webkit-scrollbar {
-      width: 0 !important; }
+      width: .5rem !important;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .shop__view::-webkit-scrollbar-thumb {
+      width: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
     @media only screen and (max-width: 67.5em) {
       .shop__view {
         flex-basis: 93%; } }
@@ -3259,7 +3492,6 @@ ORDER: base + typography > general layout + grid > page layout > components
     position: relative; }
   .shop__control {
     background-color: #fff;
-    padding: .6rem .8rem .2rem .8rem;
     color: #ff1493;
     position: relative;
     display: flex;
@@ -3287,13 +3519,13 @@ ORDER: base + typography > general layout + grid > page layout > components
       transform: translateY(0.5rem);
       box-shadow: 0 0.5rem 0.8rem rgba(0, 0, 0, 0.6); }
   .shop__details {
-    margin-top: -1rem;
-    font-size: 1.3rem;
-    font-weight: 700;
-    padding: 1.5rem 2rem;
-    cursor: pointer;
-    top: 0;
-    transition: all .1s ease; }
+    position: absolute;
+    bottom: 1rem;
+    left: 1rem;
+    color: #ff1493;
+    background-color: #fff;
+    padding: .5rem;
+    border-radius: .7rem; }
   .shop__centered-dec {
     margin-left: 10rem;
     visibility: hidden;
@@ -3305,19 +3537,22 @@ ORDER: base + typography > general layout + grid > page layout > components
     opacity: 0;
     transition: all .5s ease; }
   .shop__button {
-    padding: 1rem;
+    padding: .4rem .8rem;
+    align-self: center;
     text-align: center;
     background-color: transparent;
     border: none;
     outline: none;
-    color: #ff1493; }
+    color: #ff1493;
+    cursor: pointer; }
     .shop__button::selection {
       background-color: transparent;
       color: #ff1493; }
   .shop__num {
     font-size: 1.5rem;
     font-weight: 700;
-    padding: 1rem 2rem;
+    padding: .4rem .8rem;
+    align-self: center;
     visibility: visible;
     opacity: 1;
     transition: all .5s ease; }
@@ -3332,7 +3567,8 @@ ORDER: base + typography > general layout + grid > page layout > components
     z-index: 40;
     font-size: 1.3rem;
     font-weight: 700;
-    padding: 1.5rem 2rem;
+    padding: 1.5rem;
+    align-self: center;
     cursor: pointer;
     top: 0;
     transition: all .5s ease; }
@@ -3347,7 +3583,7 @@ ORDER: base + typography > general layout + grid > page layout > components
     font-weight: 700; }
   .shop__rating {
     position: absolute;
-    bottom: 1rem;
+    top: 1rem;
     left: 1rem;
     color: #ff1493;
     background-color: #fff;
@@ -3410,6 +3646,13 @@ ORDER: base + typography > general layout + grid > page layout > components
     align-items: baseline;
     flex: 0 0 90%;
     justify-content: flex-start;
-    overflow-y: auto; }
+    overflow-x: auto; }
     .nav__elements::-webkit-scrollbar {
-      width: 0 !important; }
+      margin-top: 2rem;
+      height: .5rem;
+      background-color: #c0bbbb;
+      border-radius: 2rem; }
+    .nav__elements::-webkit-scrollbar-thumb {
+      height: .5rem;
+      background-color: rgba(255, 20, 147, 0.8);
+      border-radius: 2rem; }
