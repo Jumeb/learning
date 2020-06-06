@@ -49,7 +49,6 @@ router.post('/add-pastry', [
     .trim(),
     body('price', 'Please enter a valid price')
     .isNumeric(),
-    body('image').isLength({ min: 4 }),
     body('desc', 'Please enter a longer description').isLength({ min: 10, max: 1000 }).trim()
 ], getAdminRoutes.postAddPastry);
 
@@ -62,7 +61,6 @@ router.post('/edit-pastry', [
     .trim(),
     body('price', 'Please enter a valid price')
     .isNumeric(),
-    body('image').isLength({ min: 4 }),
     body('desc').isLength({ min: 10, max: 1000 }).trim()
 ], getAdminRoutes.postEditPastry);
 

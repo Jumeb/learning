@@ -39,13 +39,10 @@ router.post('/add-event', [
         min: 4
     })
     .trim(),
-    body('image')
-    .isString()
-    .trim(),
     body('location', 'Please set a valid location')
     .isString()
     .isLength({
-        min: 10,
+        min: 5,
         max: 20
     })
     .trim(),
@@ -86,13 +83,10 @@ router.post('/edit-event', [
         min: 4
     })
     .trim(),
-    body('image')
-    .isString()
-    .trim(),
     body('location', 'Please set a valid location')
     .isString()
     .isLength({
-        min: 10,
+        min: 5,
         max: 20
     })
     .trim(),
@@ -118,6 +112,10 @@ router.post('/edit-event', [
 
 router.get('/delete-event/:eventId', userRoute.getDeleteEvent);
 
+router.get('/edit-profile/:userId', userRoute.getEditForm);
+
+router.post('/edit-profile', userRoute.postEditProfile)
+
 router.get('/orders', isAuth, userRoute.getOrders);
 
 router.post('/delete-event', isAuth, userRoute.postDeleteEvent);
@@ -131,6 +129,8 @@ router.get('/event-cart/:eventId', isAuth, userRoute.getCart);
 router.post('/cart-delete', isAuth, userRoute.postCartDelete);
 
 router.post('/make-order', isAuth, userRoute.postOrder);
+
+router.get('/orders/:orderId', isAuth, userRoute.getDetails);
 
 
 
