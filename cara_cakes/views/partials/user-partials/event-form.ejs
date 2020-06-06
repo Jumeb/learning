@@ -2,7 +2,7 @@
     <section class="sheet user">
         <div class="sheet__event">Event</div>
         <div class="sheet__form user__form">
-            <form action="/user/<% if (editing) { %>edit-event <% } else { %>add-event <% } %>" class="sheet__signup" method="POST">
+            <form action="/user/<% if (editing) { %>edit-event <% } else { %>add-event <% } %>" class="sheet__signup" method="POST" enctype="multipart/form-data">
                 <div class="sheet__group">
                     <input type="text" name="name" class="sheet__input" id="Name" placeholder="For: Name" value="<% if (editing || hasError) { %><%= event.name %><% } %>" required>
                     <label for="Name" class="sheet__label">Name</label>
@@ -12,7 +12,7 @@
                     <label for="Purpose" class="sheet__label">Message</label>
                 </div>
                 <div class="sheet__group">
-                    <input type="text" name="image" class="sheet__input" id="Image" value="<% if (editing || hasError) { %><%= event.image %><% } %>" placeholder="Image of person">
+                    <input type="file" name="image" class="sheet__input" id="Image">
                     <label for="Image" class="sheet__label">Image</label>
                 </div>
                 <div class="sheet__Date">

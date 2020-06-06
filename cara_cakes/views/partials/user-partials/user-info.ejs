@@ -1,9 +1,11 @@
 <div class="panel__user">
     <div class="panel__user--frame">
-        <img src="/img/cookies-7.jpg" alt="User image" class="panel__user--img">
+        <img src="<% if (!events[0].userId.image) { %>/img/cookies-7.jpg <% } else { %>/<%= events[0].userId.image %> <% } %>" alt="User image" class="panel__user--img">
     </div>
     <div class="panel__user--info">
-        <h3 class="panel__user--name"><%= events[0].userId.name %></h3>
+        <h3 class="panel__user--name">
+            <%= events[0].userId.name %>
+        </h3>
     </div>
     <div class="panel__user--events">
         <div class="panel__user--association">
@@ -28,7 +30,7 @@
             <span class="type">Events</span>
         </div>
         <div class="panel__user--association">
-            <span class="type notify__item"><a href="#" class="edit txt-white">Edit profile</a></span>
+            <span class="type notify__item"><a href="/user/edit-profile/<%= events[0].userId._id %>" class="edit txt-white">Edit profile</a></span>
         </div>
     </div>
     <div class="txt-cnt panel__logout">
