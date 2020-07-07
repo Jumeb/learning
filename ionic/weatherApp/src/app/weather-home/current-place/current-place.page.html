@@ -22,7 +22,7 @@
                                 </ion-card-title>
                                 <ion-card-subtitle>
                                     <ion-label class="ion-text-start ion-margin-end">
-                                        {{data.dt * 1000 | date: 'fullDate'}}
+                                        {{data.dt * 1000 | date: 'mediumDate'}}
                                     </ion-label>
                                     <ion-label>
                                         {{ data.dt * 1000 | date: 'shortTime' }}
@@ -94,7 +94,7 @@
                                 <h2>{{ currentPlace.current.sunrise * 1000 | date: "shortTime" }}</h2>
                             </ion-label>
                             <ion-label class="ion-text-end">
-                                <h2>Sunset <ion-icon name="sunny-outline"></ion-icon></h2>
+                                <h2>Sunset <ion-icon name="partly-sunny-outline"></ion-icon></h2>
                                 <h2>{{ currentPlace.current.sunset * 1000 | date: "shortTime" }}</h2>
                             </ion-label>
                         </ion-item>
