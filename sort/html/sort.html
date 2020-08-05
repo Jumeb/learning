@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/bootstrap.css">
+    <link rel="stylesheet" href="../css/my.css">
+    <title>Sorting</title>
+</head>
+<body>
+    <div class="container">
+        <h1>Work Area</h1>
+        <div class="workArea">
+            <div class="options">
+                <div class="category">
+                    <table id="arr" style="margin-top: 2rem; width: 100%;"></table>
+                    <div class="options">
+                        <div class="category">
+                            <input type="radio" name="Sort" value="bbSort" checked> Bubble Sort<br />
+                            <input type="radio" name="Sort" value="slcSort"> Selection Sort <br />
+                            <input type="radio" name="Sort" value="InsSort"> Insertion Sort 
+                        </div>
+                        <div class="category">
+                            <input type="radio" name="order" value="asend" checked> Ascending Order <br />
+                            <input type="radio" name="order" value="decend"> Descending Order 
+                        </div>
+                    </div>
+                    <button id="compute" class="btn btn-success" style="width: 10rem; margin: 1.2rem 0 1.2rem 40%;">Sort</button>
+                </div>
+                <div class="category section">
+                    <h6><b id="sort"></b> <b id="order"></b></h6>
+                    <table id="filList" class="table table-hover table-striped"></table>
+                </div>
+            </div>
+           
+        </div>
+    </div>
+</body>
+<script src="../js/jquery.js"></script>
+<script src="../js/bootstrap.js"></script>
+<script src="../js/appendGrid.js"></script>
+<script src="../js/grid.js"></script>
+
+</html>
