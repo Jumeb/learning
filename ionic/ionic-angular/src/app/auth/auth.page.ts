@@ -28,9 +28,8 @@ export class AuthPage implements OnInit {
         this.isLoading = false;
         loadingEl.dismiss();
         this.router.navigateByUrl('/places/tabs/discover');
-      }, 1500)
-    })
-    
+      }, 1500);
+    });
   }
 
   onSwitch() {
@@ -40,7 +39,7 @@ export class AuthPage implements OnInit {
 
   onSubmit(form: NgForm){
     console.log(form);
-    if(!form.valid){
+    if (!form.valid){
       return;
     }
 
@@ -48,7 +47,7 @@ export class AuthPage implements OnInit {
     const password = form.value.password;
     console.log(email, password);
 
-    if(this.isLogin){
+    if (this.isLogin){
       //req
     } else {
       //req
