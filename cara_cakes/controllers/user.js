@@ -804,7 +804,9 @@ exports.postEditProfile = (req, res, next) => {
             event.name = name;
             event.telNo = telNo;
             if (image) {
-                fileHelper.deleteFile(event.image);
+                if(event.image){
+                    fileHelper.deleteFile(event.image);
+                }
                 event.image = image.path;
             }
             return event.save();
