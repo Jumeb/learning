@@ -18,7 +18,7 @@ export class DiscoverPage implements OnInit {
   constructor(private placesService: PlacesService, private menuCtrl: MenuController) { }
 
   ngOnInit() {
-    this.loadedPlaces = this.placesService.places; 
+    this.loadedPlaces = this.placesService.places;
     this.listedLoadedPlaces = this.loadedPlaces.slice(1);
   }
 
@@ -26,6 +26,5 @@ export class DiscoverPage implements OnInit {
     this.menuCtrl.toggle();
   }
   onFilterUpdate(event: CustomEvent<SegmentChangeEventDetail> ) {
-    
   }
 }
