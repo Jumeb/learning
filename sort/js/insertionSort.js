@@ -1,6 +1,4 @@
-
-
-exports.insertionSort = (list, asend) => {
+insertionSort = (list, asend) => {
     for (len = 1; len < list.length; len++){
         if(asend){
             temp = list[len];
@@ -20,6 +18,7 @@ exports.insertionSort = (list, asend) => {
             list[adj + 1] = temp;
         }
     }
-
     return list;
 }
+
+http://youtu.be/uKB2QYZ3h9U?hd=1

@@ -1,5 +1,4 @@
-
-exports.selectionSort = (list, asend) => {
+selectionSort = (list, asend) => {
     for (len = 0; len < list.length - 1; len++){
         for(adj = len+1; adj < list.length; adj++){
             if(asend){
@@ -18,5 +17,5 @@ exports.selectionSort = (list, asend) => {
         }
     }
 
-    return list
+    return list;
 }
