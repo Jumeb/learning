@@ -15,7 +15,7 @@
   "author": "Jume Brice",
   "license": "ISC",
   "dependencies": {
-    "node-sass": "^4.13.1"
+    "node-sass": "^7.0.0"
   },
   "devDependencies": {
     "autoprefixer": "^9.6.1",
